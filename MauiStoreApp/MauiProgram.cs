@@ -1,4 +1,7 @@
-﻿using MauiStoreApp.Services;
+﻿using CommunityToolkit.Maui;
+using MauiStoreApp.Services;
+using MauiStoreApp.ViewModels;
+using MauiStoreApp.Views;
 using Microsoft.Extensions.Logging;
 
 namespace MauiStoreApp
@@ -14,13 +17,15 @@ namespace MauiStoreApp
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+                }).UseMauiCommunityToolkit();
 
             builder.Services.AddSingleton<BaseService>();
             builder.Services.AddSingleton<ProductService>();
             builder.Services.AddSingleton<CategoryService>();
             builder.Services.AddSingleton<CartService>();
             builder.Services.AddSingleton<UserService>();
+            builder.Services.AddTransient<HomePageViewModel>();
+            builder.Services.AddTransient<HomePage>();
 
 #if DEBUG
             builder.Logging.AddDebug();

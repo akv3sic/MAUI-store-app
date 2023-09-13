@@ -3,11 +3,44 @@
     x:Class="MauiStoreApp.Views.HomePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+    xmlns:local="clr-namespace:MauiStoreApp.ViewModels"
     Title="Početna">
-    <VerticalStackLayout>
-        <Label
-            HorizontalOptions="Center"
-            Text="Welcome to Home Page"
-            VerticalOptions="Center" />
-    </VerticalStackLayout>
+
+    <ContentPage.BindingContext>
+        <local:HomePageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Behaviors>
+        <behaviors:EventToCommandBehavior Command="{Binding GetProductsCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
+
+    <ScrollView>
+        <StackLayout>
+            <Label
+                HorizontalOptions="Center"
+                Text="Izdvojeni proizvodi"
+                VerticalOptions="Start" />
+
+            <CollectionView ItemsSource="{Binding Products}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="5" Padding="5">
+                            <StackLayout>
+                                <Image
+                                    Aspect="AspectFit"
+                                    HeightRequest="150"
+                                    Source="{Binding Image}" />
+                                <Label Text="{Binding Title}" />
+                                <Label Text="{Binding Price, StringFormat='{0:F2} EUR'}" />
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
