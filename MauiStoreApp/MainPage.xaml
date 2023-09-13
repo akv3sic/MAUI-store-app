@@ -10,31 +10,46 @@
             Spacing="25"
             VerticalOptions="Center">
 
-            <Image
-                HeightRequest="200"
-                HorizontalOptions="Center"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                Source="dotnet_bot.png" />
-
             <Label
                 FontSize="32"
                 HorizontalOptions="Center"
                 SemanticProperties.HeadingLevel="Level1"
-                Text="Hello, World!" />
+                Text="MAUI Store" />
 
             <Label
                 FontSize="18"
                 HorizontalOptions="Center"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                SemanticProperties.Description=""
                 SemanticProperties.HeadingLevel="Level2"
-                Text="Welcome to .NET Multi-platform App UI" />
+                Text="Check debug output for logs" />
 
             <Button
-                x:Name="CounterBtn"
-                Clicked="OnCounterClicked"
+                x:Name="GetProductsBtn"
+                Clicked="OnGetProductsBtnClicked"
                 HorizontalOptions="Center"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Text="Click me" />
+                SemanticProperties.Hint="Test GET '/products'"
+                Text="GET products" />
+
+            <Button
+                x:Name="GetCategoriesBtn"
+                Clicked="OnGetCategoriesBtnClicked"
+                HorizontalOptions="Center"
+                SemanticProperties.Hint="Test GET '/products/categories'"
+                Text="GET categories" />
+
+            <Button
+                x:Name="GetCartBtn"
+                Clicked="OnGetCartBtnClicked"
+                HorizontalOptions="Center"
+                SemanticProperties.Hint="Test GET '/cart'"
+                Text="GET cart" />
+
+            <Button
+                x:Name="GetUserBtn"
+                Clicked="OnGetUserBtnClicked"
+                HorizontalOptions="Center"
+                SemanticProperties.Hint="Test GET '/user'"
+                Text="GET user" />
 
         </VerticalStackLayout>
     </ScrollView>

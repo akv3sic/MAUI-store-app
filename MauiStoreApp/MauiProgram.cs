@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using MauiStoreApp.Services;
+using Microsoft.Extensions.Logging;
 
 namespace MauiStoreApp
 {
@@ -15,8 +16,14 @@ namespace MauiStoreApp
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddSingleton<BaseService>();
+            builder.Services.AddSingleton<ProductService>();
+            builder.Services.AddSingleton<CategoryService>();
+            builder.Services.AddSingleton<CartService>();
+            builder.Services.AddSingleton<UserService>();
+
 #if DEBUG
-		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
