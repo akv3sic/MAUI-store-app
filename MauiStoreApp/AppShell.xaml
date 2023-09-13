@@ -3,12 +3,28 @@
     x:Class="MauiStoreApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MauiStoreApp"
+    xmlns:views="clr-namespace:MauiStoreApp.Views"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <!--  Home Page  -->
+        <Tab Title="Početna" Icon="home.svg">
+            <ShellContent ContentTemplate="{DataTemplate views:HomePage}" Route="HomePage" />
+        </Tab>
 
+        <!--  Recently Watched Page  -->
+        <Tab Title="Nedavno gledano" Icon="recently_viewed.svg">
+            <ShellContent ContentTemplate="{DataTemplate views:RecentlyWatchedPage}" Route="RecentlyWatchedPage" />
+        </Tab>
+
+        <!--  Cart Page  -->
+        <Tab Title="Košarica" Icon="cart.svg">
+            <ShellContent ContentTemplate="{DataTemplate views:CartPage}" Route="CartPage" />
+        </Tab>
+
+        <!--  Profile Page  -->
+        <Tab Title="Profil" Icon="profile.svg">
+            <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}" Route="ProfilePage" />
+        </Tab>
+    </TabBar>
 </Shell>
