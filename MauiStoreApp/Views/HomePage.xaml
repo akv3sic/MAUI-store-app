@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="MauiStoreApp.Views.HomePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:behaviors="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
     xmlns:local="clr-namespace:MauiStoreApp.ViewModels"
-    Title="Početna">
+    Title="Početna"
+    BackgroundColor="#EBE9EF">
 
     <ContentPage.BindingContext>
         <local:HomePageViewModel />
@@ -16,10 +16,13 @@
     </ContentPage.Behaviors>
 
     <ScrollView>
-        <StackLayout>
+        <StackLayout Padding="20,10">
             <Label
-                HorizontalOptions="Center"
-                Text="Izdvojeni proizvodi"
+                Margin="0,5"
+                FontAttributes="Bold"
+                FontSize="24"
+                HorizontalOptions="Start"
+                Text="Istaknute ponude"
                 VerticalOptions="Start" />
 
             <CollectionView ItemsSource="{Binding Products}">
@@ -28,14 +31,24 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Margin="5" Padding="5">
+                        <Frame
+                            Margin="5"
+                            Padding="10,20"
+                            BackgroundColor="White"
+                            BorderColor="Transparent"
+                            CornerRadius="15"
+                            HasShadow="False">
                             <StackLayout>
                                 <Image
+                                    Margin="0,0,0,25"
                                     Aspect="AspectFit"
-                                    HeightRequest="150"
+                                    HeightRequest="120"
                                     Source="{Binding Image}" />
                                 <Label Text="{Binding Title}" />
-                                <Label Text="{Binding Price, StringFormat='{0:F2} EUR'}" />
+                                <Label
+                                    Margin="0,6,0,0"
+                                    FontAttributes="Bold"
+                                    Text="{Binding Price, StringFormat='{0:F2} EUR'}" />
                             </StackLayout>
                         </Frame>
                     </DataTemplate>
