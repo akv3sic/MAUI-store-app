@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:behaviors="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
     xmlns:local="clr-namespace:MauiStoreApp.ViewModels"
-    Title="Početna"
     BackgroundColor="#EBE9EF">
 
     <ContentPage.BindingContext>
@@ -16,109 +15,160 @@
         <behaviors:EventToCommandBehavior Command="{Binding GetCategoriesCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
 
-    <ScrollView>
-        <StackLayout Padding="20,10">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-            <Image
-                Margin="-11,0,0,0"
-                HeightRequest="50"
-                HorizontalOptions="Start"
-                Source="Resources/Images/logo_single_letter_black.svg"
-                VerticalOptions="Start" />
-            <Label
-                Margin="0,15,0,10"
-                FontAttributes="Bold"
-                FontSize="24"
-                HorizontalOptions="Start"
-                Text="Istraži po kategorijama"
-                VerticalOptions="Start" />
+        <!--  Fixed  -->
+        <StackLayout
+            x:Name="SearchBarLayout"
+            Grid.Row="0"
+            Padding="20,5">
+            <!--
+                Logo + Search bar
+            -->
+            <Grid Padding="20,3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <!--  Horizontal ScrollView for categories  -->
-            <ScrollView HorizontalScrollBarVisibility="Default" Orientation="Horizontal">
-                <StackLayout Padding="0,10" Orientation="Horizontal">
-                    <CollectionView ItemsLayout="HorizontalList" ItemsSource="{Binding Categories}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Frame
-                                    Margin="10,0"
-                                    Padding="0"
-                                    BackgroundColor="White"
-                                    BorderColor="Transparent"
-                                    CornerRadius="15"
-                                    HasShadow="False">
-                                    <StackLayout>
-                                        <Image
-                                            Aspect="AspectFill"
-                                            HeightRequest="105"
-                                            HorizontalOptions="FillAndExpand"
-                                            Source="{Binding ImageName}"
-                                            VerticalOptions="FillAndExpand"
-                                            ZIndex="2" />
-                                        <Frame
-                                            Margin="0,-20,0,0"
-                                            Padding="3,26,3,6"
-                                            BackgroundColor="#A8D5BA"
-                                            CornerRadius="15"
-                                            HasShadow="False"
-                                            HorizontalOptions="FillAndExpand"
-                                            VerticalOptions="End"
-                                            ZIndex="1">
-                                            <Label
-                                                FontAttributes="Bold"
-                                                FontSize="Small"
-                                                HorizontalTextAlignment="Center"
-                                                Text="{Binding Name}"
-                                                TextColor="White"
-                                                VerticalTextAlignment="Center" />
+                <Image
+                    x:Name="Logo"
+                    Grid.Column="0"
+                    Margin="-31,0,0,0"
+                    HeightRequest="40"
+                    HorizontalOptions="Start"
+                    Source="Resources/Images/logo_single_letter_black.svg"
+                    VerticalOptions="Center" />
 
-                                        </Frame>
-                                    </StackLayout>
-                                </Frame>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                <StackLayout
+                    Grid.Column="1"
+                    Margin="-30,12,0,0"
+                    HorizontalOptions="EndAndExpand"
+                    Orientation="Horizontal"
+                    Spacing="0"
+                    VerticalOptions="Center">
+
+                    <Entry
+                        x:Name="SearchEntry"
+                        BackgroundColor="Transparent"
+                        HeightRequest="45"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="Center"
+                        WidthRequest="270" />
+
+                    <ImageButton
+                        x:Name="SearchButton"
+                        Margin="-35,0,0,10"
+                        BackgroundColor="Transparent"
+                        HeightRequest="22"
+                        HorizontalOptions="End"
+                        Source="Resources/Images/search.svg"
+                        VerticalOptions="Center"
+                        WidthRequest="22" />
                 </StackLayout>
-            </ScrollView>
-
-            <Label
-                Margin="0,15,0,10"
-                FontAttributes="Bold"
-                FontSize="24"
-                HorizontalOptions="Start"
-                Text="Istaknute ponude"
-                VerticalOptions="Start" />
-
-            <!--  Vertical ScrollView for products  -->
-
-            <CollectionView ItemsSource="{Binding Products}">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Vertical" Span="2" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame
-                            Margin="10"
-                            Padding="10,20"
-                            BackgroundColor="White"
-                            BorderColor="Transparent"
-                            CornerRadius="15"
-                            HasShadow="False">
-                            <StackLayout>
-                                <Image
-                                    Margin="0,0,0,25"
-                                    Aspect="AspectFit"
-                                    HeightRequest="120"
-                                    Source="{Binding Image}" />
-                                <Label Text="{Binding Title}" />
-                                <Label
-                                    Margin="0,6,0,0"
-                                    FontAttributes="Bold"
-                                    Text="{Binding Price, StringFormat='{0:F2} EUR'}" />
-                            </StackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+            </Grid>
         </StackLayout>
-    </ScrollView>
+
+        <!--  ScrollView  -->
+        <ScrollView Grid.Row="1" Scrolled="OnScrolled">
+            <StackLayout Padding="20,10">
+                <Label
+                    Margin="0,15,0,10"
+                    FontAttributes="Bold"
+                    FontSize="24"
+                    HorizontalOptions="Start"
+                    Text="Istraži po kategorijama"
+                    VerticalOptions="Start" />
+
+                <!--  Horizontal ScrollView for categories  -->
+                <ScrollView HorizontalScrollBarVisibility="Default" Orientation="Horizontal">
+                    <StackLayout Padding="0,10" Orientation="Horizontal">
+                        <CollectionView ItemsLayout="HorizontalList" ItemsSource="{Binding Categories}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame
+                                        Margin="10,0"
+                                        Padding="0"
+                                        BackgroundColor="White"
+                                        BorderColor="Transparent"
+                                        CornerRadius="15"
+                                        HasShadow="False">
+                                        <StackLayout>
+                                            <Image
+                                                Aspect="AspectFill"
+                                                HeightRequest="105"
+                                                HorizontalOptions="FillAndExpand"
+                                                Source="{Binding ImageName}"
+                                                VerticalOptions="FillAndExpand"
+                                                ZIndex="2" />
+                                            <Frame
+                                                Margin="0,-20,0,0"
+                                                Padding="3,26,3,6"
+                                                BackgroundColor="#A8D5BA"
+                                                CornerRadius="15"
+                                                HasShadow="False"
+                                                HorizontalOptions="FillAndExpand"
+                                                VerticalOptions="End"
+                                                ZIndex="1">
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="Small"
+                                                    HorizontalTextAlignment="Center"
+                                                    Text="{Binding Name}"
+                                                    TextColor="White"
+                                                    VerticalTextAlignment="Center" />
+                                            </Frame>
+                                        </StackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </ScrollView>
+
+                <Label
+                    Margin="0,15,0,10"
+                    FontAttributes="Bold"
+                    FontSize="24"
+                    HorizontalOptions="Start"
+                    Text="Istaknute ponude"
+                    VerticalOptions="Start" />
+
+                <!--  Vertical ScrollView for products  -->
+                <CollectionView ItemsSource="{Binding Products}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="2" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame
+                                Margin="10"
+                                Padding="10,20"
+                                BackgroundColor="White"
+                                BorderColor="Transparent"
+                                CornerRadius="15"
+                                HasShadow="False">
+                                <StackLayout>
+                                    <Image
+                                        Margin="0,0,0,25"
+                                        Aspect="AspectFit"
+                                        HeightRequest="120"
+                                        Source="{Binding Image}" />
+                                    <Label Text="{Binding Title}" />
+                                    <Label
+                                        Margin="0,6,0,0"
+                                        FontAttributes="Bold"
+                                        Text="{Binding Price, StringFormat='{0:F2} EUR'}" />
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>
