@@ -13,17 +13,76 @@
 
     <ContentPage.Behaviors>
         <behaviors:EventToCommandBehavior Command="{Binding GetProductsCommand}" EventName="Appearing" />
+        <behaviors:EventToCommandBehavior Command="{Binding GetCategoriesCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
 
     <ScrollView>
         <StackLayout Padding="20,10">
+
             <Label
-                Margin="0,5"
+                Margin="0,15,0,10"
+                FontAttributes="Bold"
+                FontSize="24"
+                HorizontalOptions="Start"
+                Text="Istraži po kategorijama"
+                VerticalOptions="Start" />
+
+            <!--  Horizontal ScrollView for categories  -->
+            <ScrollView HorizontalScrollBarVisibility="Default" Orientation="Horizontal">
+                <StackLayout Padding="0,10" Orientation="Horizontal">
+                    <CollectionView ItemsLayout="HorizontalList" ItemsSource="{Binding Categories}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame
+                                    Margin="10,0"
+                                    Padding="0"
+                                    BackgroundColor="White"
+                                    BorderColor="Transparent"
+                                    CornerRadius="15"
+                                    HasShadow="False">
+                                    <StackLayout>
+                                        <Image
+                                            Aspect="AspectFill"
+                                            HeightRequest="105"
+                                            HorizontalOptions="FillAndExpand"
+                                            Source="{Binding ImageName}"
+                                            VerticalOptions="FillAndExpand"
+                                            ZIndex="2" />
+                                        <Frame
+                                            Margin="0,-20,0,0"
+                                            Padding="3,26,3,6"
+                                            BackgroundColor="#A8D5BA"
+                                            CornerRadius="15"
+                                            HasShadow="False"
+                                            HorizontalOptions="FillAndExpand"
+                                            VerticalOptions="End"
+                                            ZIndex="1">
+                                            <Label
+                                                FontAttributes="Bold"
+                                                FontSize="Small"
+                                                HorizontalTextAlignment="Center"
+                                                Text="{Binding Name}"
+                                                TextColor="White"
+                                                VerticalTextAlignment="Center" />
+
+                                        </Frame>
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </ScrollView>
+
+            <Label
+                Margin="0,15,0,10"
                 FontAttributes="Bold"
                 FontSize="24"
                 HorizontalOptions="Start"
                 Text="Istaknute ponude"
                 VerticalOptions="Start" />
+
+            <!--  Vertical ScrollView for products  -->
 
             <CollectionView ItemsSource="{Binding Products}">
                 <CollectionView.ItemsLayout>
@@ -32,7 +91,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame
-                            Margin="5"
+                            Margin="10"
                             Padding="10,20"
                             BackgroundColor="White"
                             BorderColor="Transparent"

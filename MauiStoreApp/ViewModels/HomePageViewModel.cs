@@ -9,13 +9,25 @@ namespace MauiStoreApp.ViewModels
     public partial class HomePageViewModel : BaseViewModel
     {
         private readonly ProductService _productService;
+        private readonly CategoryService _categoryService;
 
         public ObservableCollection<Product> Products { get; private set; } = new ObservableCollection<Product>();
-
+        public ObservableCollection<Category> Categories { get; private set; } = new ObservableCollection<Category>();
 
         public HomePageViewModel()
         {
             _productService = new ProductService();
+            _categoryService = new CategoryService();
+        }
+
+        [RelayCommand]
+        private async Task GetCategoriesAsync()
+        {
+            var categories = await _categoryService.GetCategoriesAsync();
+            foreach (var category in categories)
+            {
+                Categories.Add(category);
+            }
         }
 
         [RelayCommand]
