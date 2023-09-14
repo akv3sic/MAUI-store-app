@@ -19,6 +19,12 @@
     <ScrollView>
         <StackLayout Padding="20,10">
 
+            <Image
+                Margin="-11,0,0,0"
+                HeightRequest="50"
+                HorizontalOptions="Start"
+                Source="Resources/Images/logo_single_letter_black.svg"
+                VerticalOptions="Start" />
             <Label
                 Margin="0,15,0,10"
                 FontAttributes="Bold"
