@@ -79,7 +79,8 @@
                 <Label
                     Margin="0,15,0,10"
                     FontAttributes="Bold"
-                    FontSize="24"
+                    FontFamily="AstoreEczarSemiBold"
+                    FontSize="20"
                     HorizontalOptions="Start"
                     Text="Istraži po kategorijama"
                     VerticalOptions="Start" />
@@ -116,6 +117,7 @@
                                                 ZIndex="1">
                                                 <Label
                                                     FontAttributes="Bold"
+                                                    FontFamily="AstoreEczarSemiBold"
                                                     FontSize="Small"
                                                     HorizontalTextAlignment="Center"
                                                     Text="{Binding Name}"
@@ -133,7 +135,8 @@
                 <Label
                     Margin="0,15,0,10"
                     FontAttributes="Bold"
-                    FontSize="24"
+                    FontFamily="AstoreEczarSemiBold"
+                    FontSize="20"
                     HorizontalOptions="Start"
                     Text="Istaknute ponude"
                     VerticalOptions="Start" />
@@ -158,10 +161,14 @@
                                         Aspect="AspectFit"
                                         HeightRequest="120"
                                         Source="{Binding Image}" />
-                                    <Label Text="{Binding Title}" />
+                                    <Label
+                                        FontFamily="AstoreEczarSemiBold"
+                                        FontSize="Small"
+                                        Text="{Binding Title}" />
                                     <Label
                                         Margin="0,6,0,0"
                                         FontAttributes="Bold"
+                                        FontFamily="AstoreEczarSemiBold"
                                         Text="{Binding Price, StringFormat='{0:F2} EUR'}" />
                                 </StackLayout>
                             </Frame>
