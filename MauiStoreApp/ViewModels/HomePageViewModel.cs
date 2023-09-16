@@ -3,6 +3,7 @@ using MauiStoreApp.Services;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using CommunityToolkit.Mvvm.Input;
+using MauiStoreApp.Views;
 
 namespace MauiStoreApp.ViewModels
 {
@@ -56,6 +57,24 @@ namespace MauiStoreApp.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        [RelayCommand]
+        private async Task ProductTapped(Product product)
+        {
+            IsBusy = true;
+
+            if (product == null)
+                return;
+
+            var navigationParameter = new Dictionary<string, object>
+            {
+                { "Product", product }
+            };
+
+            await Shell.Current.GoToAsync($"{nameof(ProductDetailsPage)}", true, navigationParameter);
+
+            IsBusy = false;
         }
     }
 }

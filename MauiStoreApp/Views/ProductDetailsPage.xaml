@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MauiStoreApp.Views.ProductDetailsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+    xmlns:vm="clr-namespace:MauiStoreApp.ViewModels"
+    x:DataType="vm:ProductDetailsViewModel"
+    BackgroundColor="#EBE9EF">
+
+    <ContentPage.Behaviors>
+        <behaviors:EventToCommandBehavior Command="{Binding InitCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="0">
+
+            <Frame
+                Margin="0"
+                Padding="0,35,0,15"
+                BackgroundColor="White"
+                BorderColor="Transparent"
+                CornerRadius="0"
+                HasShadow="False"
+                ZIndex="2">
+                <Image
+                    Margin="0"
+                    Aspect="AspectFit"
+                    HeightRequest="160"
+                    Source="{Binding Product.Image}" />
+            </Frame>
+
+            <Frame
+                Margin="0,-70,0,0"
+                Padding="60"
+                BackgroundColor="White"
+                BorderColor="Transparent"
+                CornerRadius="60"
+                HasShadow="False"
+                ZIndex="1" />
+            <VerticalStackLayout Padding="20,30">
+                <Label
+                    Padding="0,10,0,0"
+                    FontAttributes="Bold"
+                    FontFamily="AstoreEczarSemiBold"
+                    FontSize="24"
+                    Text="{Binding Product.Title}" />
+
+                <Label
+                    Padding="2,10"
+                    FontFamily="AstoreEczarRegular"
+                    FontSize="16"
+                    Text="{Binding Product.Description}" />
+
+                <Label
+                    Margin="0,10,0,0"
+                    Padding="0,0,0,10"
+                    FontAttributes="Bold"
+                    FontFamily="AstoreEczarSemiBold"
+                    FontSize="20"
+                    Text="{Binding Product.Price, StringFormat='{0:F2} EUR'}"
+                    TextColor="Green" />
+
+                <Label
+                    Margin="0,5"
+                    Padding="0,10,0,0"
+                    FontFamily="AstoreEczarSemiBold"
+                    FontSize="14"
+                    Text="Kategorija" />
+
+                <Frame
+                    Padding="20"
+                    BackgroundColor="White"
+                    BorderColor="Transparent"
+                    CornerRadius="15"
+                    HasShadow="False">
+                    <Label
+                        FontFamily="AstoreEczarRegular"
+                        FontSize="16"
+                        Text="{Binding Product.Category}" />
+                </Frame>
+
+                <Label
+                    FontFamily="AstoreEczarSemiBold"
+                    FontSize="14"
+                    Text="Ocjena" />
+
+                <Frame
+                    Padding="20"
+                    BackgroundColor="White"
+                    BorderColor="Transparent"
+                    CornerRadius="15"
+                    HasShadow="False">
+                    <Label
+                        FontFamily="AstoreEczarRegular"
+                        FontSize="16"
+                        Text="{Binding Product.Rating.Rate}" />
+                </Frame>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

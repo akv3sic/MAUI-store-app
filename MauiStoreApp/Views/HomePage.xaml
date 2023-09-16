@@ -171,7 +171,12 @@
                                         FontFamily="AstoreEczarSemiBold"
                                         Text="{Binding Price, StringFormat='{0:F2} EUR'}" />
                                 </StackLayout>
+
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:HomePageViewModel}}, Path=ProductTappedCommand}" CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
                             </Frame>
+
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

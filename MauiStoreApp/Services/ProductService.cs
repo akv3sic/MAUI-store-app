@@ -9,5 +9,10 @@ namespace MauiStoreApp.Services
         {
             return await GetAsync<IEnumerable<Product>>("products");
         }
+
+        public async Task<Product> GetProductByIdAsync(int id)
+        {
+            return await GetAsync<Product>($"products/{id}");
+        }
     }
 }

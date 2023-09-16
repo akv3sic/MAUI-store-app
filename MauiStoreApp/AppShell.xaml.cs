@@ -1,10 +1,14 @@
-﻿namespace MauiStoreApp
+﻿using MauiStoreApp.Views;
+
+namespace MauiStoreApp
 {
     public partial class AppShell : Shell
     {
         public AppShell()
         {
             InitializeComponent();
+            
+            Routing.RegisterRoute(nameof(ProductDetailsPage), typeof(ProductDetailsPage));
         }
     }
 }
