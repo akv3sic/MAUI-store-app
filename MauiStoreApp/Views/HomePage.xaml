@@ -125,6 +125,11 @@
                                                     VerticalTextAlignment="Center" />
                                             </Frame>
                                         </StackLayout>
+
+
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:HomePageViewModel}}, Path=CategoryTappedCommand}" CommandParameter="{Binding .}" />
+                                        </Frame.GestureRecognizers>
                                     </Frame>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>

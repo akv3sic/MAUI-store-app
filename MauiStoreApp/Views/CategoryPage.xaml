@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MauiStoreApp.Views.CategoryPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+    xmlns:converters="clr-namespace:MauiStoreApp.Converters"
+    xmlns:local="clr-namespace:MauiStoreApp.ViewModels"
+    xmlns:model="clr-namespace:MauiStoreApp.Models"
+    xmlns:modelroot="clr-namespace:MauiStoreApp.Models"
+    x:DataType="local:CategoryPageViewModel"
+    BackgroundColor="#EBE9EF">
+
+    <ContentPage.Behaviors>
+        <behaviors:EventToCommandBehavior Command="{Binding InitCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:FirstLetterUppercaseConverter x:Key="FirstLetterUppercaseConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--  Category Name  -->
+        <Label
+            Grid.Row="0"
+            Margin="30,15,20,10"
+            FontAttributes="Bold"
+            FontSize="20"
+            HorizontalOptions="Start"
+            Text="{Binding Category.Name, Converter={StaticResource FirstLetterUppercaseConverter}}" />
+
+        <!--  Products List  -->
+        <CollectionView
+            Grid.Row="1"
+            Margin="20"
+            ItemsSource="{Binding Products}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Product">
+                    <Frame
+                        Margin="10"
+                        Padding="10,20"
+                        BackgroundColor="White"
+                        BorderColor="Transparent"
+                        CornerRadius="15"
+                        HasShadow="False">
+                        <StackLayout>
+                            <Image
+                                Margin="0,0,0,25"
+                                Aspect="AspectFit"
+                                HeightRequest="120"
+                                Source="{Binding Image}" />
+                            <Label FontSize="Small" Text="{Binding Title}" />
+                            <Label
+                                Margin="0,6,0,0"
+                                FontAttributes="Bold"
+                                Text="{Binding Price, StringFormat='{0:F2} EUR'}" />
+                        </StackLayout>
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:CategoryPageViewModel}}, Path=ProductTappedCommand}" CommandParameter="{Binding .}" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

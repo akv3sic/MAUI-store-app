@@ -1,5 +1,4 @@
 ﻿using MauiStoreApp.Models;
-using MauiStoreApp.Services;
 
 namespace MauiStoreApp.Services
 {
@@ -13,6 +12,11 @@ namespace MauiStoreApp.Services
         public async Task<Product> GetProductByIdAsync(int id)
         {
             return await GetAsync<Product>($"products/{id}");
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(string category)
+        {
+            return await GetAsync<IEnumerable<Product>>($"products/category/{category}");
         }
     }
 }

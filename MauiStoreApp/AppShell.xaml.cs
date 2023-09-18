@@ -9,6 +9,7 @@ namespace MauiStoreApp
             InitializeComponent();
             
             Routing.RegisterRoute(nameof(ProductDetailsPage), typeof(ProductDetailsPage));
+            Routing.RegisterRoute(nameof(CategoryPage), typeof(CategoryPage));
         }
     }
 }

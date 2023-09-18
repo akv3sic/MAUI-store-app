@@ -76,5 +76,23 @@ namespace MauiStoreApp.ViewModels
 
             IsBusy = false;
         }
+
+        [RelayCommand]
+        private async Task CategoryTapped(Category category)
+        {
+            IsBusy = true;
+
+            if (category == null)
+                return;
+
+            var navigationParameter = new Dictionary<string, object>
+            {
+                { "Category", category }
+            };
+
+            await Shell.Current.GoToAsync($"{nameof(CategoryPage)}", true, navigationParameter);
+
+            IsBusy = false;
+        }
     }
 }

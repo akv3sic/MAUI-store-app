@@ -29,6 +29,8 @@ namespace MauiStoreApp
             builder.Services.AddTransient<HomePage>();
             builder.Services.AddTransient<ProductDetailsViewModel>();
             builder.Services.AddTransient<ProductDetailsPage>();
+            builder.Services.AddTransient<CategoryPageViewModel>();
+            builder.Services.AddTransient<CategoryPage>();
 
 #if DEBUG
             builder.Logging.AddDebug();
