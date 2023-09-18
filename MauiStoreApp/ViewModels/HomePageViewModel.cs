@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using CommunityToolkit.Mvvm.Input;
 using MauiStoreApp.Views;
+using Newtonsoft.Json;
 
 namespace MauiStoreApp.ViewModels
 {
@@ -15,10 +16,14 @@ namespace MauiStoreApp.ViewModels
         public ObservableCollection<Product> Products { get; private set; } = new ObservableCollection<Product>();
         public ObservableCollection<Category> Categories { get; private set; } = new ObservableCollection<Category>();
 
+        public ObservableCollection<Product> RecentlyViewedProducts { get; private set; } = new ObservableCollection<Product>();
+
         public HomePageViewModel()
         {
             _productService = new ProductService();
             _categoryService = new CategoryService();
+
+            LoadRecentlyViewedProducts();
         }
 
         [RelayCommand]
@@ -72,6 +77,8 @@ namespace MauiStoreApp.ViewModels
                 { "Product", product }
             };
 
+            AddToRecentlyViewedProducts(product);
+
             await Shell.Current.GoToAsync($"{nameof(ProductDetailsPage)}", true, navigationParameter);
 
             IsBusy = false;
@@ -93,6 +100,40 @@ namespace MauiStoreApp.ViewModels
             await Shell.Current.GoToAsync($"{nameof(CategoryPage)}", true, navigationParameter);
 
             IsBusy = false;
+        }
+
+        private void AddToRecentlyViewedProducts(Product product)
+        {
+            // remove the product from the list if it already exists
+            var existingProduct = RecentlyViewedProducts.FirstOrDefault(p => p.Id == product.Id);
+            if (existingProduct != null)
+            {
+                RecentlyViewedProducts.Remove(existingProduct);
+            }
+
+            // add the product to the beginning of the list
+            RecentlyViewedProducts.Insert(0, product);
+
+            // if the list is longer than 8 items, remove the last item
+            if (RecentlyViewedProducts.Count > 8)
+            {
+                RecentlyViewedProducts.RemoveAt(RecentlyViewedProducts.Count - 1);
+            }
+
+            // save the list to preferences
+            var productsJson = JsonConvert.SerializeObject(RecentlyViewedProducts);
+            Preferences.Set("recently_viewed", productsJson);
+        }
+
+
+        private void LoadRecentlyViewedProducts()
+        {
+            var productsJson = Preferences.Get("recently_viewed", string.Empty);
+            if (!string.IsNullOrEmpty(productsJson))
+            {
+                var products = JsonConvert.DeserializeObject<ObservableCollection<Product>>(productsJson);
+                RecentlyViewedProducts = new ObservableCollection<Product>(products);
+            }
         }
     }
 }

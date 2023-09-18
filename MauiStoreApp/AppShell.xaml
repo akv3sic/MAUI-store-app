@@ -14,7 +14,7 @@
 
         <!--  Recently Watched Page  -->
         <Tab Title="Nedavno gledano" Icon="recently_viewed.svg">
-            <ShellContent ContentTemplate="{DataTemplate views:RecentlyWatchedPage}" Route="RecentlyWatchedPage" />
+            <ShellContent ContentTemplate="{DataTemplate views:RecentlyViewedPage}" Route="RecentlyViewedPage" />
         </Tab>
 
         <!--  Cart Page  -->
