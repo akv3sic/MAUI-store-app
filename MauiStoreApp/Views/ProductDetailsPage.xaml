@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="MauiStoreApp.Views.ProductDetailsPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -15,148 +14,161 @@
         <behaviors:EventToCommandBehavior Command="{Binding InitCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
 
-    <ScrollView>
-        <VerticalStackLayout Padding="0">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-            <Frame
-                Margin="0"
-                Padding="0,35,0,15"
-                BackgroundColor="White"
-                BorderColor="Transparent"
-                CornerRadius="0"
-                HasShadow="False"
-                ZIndex="2">
-                <Image
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="0">
+                <Frame
                     Margin="0"
-                    Aspect="AspectFit"
-                    HeightRequest="160"
-                    Source="{Binding Product.Image}" />
-            </Frame>
-
-            <Frame
-                Margin="0,-70,0,0"
-                Padding="60"
-                BackgroundColor="White"
-                BorderColor="Transparent"
-                CornerRadius="60"
-                HasShadow="False"
-                ZIndex="1" />
-            <VerticalStackLayout Padding="20,30">
-                <Label
-                    Padding="0,10,0,0"
-                    FontAttributes="Bold"
-                    FontFamily="AstoreEczarSemiBold"
-                    FontSize="24"
-                    Text="{Binding Product.Title}" />
-
-                <Label
-                    Padding="2,10"
-                    FontFamily="AstoreEczarRegular"
-                    FontSize="16"
-                    Text="{Binding Product.Description}" />
-
-                <Label
-                    Margin="0,10,0,0"
-                    Padding="0,0,0,10"
-                    FontAttributes="Bold"
-                    FontFamily="AstoreEczarSemiBold"
-                    FontSize="20"
-                    Text="{Binding Product.Price, StringFormat='{0:F2} EUR'}"
-                    TextColor="Green" />
-
-                <Label
-                    Margin="0,5"
-                    Padding="0,10,0,0"
-                    FontFamily="AstoreEczarSemiBold"
-                    FontSize="14"
-                    Text="Kategorija" />
-
-                <Frame
-                    Padding="20"
+                    Padding="0,35,0,15"
                     BackgroundColor="White"
                     BorderColor="Transparent"
-                    CornerRadius="15"
-                    HasShadow="False">
-                    <Label
-                        FontFamily="AstoreEczarRegular"
-                        FontSize="16"
-                        Text="{Binding Product.Category}" />
+                    CornerRadius="0"
+                    HasShadow="False"
+                    ZIndex="2">
+                    <Image
+                        Margin="0"
+                        Aspect="AspectFit"
+                        HeightRequest="160"
+                        Source="{Binding Product.Image}" />
                 </Frame>
-
-                <Label
-                    FontFamily="AstoreEczarSemiBold"
-                    FontSize="14"
-                    Text="Ocjena" />
 
                 <Frame
-                    Padding="20"
+                    Margin="0,-70,0,0"
+                    Padding="60"
                     BackgroundColor="White"
                     BorderColor="Transparent"
-                    CornerRadius="15"
-                    HasShadow="False">
+                    CornerRadius="60"
+                    HasShadow="False"
+                    ZIndex="1" />
+                <VerticalStackLayout Padding="20,30">
                     <Label
+                        Padding="0,10,0,0"
+                        FontAttributes="Bold"
+                        FontFamily="AstoreEczarSemiBold"
+                        FontSize="24"
+                        Text="{Binding Product.Title}" />
+
+                    <Label
+                        Padding="2,10"
                         FontFamily="AstoreEczarRegular"
                         FontSize="16"
-                        Text="{Binding Product.Rating.Rate}" />
-                </Frame>
+                        Text="{Binding Product.Description}" />
+
+                    <Label
+                        Margin="0,10,0,0"
+                        Padding="0,0,0,10"
+                        FontAttributes="Bold"
+                        FontFamily="AstoreEczarSemiBold"
+                        FontSize="20"
+                        Text="{Binding Product.Price, StringFormat='{0:F2} EUR'}"
+                        TextColor="Green" />
+
+                    <Label
+                        Margin="0,5"
+                        Padding="0,10,0,0"
+                        FontFamily="AstoreEczarSemiBold"
+                        FontSize="14"
+                        Text="Kategorija" />
+
+                    <Frame
+                        Padding="20"
+                        BackgroundColor="White"
+                        BorderColor="Transparent"
+                        CornerRadius="15"
+                        HasShadow="False">
+                        <Label
+                            FontFamily="AstoreEczarRegular"
+                            FontSize="16"
+                            Text="{Binding Product.Category}" />
+                    </Frame>
+
+                    <Label
+                        FontFamily="AstoreEczarSemiBold"
+                        FontSize="14"
+                        Text="Ocjena" />
+
+                    <Frame
+                        Padding="20"
+                        BackgroundColor="White"
+                        BorderColor="Transparent"
+                        CornerRadius="15"
+                        HasShadow="False">
+                        <Label
+                            FontFamily="AstoreEczarRegular"
+                            FontSize="16"
+                            Text="{Binding Product.Rating.Rate}" />
+                    </Frame>
 
 
-                <!--  cross-sell section  -->
-                <Label
-                    Margin="0,20,0,10"
-                    FontFamily="AstoreEczarSemiBold"
-                    FontSize="18"
-                    Text="Preporučeni proizvodi" />
+                    <!--  cross-sell section  -->
+                    <Label
+                        Margin="0,20,0,10"
+                        FontFamily="AstoreEczarSemiBold"
+                        FontSize="18"
+                        Text="Preporučeni proizvodi" />
 
-                <CollectionView ItemsLayout="HorizontalList" ItemsSource="{Binding CrossSellProducts}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="model:Product">
-                            <Frame
-                                Margin="10"
-                                Padding="10,20"
-                                BackgroundColor="White"
-                                BorderColor="Transparent"
-                                CornerRadius="15"
-                                HasShadow="False">
-                                <Grid HeightRequest="220" WidthRequest="150">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
+                    <CollectionView ItemsLayout="HorizontalList" ItemsSource="{Binding CrossSellProducts}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Product">
+                                <Frame
+                                    Margin="10"
+                                    Padding="10,20"
+                                    BackgroundColor="White"
+                                    BorderColor="Transparent"
+                                    CornerRadius="15"
+                                    HasShadow="False">
+                                    <Grid HeightRequest="220" WidthRequest="150">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
 
-                                    <StackLayout Grid.Row="0">
-                                        <Image
-                                            Margin="0,0,0,25"
-                                            Aspect="AspectFit"
-                                            HeightRequest="120"
-                                            Source="{Binding Image}" />
+                                        <StackLayout Grid.Row="0">
+                                            <Image
+                                                Margin="0,0,0,25"
+                                                Aspect="AspectFit"
+                                                HeightRequest="120"
+                                                Source="{Binding Image}" />
+                                            <Label
+                                                FontFamily="AstoreEczarSemiBold"
+                                                FontSize="Small"
+                                                LineBreakMode="WordWrap"
+                                                Text="{Binding Title}" />
+                                        </StackLayout>
+
                                         <Label
+                                            Grid.Row="1"
+                                            Margin="0,6,0,0"
+                                            FontAttributes="Bold"
                                             FontFamily="AstoreEczarSemiBold"
-                                            FontSize="Small"
                                             LineBreakMode="WordWrap"
-                                            Text="{Binding Title}" />
-                                    </StackLayout>
+                                            Text="{Binding Price, StringFormat='{0:F2} EUR'}"
+                                            VerticalOptions="End" />
+                                    </Grid>
 
-                                    <Label
-                                        Grid.Row="1"
-                                        Margin="0,6,0,0"
-                                        FontAttributes="Bold"
-                                        FontFamily="AstoreEczarSemiBold"
-                                        LineBreakMode="WordWrap"
-                                        Text="{Binding Price, StringFormat='{0:F2} EUR'}"
-                                        VerticalOptions="End" />
-                                </Grid>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProductDetailsViewModel}}, Path=ProductTappedCommand}" CommandParameter="{Binding .}" />
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                            </DataTemplate>
 
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProductDetailsViewModel}}, Path=ProductTappedCommand}" CommandParameter="{Binding .}" />
-                                </Frame.GestureRecognizers>
-                            </Frame>
-                        </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
 
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-
+                </VerticalStackLayout>
             </VerticalStackLayout>
-        </VerticalStackLayout>
-    </ScrollView>
+        </ScrollView>
+
+        <!--  loading indicator  -->
+        <ActivityIndicator
+            Grid.Row="0"
+            HorizontalOptions="CenterAndExpand"
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}"
+            VerticalOptions="CenterAndExpand" />
+    </Grid>
 </ContentPage>
