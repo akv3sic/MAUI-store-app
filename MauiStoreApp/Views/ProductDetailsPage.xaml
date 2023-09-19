@@ -4,8 +4,11 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:behaviors="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+    xmlns:local="clr-namespace:MauiStoreApp.ViewModels"
+    xmlns:model="clr-namespace:MauiStoreApp.Models"
+    xmlns:modelroot="clr-namespace:MauiStoreApp.Models"
     xmlns:vm="clr-namespace:MauiStoreApp.ViewModels"
-    x:DataType="vm:ProductDetailsViewModel"
+    x:DataType="local:ProductDetailsViewModel"
     BackgroundColor="#EBE9EF">
 
     <ContentPage.Behaviors>
@@ -96,6 +99,63 @@
                         FontSize="16"
                         Text="{Binding Product.Rating.Rate}" />
                 </Frame>
+
+
+                <!--  cross-sell section  -->
+                <Label
+                    Margin="0,20,0,10"
+                    FontFamily="AstoreEczarSemiBold"
+                    FontSize="18"
+                    Text="Preporučeni proizvodi" />
+
+                <CollectionView ItemsLayout="HorizontalList" ItemsSource="{Binding CrossSellProducts}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Product">
+                            <Frame
+                                Margin="10"
+                                Padding="10,20"
+                                BackgroundColor="White"
+                                BorderColor="Transparent"
+                                CornerRadius="15"
+                                HasShadow="False">
+                                <Grid HeightRequest="220" WidthRequest="150">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <StackLayout Grid.Row="0">
+                                        <Image
+                                            Margin="0,0,0,25"
+                                            Aspect="AspectFit"
+                                            HeightRequest="120"
+                                            Source="{Binding Image}" />
+                                        <Label
+                                            FontFamily="AstoreEczarSemiBold"
+                                            FontSize="Small"
+                                            LineBreakMode="WordWrap"
+                                            Text="{Binding Title}" />
+                                    </StackLayout>
+
+                                    <Label
+                                        Grid.Row="1"
+                                        Margin="0,6,0,0"
+                                        FontAttributes="Bold"
+                                        FontFamily="AstoreEczarSemiBold"
+                                        LineBreakMode="WordWrap"
+                                        Text="{Binding Price, StringFormat='{0:F2} EUR'}"
+                                        VerticalOptions="End" />
+                                </Grid>
+
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProductDetailsViewModel}}, Path=ProductTappedCommand}" CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </DataTemplate>
+
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
             </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
