@@ -36,6 +36,34 @@
             HorizontalOptions="Start"
             Text="{Binding Category.Name, Converter={StaticResource FirstLetterUppercaseConverter}}" />
 
+        <!--  Sort by Price  -->
+        <Image
+            Grid.Row="0"
+            Margin="0,15,25,10"
+            HeightRequest="30"
+            HorizontalOptions="End"
+            WidthRequest="30">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding SortProductsCommand}" />
+            </Image.GestureRecognizers>
+            <Image.Triggers>
+                <DataTrigger
+                    Binding="{Binding SortOrder}"
+                    TargetType="Image"
+                    Value="asc">
+                    <Setter Property="Source" Value="sort_from_top_to_bottom.svg" />
+                </DataTrigger>
+                <DataTrigger
+                    Binding="{Binding SortOrder}"
+                    TargetType="Image"
+                    Value="desc">
+                    <Setter Property="Source" Value="sort_from_bottom_to_top.svg" />
+                </DataTrigger>
+            </Image.Triggers>
+        </Image>
+
+
+
         <!--  Products List  -->
         <CollectionView
             Grid.Row="1"

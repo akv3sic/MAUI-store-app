@@ -23,6 +23,9 @@ namespace MauiStoreApp.ViewModels
         [ObservableProperty]
         Category category;
 
+        [ObservableProperty]
+        string sortOrder = "asc";
+
         public ObservableCollection<Product> Products { get; private set; } = new ObservableCollection<Product>();
 
         [RelayCommand]
@@ -31,7 +34,7 @@ namespace MauiStoreApp.ViewModels
             await GetProductsByCategoryAsync();
         }
 
-        private async Task GetProductsByCategoryAsync()
+        private async Task GetProductsByCategoryAsync(string sortOrder = "asc")
         {
             if (IsBusy)
                 return;
@@ -39,8 +42,7 @@ namespace MauiStoreApp.ViewModels
             try
             {
                 IsBusy = true;
-
-                var products = await _productService.GetProductsByCategoryAsync(Category.Name);
+                var products = await _productService.GetProductsByCategoryAsync(Category.Name, sortOrder);
                 Products.Clear();
                 foreach (var product in products)
                 {
@@ -58,6 +60,7 @@ namespace MauiStoreApp.ViewModels
             }
         }
 
+
         [RelayCommand]
         private async Task ProductTapped(Product product)
         {
@@ -74,6 +77,13 @@ namespace MauiStoreApp.ViewModels
             await Shell.Current.GoToAsync($"{nameof(ProductDetailsPage)}", true, navigationParameter);
 
             IsBusy = false;
+        }
+
+        [RelayCommand]
+        private async Task SortProducts()
+        {
+            SortOrder = SortOrder == "asc" ? "desc" : "asc";
+            await GetProductsByCategoryAsync(SortOrder);
         }
     }
 }
