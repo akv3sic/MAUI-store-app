@@ -26,3 +26,9 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build MauiStoreApp/MauiStoreApp.csproj -c Release -f net7.0-android --no-restore
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.3
+      with:
+        path: |
+          ./**/*.aab
+          ./**/*.apk
