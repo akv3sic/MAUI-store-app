@@ -8,5 +8,10 @@ namespace MauiStoreApp.Services
         {
             return await GetAsync<Cart>($"carts/{cartId}");
         }
+
+        public async Task<List<Cart>> GetCartByUserIdAsync(int userId)
+        {
+            return await GetAsync<List<Cart>>($"carts/user/{userId}");
+        }
     }
 }
