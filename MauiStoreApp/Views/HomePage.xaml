@@ -33,7 +33,7 @@
         <StackLayout
             x:Name="SearchBarLayout"
             Grid.Row="0"
-            Padding="20,5">
+            Padding="12,5">
             <!--
                 Logo + Search bar
             -->
@@ -83,7 +83,7 @@
 
         <!--  ScrollView  -->
         <ScrollView Grid.Row="1" Scrolled="OnScrolled">
-            <StackLayout Padding="20,10">
+            <StackLayout Padding="12,10">
                 <Label
                     Margin="0,15,0,10"
                     FontAttributes="Bold"
@@ -109,7 +109,7 @@
                                         <StackLayout>
                                             <Image
                                                 Aspect="AspectFill"
-                                                HeightRequest="105"
+                                                HeightRequest="110"
                                                 HorizontalOptions="FillAndExpand"
                                                 Source="{Binding ImageName}"
                                                 VerticalOptions="FillAndExpand"
@@ -134,8 +134,6 @@
                                                     VerticalTextAlignment="Center" />
                                             </Frame>
                                         </StackLayout>
-
-
                                         <Frame.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:HomePageViewModel}}, Path=CategoryTappedCommand}" CommandParameter="{Binding .}" />
                                         </Frame.GestureRecognizers>
@@ -162,34 +160,81 @@
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame
-                                Margin="10"
-                                Padding="10,20"
-                                BackgroundColor="White"
-                                BorderColor="Transparent"
-                                CornerRadius="15"
-                                HasShadow="False">
-                                <StackLayout>
-                                    <Image
-                                        Margin="0,0,0,25"
-                                        Aspect="AspectFit"
-                                        HeightRequest="120"
-                                        Source="{Binding Image}" />
-                                    <Label
-                                        FontFamily="AstoreEczarSemiBold"
-                                        FontSize="Small"
-                                        Text="{Binding Title}" />
-                                    <Label
-                                        Margin="0,6,0,0"
-                                        FontAttributes="Bold"
-                                        FontFamily="AstoreEczarSemiBold"
-                                        Text="{Binding Price, StringFormat='{0:F2} EUR'}" />
-                                </StackLayout>
+                            <StackLayout Margin="10">
+                                <Frame
+                                    Padding="8"
+                                    BorderColor="Transparent"
+                                    CornerRadius="15"
+                                    HasShadow="False"
+                                    ZIndex="2">
+                                    <Grid>
+                                        <!--  product image  -->
+                                        <Image
+                                            Margin="20"
+                                            Aspect="AspectFit"
+                                            HeightRequest="120"
+                                            Source="{Binding Image}">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:HomePageViewModel}}, Path=ProductTappedCommand}" CommandParameter="{Binding .}" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
 
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:HomePageViewModel}}, Path=ProductTappedCommand}" CommandParameter="{Binding .}" />
-                                </Frame.GestureRecognizers>
-                            </Frame>
+                                        <!--  favorite icon  -->
+                                        <Frame
+                                            Padding="10"
+                                            BackgroundColor="#F92C2E"
+                                            BorderColor="Transparent"
+                                            CornerRadius="20"
+                                            HasShadow="False"
+                                            HeightRequest="27"
+                                            HorizontalOptions="Start"
+                                            VerticalOptions="Start"
+                                            WidthRequest="27">
+                                            <Image
+                                                Aspect="AspectFit"
+                                                HeightRequest="16"
+                                                HorizontalOptions="Center"
+                                                Source="favourite_white.svg"
+                                                VerticalOptions="Center"
+                                                WidthRequest="16" />
+                                        </Frame>
+                                    </Grid>
+                                </Frame>
+
+
+                                <Frame
+                                    Margin="0,-30,0,0"
+                                    Padding="15,50,15,20"
+                                    BackgroundColor="#2F3137"
+                                    BorderColor="Transparent"
+                                    CornerRadius="10"
+                                    HasShadow="False"
+                                    HeightRequest="150"
+                                    ZIndex="1">
+                                    <StackLayout>
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontFamily="AstoreEczarSemiBold"
+                                            FontSize="Small"
+                                            LineBreakMode="WordWrap"
+                                            MaxLines="2"
+                                            Text="{Binding Title}"
+                                            TextColor="White" />
+                                        <Label
+                                            Margin="0,6,0,0"
+                                            FontAttributes="Bold"
+                                            FontFamily="AstoreEczarSemiBold"
+                                            FontSize="Medium"
+                                            Text="{Binding Price, StringFormat='€{0:F2}'}"
+                                            TextColor="White"
+                                            VerticalOptions="EndAndExpand" />
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:HomePageViewModel}}, Path=ProductTappedCommand}" CommandParameter="{Binding .}" />
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+
 
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
