@@ -30,39 +30,44 @@
         <!--  Category Name  -->
         <Label
             Grid.Row="0"
-            Margin="30,15,20,10"
+            Margin="30,17,20,5"
             FontAttributes="Bold"
             FontSize="20"
             HorizontalOptions="Start"
             Text="{Binding Category.Name, Converter={StaticResource FirstLetterUppercaseConverter}}" />
 
-        <!--  Sort by Price  -->
-        <Image
+        <!--  Sort Button  -->
+        <Frame
             Grid.Row="0"
-            Margin="0,15,25,10"
-            HeightRequest="30"
+            Margin="0,17,25,5"
+            Padding="5"
+            BackgroundColor="Black"
+            BorderColor="Transparent"
+            CornerRadius="20"
+            HasShadow="False"
+            HeightRequest="39"
             HorizontalOptions="End"
-            WidthRequest="30">
-            <Image.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding SortProductsCommand}" />
-            </Image.GestureRecognizers>
-            <Image.Triggers>
-                <DataTrigger
-                    Binding="{Binding SortOrder}"
-                    TargetType="Image"
-                    Value="asc">
-                    <Setter Property="Source" Value="sort_from_top_to_bottom.svg" />
-                </DataTrigger>
-                <DataTrigger
-                    Binding="{Binding SortOrder}"
-                    TargetType="Image"
-                    Value="desc">
-                    <Setter Property="Source" Value="sort_from_bottom_to_top.svg" />
-                </DataTrigger>
-            </Image.Triggers>
-        </Image>
-
-
+            WidthRequest="39">
+            <Image HeightRequest="25" WidthRequest="25">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SortProductsCommand}" />
+                </Image.GestureRecognizers>
+                <Image.Triggers>
+                    <DataTrigger
+                        Binding="{Binding SortOrder}"
+                        TargetType="Image"
+                        Value="asc">
+                        <Setter Property="Source" Value="sort_from_top_to_bottom_white.svg" />
+                    </DataTrigger>
+                    <DataTrigger
+                        Binding="{Binding SortOrder}"
+                        TargetType="Image"
+                        Value="desc">
+                        <Setter Property="Source" Value="sort_from_bottom_to_top_white.svg" />
+                    </DataTrigger>
+                </Image.Triggers>
+            </Image>
+        </Frame>
 
         <!--  Products List  -->
         <CollectionView
@@ -74,30 +79,80 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:Product">
-                    <Frame
-                        Margin="10"
-                        Padding="10,20"
-                        BackgroundColor="White"
-                        BorderColor="Transparent"
-                        CornerRadius="15"
-                        HasShadow="False">
-                        <StackLayout>
-                            <Image
-                                Margin="0,0,0,25"
-                                Aspect="AspectFit"
-                                HeightRequest="120"
-                                Source="{Binding Image}" />
-                            <Label FontSize="Small" Text="{Binding Title}" />
-                            <Label
-                                Margin="0,6,0,0"
-                                FontAttributes="Bold"
-                                Text="{Binding Price, StringFormat='{0:F2} EUR'}" />
-                        </StackLayout>
+                    <StackLayout Margin="10">
+                        <Frame
+                            Padding="8"
+                            BorderColor="Transparent"
+                            CornerRadius="15"
+                            HasShadow="False"
+                            ZIndex="2">
+                            <Grid>
 
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:CategoryPageViewModel}}, Path=ProductTappedCommand}" CommandParameter="{Binding .}" />
-                        </Frame.GestureRecognizers>
-                    </Frame>
+                                <!--  product image  -->
+                                <Image
+                                    Margin="20"
+                                    Aspect="AspectFit"
+                                    HeightRequest="120"
+                                    Source="{Binding Image}">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:CategoryPageViewModel}}, Path=ProductTappedCommand}" CommandParameter="{Binding .}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                                <!--  favorite icon  -->
+                                <Frame
+                                    Padding="10"
+                                    BackgroundColor="#F92C2E"
+                                    BorderColor="Transparent"
+                                    CornerRadius="20"
+                                    HasShadow="False"
+                                    HeightRequest="27"
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Start"
+                                    WidthRequest="27">
+                                    <Image
+                                        Aspect="AspectFit"
+                                        HeightRequest="16"
+                                        HorizontalOptions="Center"
+                                        Source="favourite_white.svg"
+                                        VerticalOptions="Center"
+                                        WidthRequest="16" />
+                                </Frame>
+                            </Grid>
+                        </Frame>
+
+                        <Frame
+                            Margin="0,-30,0,0"
+                            Padding="15,50,15,20"
+                            BackgroundColor="#2F3137"
+                            BorderColor="Transparent"
+                            CornerRadius="10"
+                            HasShadow="False"
+                            HeightRequest="150"
+                            ZIndex="1">
+                            <StackLayout>
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontFamily="AstoreEczarSemiBold"
+                                    FontSize="Small"
+                                    LineBreakMode="WordWrap"
+                                    MaxLines="2"
+                                    Text="{Binding Title}"
+                                    TextColor="White" />
+                                <Label
+                                    Margin="0,6,0,0"
+                                    FontAttributes="Bold"
+                                    FontFamily="AstoreEczarSemiBold"
+                                    FontSize="Medium"
+                                    Text="{Binding Price, StringFormat='€{0:F2}'}"
+                                    TextColor="White"
+                                    VerticalOptions="EndAndExpand" />
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:CategoryPageViewModel}}, Path=ProductTappedCommand}" CommandParameter="{Binding .}" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
