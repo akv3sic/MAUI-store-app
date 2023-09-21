@@ -9,13 +9,22 @@ the functionality and features of a real-world store application.
 
 ### Features
 
-*(To be added)*
+- [x] Product listing
+- [x] Categories
+- [x] Product details
+- [x] Cart
+- [ ] User profile
+- [ ] Authentication
+- [x] Sorting
+- [x] Cross selling
+- [x] Product sharing
+- [x] Recently viewed products
 
 ## Setup Instructions
 
 ### Prerequisites
 
-- [Visual Studio 2022](https://visualstudio.microsoft.com/vs/) 17.3 or greter with .NET MAUI installed.
+- [Visual Studio 2022](https://visualstudio.microsoft.com/vs/) 17.3 or greater with .NET MAUI installed.
 
 More at [Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/maui/get-started/installation).
 
