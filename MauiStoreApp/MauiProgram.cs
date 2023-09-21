@@ -25,6 +25,7 @@ namespace MauiStoreApp
             builder.Services.AddSingleton<CategoryService>();
             builder.Services.AddSingleton<CartService>();
             builder.Services.AddSingleton<UserService>();
+            builder.Services.AddSingleton<AuthService>();
             builder.Services.AddTransient<HomePageViewModel>();
             builder.Services.AddTransient<HomePage>();
             builder.Services.AddTransient<ProductDetailsViewModel>();
@@ -35,6 +36,8 @@ namespace MauiStoreApp
             builder.Services.AddTransient<RecentlyViewedPage>();
             builder.Services.AddTransient<CartViewModel>();
             builder.Services.AddTransient<CartPage>();
+            builder.Services.AddTransient<LoginViewModel>();
+            builder.Services.AddTransient<LoginPage>();
 
 #if DEBUG
             builder.Logging.AddDebug();
