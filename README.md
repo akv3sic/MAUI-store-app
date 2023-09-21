@@ -1,5 +1,7 @@
 # FSRE Master Thesis - MAUI Store App
 
+![Build Anroid](https://github.com/akv3sic/MAUI-store-app/actions/workflows/dotnet.yml/badge.svg)
+
 ## Project Description
 
 This project is developed as a part of a Master's Thesis at [FSRE](https://fsre.sum.ba). 
