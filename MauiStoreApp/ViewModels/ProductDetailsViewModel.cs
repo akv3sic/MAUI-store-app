@@ -106,5 +106,19 @@ namespace MauiStoreApp.ViewModels
 
             IsBusy = false;
         }
+
+        [RelayCommand]
+        private async Task ShareProduct(Product product)
+        {
+            if (product == null)
+                return;
+
+            await Share.RequestAsync(new ShareTextRequest
+            {
+                Uri = product.Image,
+                Title = product.Title,
+                Text = "Pogledaj ovaj proizod na AStore!"
+            });
+        }
     }
 }

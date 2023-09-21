@@ -8,7 +8,8 @@
     xmlns:modelroot="clr-namespace:MauiStoreApp.Models"
     xmlns:vm="clr-namespace:MauiStoreApp.ViewModels"
     x:DataType="local:ProductDetailsViewModel"
-    BackgroundColor="#EBE9EF">
+    BackgroundColor="#EBE9EF"
+    Shell.NavBarIsVisible="False">
 
     <ContentPage.Behaviors>
         <behaviors:EventToCommandBehavior Command="{Binding InitCommand}" EventName="Appearing" />
@@ -16,14 +17,50 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <ScrollView Grid.Row="0">
+        <Grid
+            x:Name="ProductNavigation"
+            Grid.Row="0"
+            Padding="5,10"
+            BackgroundColor="White"
+            ColumnDefinitions="48,*,48"
+            ColumnSpacing="10">
+
+            <!--  back button  -->
+            <ImageButton
+                Grid.Column="0"
+                BackgroundColor="Transparent"
+                CornerRadius="20"
+                HeightRequest="25"
+                Source="arrow_back.svg"
+                WidthRequest="25">
+                <ImageButton.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProductDetailsViewModel}}, Path=GoBackCommand}" />
+                </ImageButton.GestureRecognizers>
+            </ImageButton>
+
+            <HorizontalStackLayout Grid.Column="1" />
+
+            <!--  share button  -->
+            <ImageButton
+                Grid.Column="2"
+                Padding="6"
+                BackgroundColor="#000000"
+                Command="{Binding ShareProductCommand}"
+                CommandParameter="{Binding Product}"
+                CornerRadius="17"
+                HeightRequest="46"
+                Source="share_white.svg"
+                WidthRequest="46" />
+        </Grid>
+        <ScrollView Grid.Row="1" Margin="0,-1,0,0">
             <VerticalStackLayout Padding="0">
                 <Frame
                     Margin="0"
-                    Padding="0,35,0,15"
+                    Padding="0,40,0,15"
                     BackgroundColor="White"
                     BorderColor="Transparent"
                     CornerRadius="0"
@@ -199,7 +236,7 @@
 
         <!--  loading indicator  -->
         <ActivityIndicator
-            Grid.Row="0"
+            Grid.Row="1"
             HorizontalOptions="CenterAndExpand"
             IsRunning="{Binding IsBusy}"
             IsVisible="{Binding IsBusy}"
