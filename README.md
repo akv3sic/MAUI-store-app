@@ -1,6 +1,6 @@
 # FSRE Master Thesis - MAUI Store App
 
-![Build Anroid](https://github.com/akv3sic/MAUI-store-app/actions/workflows/dotnet.yml/badge.svg)
+![Build Anroid](https://github.com/akv3sic/MAUI-store-app/actions/workflows/dotnet.yml/badge.svg?event=push&branch=master)
 
 ## Project Description
 
