@@ -12,17 +12,21 @@ namespace MauiStoreApp.ViewModels
     {
         private readonly CartService _cartService;
         private readonly ProductService _productService;
+        private readonly AuthService _authService;
 
-        public CartViewModel(CartService cartService, ProductService productService)
+        public CartViewModel(CartService cartService, ProductService productService, AuthService authService)
         {
             _cartService = cartService;
             _productService = productService;
+            _authService = authService;
         }
 
         public CartViewModel()
         {
         }
 
+        [ObservableProperty]
+        public bool isUserLoggedIn;
 
         [ObservableProperty]
         Cart cart;
@@ -33,6 +37,7 @@ namespace MauiStoreApp.ViewModels
         public async Task Init()
         {
             await GetCartByUserIdAsync();
+            IsUserLoggedIn = AuthService.IsUserLoggedIn;
         }
 
         private async Task GetCartByUserIdAsync()
@@ -79,6 +84,12 @@ namespace MauiStoreApp.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        [RelayCommand]
+        public async Task GoToLoginPage()
+        {
+            await Shell.Current.GoToAsync("LoginPage");
         }
     }
 }

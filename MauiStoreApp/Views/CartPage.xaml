@@ -7,6 +7,7 @@
     xmlns:converters="clr-namespace:MauiStoreApp.Converters"
     xmlns:local="clr-namespace:MauiStoreApp.ViewModels"
     xmlns:model="clr-namespace:MauiStoreApp.Models"
+    xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     xmlns:vm="clr-namespace:MauiStoreApp.ViewModels"
     Title="Košarica"
     BackgroundColor="White"
@@ -16,6 +17,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:FirstLetterUppercaseConverter x:Key="FirstLetterUppercaseConverter" />
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -27,11 +29,15 @@
         <behaviors:EventToCommandBehavior Command="{Binding InitCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
 
+    <!--  if user is logged in  -->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <StackLayout Grid.Row="0" Padding="10">
+        <StackLayout
+            Grid.Row="0"
+            Padding="10"
+            IsVisible="{Binding IsUserLoggedIn}">
             <CollectionView ItemsSource="{Binding CartItems}" VerticalOptions="FillAndExpand">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:CartItemDetail">
@@ -191,5 +197,44 @@
             IsRunning="{Binding IsBusy}"
             IsVisible="{Binding IsBusy}"
             VerticalOptions="CenterAndExpand" />
+
+
+        <!--  if user is not logged in  -->
+        <StackLayout
+            Grid.Row="0"
+            Padding="10"
+            IsVisible="{Binding IsUserLoggedIn, Converter={StaticResource InvertedBoolConverter}}"
+            VerticalOptions="CenterAndExpand">
+            <Image
+                Margin="0,0,0,45"
+                HorizontalOptions="Center"
+                Source="not_logged_in.svg"
+                VerticalOptions="Center" />
+
+            <Label
+                Margin="0,5"
+                FontAttributes="Bold"
+                FontSize="Large"
+                HorizontalOptions="Center"
+                Text="Niste prijavljeni"
+                VerticalOptions="Center" />
+
+            <Label
+                Margin="0,5"
+                HorizontalOptions="Center"
+                Text="Molimo prijavite se ako želite vidjeti košaricu."
+                TextColor="Gray"
+                VerticalOptions="Center" />
+
+            <Button
+                Margin="0,45"
+                Command="{Binding GoToLoginPageCommand}"
+                CornerRadius="20"
+                HorizontalOptions="Center"
+                Text="Prijava"
+                VerticalOptions="Center"
+                WidthRequest="150" />
+
+        </StackLayout>
     </Grid>
 </ContentPage>

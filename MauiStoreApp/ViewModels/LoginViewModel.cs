@@ -45,6 +45,21 @@ namespace MauiStoreApp.ViewModels
 
                     // save token to secure storage
                     await SecureStorage.Default.SetAsync("token", loginResponse.Token);
+
+                    AuthService.IsUserLoggedIn = true;
+
+                    var navigationStack = Shell.Current.Navigation.NavigationStack;
+
+                    if (navigationStack.Count >= 2)
+                    {
+                        // go to previous page
+                        await Shell.Current.Navigation.PopAsync();
+                    }
+                    else
+                    {
+                        // if there is no previous page, navigate to home page
+                        await Shell.Current.GoToAsync("//HomePage");
+                    }
                 }
             }
             catch (Exception ex)
@@ -55,6 +70,6 @@ namespace MauiStoreApp.ViewModels
             {
                 IsBusy = false;
             }
-        }   
+        }
     }
 }

@@ -26,10 +26,5 @@
         <Tab Title="Profil" Icon="profile.svg">
             <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}" Route="ProfilePage" />
         </Tab>
-
-        <!--  test login page  -->
-        <Tab Title="Login" Icon="profile.svg">
-            <ShellContent ContentTemplate="{DataTemplate views:LoginPage}" Route="LoginPage" />
-        </Tab>
     </TabBar>
 </Shell>

@@ -6,6 +6,28 @@ namespace MauiStoreApp.Services
 {
     public class AuthService : BaseService
     {
+        public AuthService()
+        {
+        }
+
+        public static bool IsUserLoggedIn
+        {
+            get
+            {
+                var token = SecureStorage.GetAsync("token").Result;
+                return !string.IsNullOrEmpty(token);
+            }
+
+            set
+            {
+                if (!value)
+                {
+                    // remove token from secure storage if IsUserLoggedIn is set to false
+                    SecureStorage.Remove("token");
+                }
+            }
+        }
+
         public async Task<LoginResponse> LoginAsync(string username, string password)
         {
             var request = new LoginRequest
