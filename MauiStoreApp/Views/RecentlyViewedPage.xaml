@@ -123,5 +123,43 @@
             IsRunning="{Binding IsBusy}"
             IsVisible="{Binding IsBusy}"
             VerticalOptions="CenterAndExpand" />
+
+
+        <!--  if page is empty  -->
+        <StackLayout
+            Grid.Row="0"
+            Padding="10"
+            IsVisible="{Binding IsPageEmpty}"
+            VerticalOptions="CenterAndExpand">
+            <Image
+                Margin="0,0,0,45"
+                HorizontalOptions="Center"
+                Source="empty_ghost.svg"
+                VerticalOptions="Center" />
+
+            <Label
+                Margin="0,5"
+                FontAttributes="Bold"
+                FontSize="Large"
+                HorizontalOptions="Center"
+                Text="Buuh!"
+                VerticalOptions="Center" />
+
+            <Label
+                Margin="0,5"
+                HorizontalOptions="Center"
+                Text="Nemate nedavno pregledanih proizvoda."
+                TextColor="Gray"
+                VerticalOptions="Center" />
+
+            <Button
+                Margin="0,45"
+                Command="{Binding GoToHomeCommand}"
+                CornerRadius="20"
+                HorizontalOptions="Center"
+                Text="Pogledajte ponudu"
+                VerticalOptions="Center"
+                WidthRequest="155" />
+        </StackLayout>
     </Grid>
 </ContentPage>

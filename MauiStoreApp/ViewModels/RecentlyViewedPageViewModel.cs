@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MauiStoreApp.Models;
 using MauiStoreApp.Views;
 using Newtonsoft.Json;
@@ -14,10 +15,14 @@ namespace MauiStoreApp.ViewModels
         {
         }
 
+        [ObservableProperty]
+        public bool isPageEmpty;
+
         [RelayCommand]
         public async Task Init()
         {
             LoadRecentlyViewedProducts();
+            IsPageEmpty = RecentlyViewedProducts.Count == 0;
 
             await Task.CompletedTask;
         }
@@ -54,6 +59,12 @@ namespace MauiStoreApp.ViewModels
             await Shell.Current.GoToAsync($"{nameof(ProductDetailsPage)}", true, navigationParameter);
 
             IsBusy = false;
+        }
+
+        [RelayCommand]
+        private async Task GoToHome()
+        {
+            await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
         }
     }
 }
