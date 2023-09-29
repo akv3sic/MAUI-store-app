@@ -38,6 +38,14 @@ namespace MauiStoreApp.ViewModels
             {
                 IsBusy = true;
                 loginResponse = await _authService.LoginAsync(Username, Password);
+
+                if (loginResponse != null)
+                {
+                    Debug.WriteLine($"Login successful. Token: {loginResponse.Token}");
+
+                    // save token to secure storage
+                    await SecureStorage.Default.SetAsync("token", loginResponse.Token);
+                }
             }
             catch (Exception ex)
             {

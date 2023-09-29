@@ -21,7 +21,22 @@ namespace MauiStoreApp.Services
             response.EnsureSuccessStatusCode();
 
             var responseContent = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<LoginResponse>(responseContent);
+            var loginResponse = JsonSerializer.Deserialize<LoginResponse>(responseContent);
+
+            // fetch all users
+            var usersResponse = await _httpClient.GetAsync("users");
+            usersResponse.EnsureSuccessStatusCode();
+            var usersResponseContent = await usersResponse.Content.ReadAsStringAsync();
+            var users = JsonSerializer.Deserialize<List<User>>(usersResponseContent);
+
+            // find the matching user and set the UserId in LoginResponse
+            var user = users.FirstOrDefault(u => u.Username == username);
+            if (user != null)
+            {
+                loginResponse.UserId = user.Id;
+            }
+
+            return loginResponse;
         }
     }
 }

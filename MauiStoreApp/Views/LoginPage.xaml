@@ -1,12 +1,135 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiStoreApp.Views.LoginPage"
-             Title="LoginPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    x:Class="MauiStoreApp.Views.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MauiStoreApp.ViewModels"
+    xmlns:model="clr-namespace:MauiStoreApp.Models"
+    xmlns:modelroot="clr-namespace:MauiStoreApp.Models"
+    Title="Login Page"
+    x:DataType="local:LoginViewModel"
+    BackgroundColor="#FFF"
+    Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="Black" />
+            </Style>
+            <Style x:Key="EntryStyle" TargetType="Entry">
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="TextColor" Value="Black" />
+            </Style>
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#000" />
+                <Setter Property="CornerRadius" Value="20" />
+                <Setter Property="Margin" Value="20" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid
+            x:Name="NavBar"
+            Grid.Row="0"
+            Padding="5,10"
+            BackgroundColor="White"
+            ColumnDefinitions="48,*,48"
+            ColumnSpacing="10"
+            HeightRequest="52">
+
+            <!--  back button  -->
+            <ImageButton
+                Grid.Column="0"
+                BackgroundColor="Transparent"
+                CornerRadius="20"
+                HeightRequest="25"
+                Source="arrow_back.svg"
+                WidthRequest="25">
+                <ImageButton.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProductDetailsViewModel}}, Path=GoBackCommand}" />
+                </ImageButton.GestureRecognizers>
+            </ImageButton>
+
+            <!--  title  -->
+            <Label
+                Grid.Column="1"
+                Margin="0,3,0,0"
+                FontAttributes="Bold"
+                FontFamily="AstoreEczarSemiBold"
+                FontSize="Medium"
+                HorizontalOptions="Center"
+                Text="Prijava"
+                TextColor="Black" />
+        </Grid>
+
+        <StackLayout
+            Grid.Row="1"
+            Margin="0,70,0,0"
+            Padding="20"
+            Spacing="20">
+
+
+
+            <HorizontalStackLayout Margin="0,0,0,20">
+                <Label
+                    Style="{StaticResource LabelStyle}"
+                    Text="Dobrodošli"
+                    TextColor="#F82C2E"
+                    VerticalOptions="Center" />
+                <Label
+                    Style="{StaticResource LabelStyle}"
+                    Text=" natrag!"
+                    VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+
+            <Entry
+                Placeholder="Korisničko ime"
+                Style="{StaticResource EntryStyle}"
+                Text="{Binding Username}" />
+
+            <Entry
+                IsPassword="True"
+                Placeholder="Zaporka"
+                Style="{StaticResource EntryStyle}"
+                Text="{Binding Password}" />
+
+            <Label
+                FontSize="Small"
+                HorizontalOptions="Center"
+                Text="Zaboravili ste zaporku?"
+                TextColor="Black" />
+
+            <Button
+                Command="{Binding LoginCommand}"
+                Style="{StaticResource ButtonStyle}"
+                Text="Prijava" />
+
+            <!--  no account  -->
+            <HorizontalStackLayout Margin="0,0,0,20" HorizontalOptions="Center">
+                <Label
+                    Style="{StaticResource LabelStyle}"
+                    Text="Nemate račun?"
+                    VerticalOptions="Center" />
+                <Label
+                    Style="{StaticResource LabelStyle}"
+                    Text=" Registrirajte se!"
+                    TextColor="#F82C2E"
+                    VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+        </StackLayout>
+
+    </Grid>
+
 </ContentPage>
