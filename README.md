@@ -14,9 +14,9 @@ the functionality and features of a real-world store application.
 - [x] Product listing
 - [x] Categories
 - [x] Product details
-- [x] Cart
-- [ ] User profile
-- [ ] Authentication
+- [ ] Cart - some features are not implemented yet
+- [x] User profile
+- [x] Authentication
 - [x] Sorting
 - [x] Cross selling
 - [x] Product sharing
@@ -35,3 +35,7 @@ More at [Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/maui/get-starte
 1. Clone the repository.
 2. Open the solution in Visual Studio 2022.
 3. Build and run the app.
+
+## Contact
+
+For any questions or suggestions, feel free to contact me at [ante.kvesic@fsre.sum.ba](mailto:ante.kvesic@fsre.sum.ba).
