@@ -38,6 +38,8 @@ namespace MauiStoreApp
             builder.Services.AddTransient<CartPage>();
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<LoginPage>();
+            builder.Services.AddTransient<ProfilePageViewModel>();
+            builder.Services.AddTransient<ProfilePage>();
 
 #if DEBUG
             builder.Logging.AddDebug();

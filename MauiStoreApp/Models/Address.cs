@@ -18,5 +18,11 @@ namespace MauiStoreApp.Models
 
         [JsonPropertyName("zipcode")]
         public string Zipcode { get; set; }
+
+        public string CityCapitalized => $"{City?.ToUpper()[0]}{City?.ToLower()[1..]}";
+
+        public string CityAndZipcode => $"{CityCapitalized} {Zipcode}";
+
+        public string FullStreet => $"{Street?.ToUpper()[0]}{Street?.ToLower()[1..]} {Number}";
     }
 }

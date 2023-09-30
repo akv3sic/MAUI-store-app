@@ -24,5 +24,9 @@ namespace MauiStoreApp.Models
 
         [JsonPropertyName("address")]
         public Address Address { get; set; }
+
+        public string FullName => $"{Name?.Firstname?.ToUpper()[0]}{Name?.Firstname?.ToLower()[1..]} {Name?.Lastname?.ToUpper()[0]}{Name?.Lastname?.ToLower()[1..]}";
+
+        public string AvatarInitials => $"{Name?.Firstname?.ToUpper()[0]}{Name?.Lastname?.ToUpper()[0]}";
     }
 }

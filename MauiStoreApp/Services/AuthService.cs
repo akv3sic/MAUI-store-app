@@ -22,8 +22,9 @@ namespace MauiStoreApp.Services
             {
                 if (!value)
                 {
-                    // remove token from secure storage if IsUserLoggedIn is set to false
+                    // remove token and userId from secure storage if IsUserLoggedIn is set to false
                     SecureStorage.Remove("token");
+                    SecureStorage.Remove("userId");
                 }
             }
         }

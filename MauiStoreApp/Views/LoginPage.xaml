@@ -56,7 +56,7 @@
                 Source="arrow_back.svg"
                 WidthRequest="25">
                 <ImageButton.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProductDetailsViewModel}}, Path=GoBackCommand}" />
+                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:LoginViewModel}}, Path=GoBackCommand}" />
                 </ImageButton.GestureRecognizers>
             </ImageButton>
 

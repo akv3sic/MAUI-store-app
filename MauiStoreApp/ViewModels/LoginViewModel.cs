@@ -45,6 +45,8 @@ namespace MauiStoreApp.ViewModels
 
                     // save token to secure storage
                     await SecureStorage.Default.SetAsync("token", loginResponse.Token);
+                    // save user id to secure storage
+                    await SecureStorage.Default.SetAsync("userId", loginResponse.UserId.ToString());
 
                     AuthService.IsUserLoggedIn = true;
 

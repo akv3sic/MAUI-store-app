@@ -23,7 +23,7 @@
         </Tab>
 
         <!--  Profile Page  -->
-        <Tab Title="Profil" Icon="profile.svg">
+        <Tab Title="Račun" Icon="profile.svg">
             <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}" Route="ProfilePage" />
         </Tab>
     </TabBar>
