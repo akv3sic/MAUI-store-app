@@ -18,15 +18,31 @@ namespace MauiStoreApp.ViewModels
 
         public ObservableCollection<Product> RecentlyViewedProducts { get; private set; } = new ObservableCollection<Product>();
 
+        bool isFirstRun;
+
+        public HomePageViewModel(ProductService productService, CategoryService categoryService)
+        {
+            _productService = productService;
+            _categoryService = categoryService;
+            isFirstRun = true;
+        }
+
         public HomePageViewModel()
         {
-            _productService = new ProductService();
-            _categoryService = new CategoryService();
-
-            LoadRecentlyViewedProducts();
         }
 
         [RelayCommand]
+        public async Task Init()
+        {
+            if (isFirstRun)
+            {
+                await GetProductsAsync();
+                await GetCategoriesAsync();
+                LoadRecentlyViewedProducts();
+                isFirstRun = false;
+            }
+        }
+
         private async Task GetCategoriesAsync()
         {
             var categories = await _categoryService.GetCategoriesAsync();
@@ -36,7 +52,6 @@ namespace MauiStoreApp.ViewModels
             }
         }
 
-        [RelayCommand]
         private async Task GetProductsAsync()
         {
             if (IsBusy)

@@ -19,8 +19,7 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Behaviors>
-        <behaviors:EventToCommandBehavior Command="{Binding GetProductsCommand}" EventName="Appearing" />
-        <behaviors:EventToCommandBehavior Command="{Binding GetCategoriesCommand}" EventName="Appearing" />
+        <behaviors:EventToCommandBehavior Command="{Binding InitCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
 
     <Grid>
