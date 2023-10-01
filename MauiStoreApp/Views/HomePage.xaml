@@ -5,7 +5,7 @@
     xmlns:behaviors="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
     xmlns:converters="clr-namespace:MauiStoreApp.Converters"
     xmlns:local="clr-namespace:MauiStoreApp.ViewModels"
-    BackgroundColor="#EBE9EF">
+    BackgroundColor="#F4F3F4">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -103,7 +103,7 @@
                                         Padding="0"
                                         BackgroundColor="White"
                                         BorderColor="Transparent"
-                                        CornerRadius="15"
+                                        CornerRadius="8"
                                         HasShadow="False">
                                         <StackLayout>
                                             <Image
@@ -118,7 +118,7 @@
                                                 Padding="3,26,3,6"
                                                 BackgroundColor="{Binding Name, Converter={StaticResource CategoryToColorConverter}}"
                                                 BorderColor="Transparent"
-                                                CornerRadius="15"
+                                                CornerRadius="8"
                                                 HasShadow="False"
                                                 HorizontalOptions="FillAndExpand"
                                                 VerticalOptions="End"
@@ -159,87 +159,85 @@
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout Margin="10">
+                            <StackLayout Margin="10" WidthRequest="160">
+                                <!--  Image Frame  -->
                                 <Frame
-                                    Padding="8"
+                                    Padding="1"
                                     BorderColor="Transparent"
-                                    CornerRadius="15"
-                                    HasShadow="False"
-                                    ZIndex="2">
+                                    CornerRadius="8"
+                                    HasShadow="False">
                                     <Grid>
                                         <!--  product image  -->
                                         <Image
                                             Margin="20"
                                             Aspect="AspectFit"
-                                            HeightRequest="120"
+                                            HeightRequest="130"
                                             Source="{Binding Image}">
                                             <Image.GestureRecognizers>
                                                 <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:HomePageViewModel}}, Path=ProductTappedCommand}" CommandParameter="{Binding .}" />
                                             </Image.GestureRecognizers>
                                         </Image>
-
-                                        <!--  rating  -->
-                                        <FlexLayout
-                                            Margin="1"
-                                            AlignItems="Start"
-                                            AlignSelf="Center"
-                                            Direction="Row"
-                                            JustifyContent="Start"
-                                            Wrap="NoWrap">
-                                            <Image
-                                                Aspect="AspectFit"
-                                                HeightRequest="16"
-                                                HorizontalOptions="StartAndExpand"
-                                                Source="star_filled_yellow.svg"
-                                                VerticalOptions="Center"
-                                                WidthRequest="16" />
-                                            <Label
-                                                FontAttributes="Bold"
-                                                FontFamily="AstoreEczarSemiBold"
-                                                FontSize="Small"
-                                                HorizontalOptions="StartAndExpand"
-                                                Text="{Binding Rating.Rate}"
-                                                TextColor="Black"
-                                                VerticalTextAlignment="Center" />
-                                        </FlexLayout>
                                     </Grid>
                                 </Frame>
 
+                                <!--  rating, title, price  -->
+                                <FlexLayout
+                                    Margin="5,0"
+                                    AlignItems="Start"
+                                    Direction="Column"
+                                    JustifyContent="Start">
 
-                                <Frame
-                                    Margin="0,-30,0,0"
-                                    Padding="15,50,15,20"
-                                    BackgroundColor="#2F3137"
-                                    BorderColor="Transparent"
-                                    CornerRadius="10"
-                                    HasShadow="False"
-                                    HeightRequest="150"
-                                    ZIndex="1">
-                                    <StackLayout>
+                                    <!--  rating  -->
+                                    <FlexLayout
+                                        AlignItems="Start"
+                                        AlignSelf="Center"
+                                        Direction="Row"
+                                        HeightRequest="30"
+                                        JustifyContent="Start"
+                                        Wrap="NoWrap">
+                                        <Image
+                                            Aspect="AspectFit"
+                                            HeightRequest="16"
+                                            HorizontalOptions="StartAndExpand"
+                                            Source="star_filled_yellow.svg"
+                                            VerticalOptions="Center"
+                                            WidthRequest="16" />
                                         <Label
                                             FontAttributes="Bold"
                                             FontFamily="AstoreEczarSemiBold"
                                             FontSize="Small"
-                                            LineBreakMode="WordWrap"
-                                            MaxLines="2"
-                                            Text="{Binding Title}"
-                                            TextColor="White" />
-                                        <Label
-                                            Margin="0,6,0,0"
-                                            FontAttributes="Bold"
-                                            FontFamily="AstoreEczarSemiBold"
-                                            FontSize="Medium"
-                                            Text="{Binding Price, StringFormat='€{0:F2}'}"
-                                            TextColor="White"
-                                            VerticalOptions="EndAndExpand" />
-                                        <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:HomePageViewModel}}, Path=ProductTappedCommand}" CommandParameter="{Binding .}" />
-                                        </StackLayout.GestureRecognizers>
-                                    </StackLayout>
-                                </Frame>
+                                            HorizontalOptions="StartAndExpand"
+                                            Text="{Binding Rating.Rate}"
+                                            TextColor="Black"
+                                            VerticalTextAlignment="Center" />
+                                    </FlexLayout>
+
+                                    <!--  title  -->
+                                    <Label
+                                        Margin="0,3"
+                                        FontFamily="AstoreEczarSemiBold"
+                                        FontSize="Small"
+                                        HeightRequest="35"
+                                        LineBreakMode="WordWrap"
+                                        MaxLines="2"
+                                        Text="{Binding Title}"
+                                        TextColor="#000" />
+
+                                    <!--  price  -->
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontFamily="AstoreEczarSemiBold"
+                                        FontSize="Medium"
+                                        HeightRequest="30"
+                                        HorizontalOptions="StartAndExpand"
+                                        LineBreakMode="NoWrap"
+                                        Text="{Binding Price, StringFormat='€{0:F2}'}"
+                                        TextColor="Black" />
+                                    <FlexLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:HomePageViewModel}}, Path=ProductTappedCommand}" CommandParameter="{Binding .}" />
+                                    </FlexLayout.GestureRecognizers>
+                                </FlexLayout>
                             </StackLayout>
-
-
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

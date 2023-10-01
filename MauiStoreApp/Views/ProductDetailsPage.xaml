@@ -8,7 +8,7 @@
     xmlns:modelroot="clr-namespace:MauiStoreApp.Models"
     xmlns:vm="clr-namespace:MauiStoreApp.ViewModels"
     x:DataType="local:ProductDetailsViewModel"
-    BackgroundColor="#EBE9EF"
+    BackgroundColor="#F4F3F4"
     Shell.NavBarIsVisible="False">
 
     <ContentPage.Behaviors>
@@ -77,106 +77,206 @@
                     Margin="0,-70,0,0"
                     Padding="60"
                     BackgroundColor="White"
-                    BorderColor="Transparent"
+                    BorderColor="Beige"
                     CornerRadius="60"
                     HasShadow="False"
                     ZIndex="1" />
-                <VerticalStackLayout Padding="20,30">
+
+                <VerticalStackLayout Padding="0,30">
+                    <!--  available label  -->
                     <Label
-                        Padding="0,10,0,0"
+                        Padding="20,0"
                         FontAttributes="Bold"
                         FontFamily="AstoreEczarSemiBold"
-                        FontSize="24"
+                        FontSize="Small"
+                        Text="Dostupno"
+                        TextColor="Green"
+                        VerticalTextAlignment="Center" />
+
+                    <Label
+                        Padding="20,10,20,0"
+                        FontFamily="AstoreEczarSemiBold"
+                        FontSize="21"
                         Text="{Binding Product.Title}" />
 
-                    <Label
-                        Padding="2,10"
-                        FontFamily="AstoreEczarRegular"
-                        FontSize="16"
-                        Text="{Binding Product.Description}" />
+                    <!--  flex layout with price and add to cart button  -->
+                    <FlexLayout
+                        Margin="20,10,20,10"
+                        AlignItems="Center"
+                        Direction="Row"
+                        HeightRequest="45"
+                        JustifyContent="SpaceBetween">
+                        <Label
+                            FontAttributes="Bold"
+                            FontFamily="AstoreEczarSemiBold"
+                            FontSize="24"
+                            Text="{Binding Product.Price, StringFormat='€{0:F2}'}"
+                            TextColor="Black"
+                            VerticalTextAlignment="Center" />
+                        <Button
+                            Margin="0,0,0,0"
+                            Padding="10,5"
+                            BackgroundColor="#E7B844"
+                            BorderColor="Transparent"
+                            BorderWidth="0"
+                            CornerRadius="10"
+                            FontAttributes="Bold"
+                            FontFamily="AstoreEczarSemiBold"
+                            FontSize="Medium"
+                            Text="Dodaj u košaricu"
+                            TextColor="White"
+                            VerticalOptions="Center">
+                            <Button.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProductDetailsViewModel}}, Path=AddToCartCommand}" CommandParameter="{Binding Product}" />
+                            </Button.GestureRecognizers>
+                        </Button>
+                    </FlexLayout>
 
-                    <Label
-                        Margin="0,10,0,0"
-                        Padding="0,0,0,10"
-                        FontAttributes="Bold"
-                        FontFamily="AstoreEczarSemiBold"
-                        FontSize="20"
-                        Text="{Binding Product.Price, StringFormat='{0:F2} EUR'}"
-                        TextColor="Green" />
-
-                    <Label
+                    <!--  description  -->
+                    <Frame
                         Margin="0,5"
-                        Padding="0,10,0,0"
-                        FontFamily="AstoreEczarSemiBold"
-                        FontSize="14"
-                        Text="Kategorija" />
-
-                    <Frame
-                        Padding="20"
-                        BackgroundColor="White"
+                        Padding="15,12"
+                        BackgroundColor="#FFF"
                         BorderColor="Transparent"
-                        CornerRadius="15"
+                        CornerRadius="0"
                         HasShadow="False">
-                        <Label
-                            FontFamily="AstoreEczarRegular"
-                            FontSize="16"
-                            Text="{Binding Product.Category}" />
+                        <StackLayout>
+                            <Label
+                                FontAttributes="Bold"
+                                FontFamily="AstoreEczarSemiBold"
+                                FontSize="17"
+                                Text="Detalji proizvoda" />
+
+                            <Label
+                                FontFamily="AstoreEczarRegular"
+                                FontSize="16"
+                                Text="{Binding Product.Description}"
+                                TextColor="DimGray" />
+                        </StackLayout>
                     </Frame>
 
-                    <Label
-                        FontFamily="AstoreEczarSemiBold"
-                        FontSize="14"
-                        Text="Ocjena" />
-
+                    <!--  category  -->
                     <Frame
-                        Padding="20"
-                        BackgroundColor="White"
+                        Margin="0,5"
+                        Padding="15,12"
+                        BackgroundColor="#FFF"
                         BorderColor="Transparent"
-                        CornerRadius="15"
+                        CornerRadius="0"
                         HasShadow="False">
-                        <Label
-                            FontFamily="AstoreEczarRegular"
-                            FontSize="16"
-                            Text="{Binding Product.Rating.Rate}" />
+                        <StackLayout>
+                            <Label
+                                FontAttributes="Bold"
+                                FontFamily="AstoreEczarSemiBold"
+                                FontSize="17"
+                                Text="Kategorija" />
+                            <Label
+                                FontFamily="AstoreEczarRegular"
+                                FontSize="16"
+                                Text="{Binding Product.Category}"
+                                VerticalOptions="Center" />
+                        </StackLayout>
                     </Frame>
 
+                    <StackLayout Padding="20,0">
+                        <Label
+                            Margin="0,5"
+                            FontAttributes="Bold"
+                            FontFamily="AstoreEczarSemiBold"
+                            FontSize="17"
+                            Text="Ocjene" />
 
-                    <!--  cross-sell section  -->
-                    <Label
-                        Margin="0,20,0,10"
-                        FontFamily="AstoreEczarSemiBold"
-                        FontSize="18"
-                        Text="Preporučeni proizvodi" />
+                        <!--  rating  -->
+                        <Frame
+                            Padding="15,12"
+                            BackgroundColor="#FFF7F3"
+                            BorderColor="Transparent"
+                            CornerRadius="15"
+                            HasShadow="False"
+                            HeightRequest="60">
+                            <FlexLayout
+                                AlignItems="Center"
+                                Direction="Row"
+                                JustifyContent="SpaceBetween">
+                                <FlexLayout
+                                    AlignItems="Center"
+                                    Direction="Row"
+                                    JustifyContent="Start">
 
-                    <CollectionView ItemsLayout="HorizontalList" ItemsSource="{Binding CrossSellProducts}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="model:Product">
-                                <StackLayout Margin="10" WidthRequest="160">
-                                    <!--  Image Frame  -->
-                                    <Frame
-                                        Padding="8"
-                                        BorderColor="Transparent"
-                                        CornerRadius="15"
-                                        HasShadow="False"
-                                        ZIndex="2">
-                                        <Grid>
-                                            <!--  product image  -->
-                                            <Image
-                                                Margin="20"
-                                                Aspect="AspectFit"
-                                                HeightRequest="120"
-                                                Source="{Binding Image}">
-                                                <Image.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:HomePageViewModel}}, Path=ProductTappedCommand}" CommandParameter="{Binding .}" />
-                                                </Image.GestureRecognizers>
-                                            </Image>
+                                    <Image
+                                        Aspect="AspectFit"
+                                        HeightRequest="30"
+                                        Source="star_filled_yellow.svg"
+                                        VerticalOptions="Center" />
+
+                                    <Label
+                                        Margin="1,0"
+                                        FontAttributes="Bold"
+                                        FontFamily="AstoreEczarRegular"
+                                        FontSize="18"
+                                        Text="{Binding Product.Rating.Rate}"
+                                        VerticalOptions="Center" />
+
+                                    <Label
+                                        Margin="1,1,0,1"
+                                        FontSize="16"
+                                        Text="{Binding Product.Rating.Count, StringFormat='({0} mišljenja)'}"
+                                        VerticalOptions="Center" />
+                                </FlexLayout>
+
+                                <Image
+                                    Aspect="AspectFit"
+                                    HeightRequest="30"
+                                    HorizontalOptions="End"
+                                    Source="arrow_next_small.svg"
+                                    VerticalOptions="Center" />
+                            </FlexLayout>
+                        </Frame>
+
+                        <!--  cross-sell section  -->
+                        <Label
+                            Margin="0,20,0,10"
+                            FontAttributes="Bold"
+                            FontFamily="AstoreEczarSemiBold"
+                            FontSize="17"
+                            Text="Povezani proizvodi" />
+
+                        <CollectionView ItemsLayout="HorizontalList" ItemsSource="{Binding CrossSellProducts}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="model:Product">
+                                    <StackLayout Margin="10" WidthRequest="160">
+                                        <!--  Image Frame  -->
+                                        <Frame
+                                            Padding="1"
+                                            BorderColor="Transparent"
+                                            CornerRadius="8"
+                                            HasShadow="False">
+                                            <Grid>
+                                                <!--  product image  -->
+                                                <Image
+                                                    Margin="20"
+                                                    Aspect="AspectFit"
+                                                    HeightRequest="130"
+                                                    Source="{Binding Image}">
+                                                    <Image.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:HomePageViewModel}}, Path=ProductTappedCommand}" CommandParameter="{Binding .}" />
+                                                    </Image.GestureRecognizers>
+                                                </Image>
+                                            </Grid>
+                                        </Frame>
+
+                                        <!--  rating, title, price  -->
+                                        <FlexLayout
+                                            Margin="5,0"
+                                            AlignItems="Start"
+                                            Direction="Column"
+                                            JustifyContent="Start">
 
                                             <!--  rating  -->
                                             <FlexLayout
-                                                Margin="1"
                                                 AlignItems="Start"
                                                 AlignSelf="Center"
                                                 Direction="Row"
+                                                HeightRequest="30"
                                                 JustifyContent="Start"
                                                 Wrap="NoWrap">
                                                 <Image
@@ -195,48 +295,40 @@
                                                     TextColor="Black"
                                                     VerticalTextAlignment="Center" />
                                             </FlexLayout>
-                                        </Grid>
-                                    </Frame>
 
-                                    <!--  Text Frame  -->
-                                    <Frame
-                                        Margin="0,-30,0,0"
-                                        Padding="15,50,15,20"
-                                        BackgroundColor="#2F3137"
-                                        BorderColor="Transparent"
-                                        CornerRadius="10"
-                                        HasShadow="False"
-                                        HeightRequest="150"
-                                        ZIndex="1">
-                                        <StackLayout>
+                                            <!--  title  -->
                                             <Label
-                                                FontAttributes="Bold"
+                                                Margin="0,3"
                                                 FontFamily="AstoreEczarSemiBold"
                                                 FontSize="Small"
+                                                HeightRequest="35"
                                                 LineBreakMode="WordWrap"
                                                 MaxLines="2"
                                                 Text="{Binding Title}"
-                                                TextColor="White" />
+                                                TextColor="#000" />
+
+                                            <!--  price  -->
                                             <Label
-                                                Margin="0,6,0,0"
                                                 FontAttributes="Bold"
                                                 FontFamily="AstoreEczarSemiBold"
                                                 FontSize="Medium"
+                                                HeightRequest="30"
+                                                HorizontalOptions="StartAndExpand"
+                                                LineBreakMode="NoWrap"
                                                 Text="{Binding Price, StringFormat='€{0:F2}'}"
-                                                TextColor="White"
-                                                VerticalOptions="EndAndExpand" />
-                                            <StackLayout.GestureRecognizers>
+                                                TextColor="Black" />
+                                            <FlexLayout.GestureRecognizers>
                                                 <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProductDetailsViewModel}}, Path=ProductTappedCommand}" CommandParameter="{Binding .}" />
-                                            </StackLayout.GestureRecognizers>
-                                        </StackLayout>
-                                    </Frame>
-                                </StackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-
+                                            </FlexLayout.GestureRecognizers>
+                                        </FlexLayout>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
                 </VerticalStackLayout>
             </VerticalStackLayout>
+
         </ScrollView>
 
         <!--  loading indicator  -->
