@@ -6,15 +6,15 @@
     xmlns:converters="clr-namespace:MauiStoreApp.Converters"
     xmlns:local="clr-namespace:MauiStoreApp.ViewModels"
     xmlns:model="clr-namespace:MauiStoreApp.Models"
+    xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     xmlns:vm="clr-namespace:MauiStoreApp.ViewModels"
-    Title="Nedavno gledano"
     BackgroundColor="White"
-    Shell.BackgroundColor="Transparent"
-    Shell.TitleColor="Black">
+    Shell.NavBarIsVisible="False">
 
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:FirstLetterUppercaseConverter x:Key="FirstLetterUppercaseConverter" />
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -30,9 +30,35 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <StackLayout Grid.Row="0" Padding="10">
+
+        <!--  appbar  -->
+        <Grid Grid.Row="0" Padding="5,15">
+            <Label
+                FontAttributes="Bold"
+                FontSize="18"
+                HorizontalOptions="Center"
+                Text="Nedavno gledano"
+                TextColor="Black"
+                VerticalOptions="Center" />
+
+            <!--  delete button  -->
+            <ImageButton
+                Grid.Column="2"
+                Padding="6"
+                BackgroundColor="#000000"
+                Command="{Binding DeleteAllCommand}"
+                CornerRadius="17"
+                HeightRequest="46"
+                HorizontalOptions="End"
+                IsVisible="{Binding IsPageEmpty, Converter={StaticResource InvertedBoolConverter}}"
+                Source="delete_white.svg"
+                WidthRequest="46" />
+        </Grid>
+
+        <StackLayout Grid.Row="1" Padding="10,0,10,10">
             <CollectionView ItemsSource="{Binding RecentlyViewedProducts}" VerticalOptions="FillAndExpand">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Product">
@@ -127,7 +153,7 @@
 
         <!--  if page is empty  -->
         <StackLayout
-            Grid.Row="0"
+            Grid.Row="1"
             Padding="10"
             IsVisible="{Binding IsPageEmpty}"
             VerticalOptions="CenterAndExpand">

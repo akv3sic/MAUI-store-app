@@ -66,5 +66,21 @@ namespace MauiStoreApp.ViewModels
         {
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
         }
+
+        [RelayCommand]
+        private async Task DeleteAll()
+        {
+            // fire alert to confirm
+            var result = await Shell.Current.DisplayAlert("Brisanje", "Sigurno želite izbrisati sve nedano gledane proizvode?", "Da", "Ne");
+
+            if (!result)
+                return; // exit if user cancels
+
+            Preferences.Remove("recently_viewed");
+            RecentlyViewedProducts.Clear();
+            IsPageEmpty = true;
+
+            await Task.CompletedTask;
+        }
     }
 }
