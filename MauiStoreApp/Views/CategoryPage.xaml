@@ -99,25 +99,30 @@
                                     </Image.GestureRecognizers>
                                 </Image>
 
-                                <!--  favorite icon  -->
-                                <Frame
-                                    Padding="10"
-                                    BackgroundColor="#F92C2E"
-                                    BorderColor="Transparent"
-                                    CornerRadius="20"
-                                    HasShadow="False"
-                                    HeightRequest="27"
-                                    HorizontalOptions="Start"
-                                    VerticalOptions="Start"
-                                    WidthRequest="27">
+                                <!--  rating  -->
+                                <FlexLayout
+                                    Margin="1"
+                                    AlignItems="Start"
+                                    AlignSelf="Center"
+                                    Direction="Row"
+                                    JustifyContent="Start"
+                                    Wrap="NoWrap">
                                     <Image
                                         Aspect="AspectFit"
                                         HeightRequest="16"
-                                        HorizontalOptions="Center"
-                                        Source="favourite_white.svg"
+                                        HorizontalOptions="StartAndExpand"
+                                        Source="star_filled_yellow.svg"
                                         VerticalOptions="Center"
                                         WidthRequest="16" />
-                                </Frame>
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontFamily="AstoreEczarSemiBold"
+                                        FontSize="Small"
+                                        HorizontalOptions="StartAndExpand"
+                                        Text="{Binding Rating.Rate}"
+                                        TextColor="Black"
+                                        VerticalTextAlignment="Center" />
+                                </FlexLayout>
                             </Grid>
                         </Frame>
 
