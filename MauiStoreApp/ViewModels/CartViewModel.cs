@@ -45,13 +45,33 @@ namespace MauiStoreApp.ViewModels
             if (IsBusy)
                 return;
 
+            int userId;
+
+            try
+            {
+                // Try to fetch the userId from SecureStorage
+                var userIdStr = await SecureStorage.GetAsync("userId");
+                if (!int.TryParse(userIdStr, out userId))
+                {
+                    Debug.WriteLine("Failed to get or parse userId from SecureStorage.");
+                    await Shell.Current.DisplayAlert("Greška", "Greška prilikom dohvata korisničkih podataka.", "U redu");
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error fetching userId from SecureStorage: {ex.Message}");
+                await Shell.Current.DisplayAlert("Greška", "Greška prilikom dohvata korisničkih podataka.", "U redu");
+                return; // exit if we can't get the userId
+            }
+
             try
             {
                 IsBusy = true;
 
                 // Get a list of Cart objects
-                var carts = await _cartService.GetCartByUserIdAsync(1);
-
+                var carts = await _cartService.GetCartByUserIdAsync(userId);
+        
                 // Get the first cart from the list (if any)
                 var cart = carts?.FirstOrDefault();
 
@@ -72,13 +92,13 @@ namespace MauiStoreApp.ViewModels
                 else
                 {
                     Debug.WriteLine("No cart found for user.");
-                    await Shell.Current.DisplayAlert("Notice", "No cart found for this user.", "OK");
+                    await Shell.Current.DisplayAlert("Obavijest", "Nema košarice za ovog korisnika.", "U redu");
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Unable to get cart: {ex.Message}");
-                await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
+                await Shell.Current.DisplayAlert("Greška", "Greška prilikom dohvata košarice.", "U redu");
             }
             finally
             {
