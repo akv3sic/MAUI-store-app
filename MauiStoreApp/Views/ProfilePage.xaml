@@ -39,10 +39,7 @@
                 VerticalOptions="Center" />
         </Grid>
 
-
-
         <StackLayout Grid.Row="1" Padding="0">
-
             <!--  gradient frame behind avatar  -->
             <Frame
                 BackgroundColor="Transparent"
@@ -65,7 +62,6 @@
                 HorizontalOptions="Center"
                 IsVisible="{Binding IsUserLoggedIn}"
                 Spacing="8">
-
 
                 <!--  Avatar with Initials  -->
                 <Frame
@@ -95,20 +91,31 @@
                 <!--  Location (City)  -->
                 <Frame
                     Margin="0,3,0,0"
-                    Padding="5"
+                    Padding="5,4"
                     BackgroundColor="#EDF4FA"
                     BorderColor="Transparent"
                     CornerRadius="17"
-                    MaximumWidthRequest="170"
-                    MinimumWidthRequest="70">
-                    <Label
-                        FontAttributes="Bold"
-                        HorizontalOptions="Center"
-                        Text="{Binding User.Address.CityCapitalized}"
-                        TextColor="#4C89E4" />
+                    HeightRequest="25"
+                    HorizontalOptions="CenterAndExpand">
+
+                    <FlexLayout AlignItems="Center" Direction="Row">
+
+                        <!--  Location marker icon  -->
+                        <Image
+                            Aspect="AspectFit"
+                            HeightRequest="18"
+                            Source="location_marker_blue.svg"
+                            WidthRequest="18" />
+
+                        <!--  City label  -->
+                        <Label
+                            Margin="5,0,0,0"
+                            FontAttributes="Bold"
+                            HorizontalOptions="StartAndExpand"
+                            Text="{Binding User.Address.CityCapitalized}"
+                            TextColor="#4C89E4" />
+                    </FlexLayout>
                 </Frame>
-
-
             </StackLayout>
 
             <!--  Addresses Section  -->
@@ -143,35 +150,87 @@
                     FontSize="Small"
                     Text="Račun"
                     TextColor="DimGray" />
-                <Label
+
+                <FlexLayout
                     Margin="0,8,0,0"
-                    FontAttributes="Bold"
-                    FontSize="17"
+                    AlignItems="Center"
+                    Direction="Row"
+                    HeightRequest="20"
                     IsVisible="{Binding IsUserLoggedIn, Converter={StaticResource InvertedBoolConverter}}"
-                    Text="Prijava"
-                    TextColor="Black">
-                    <Label.GestureRecognizers>
+                    JustifyContent="SpaceBetween">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="17"
+                        Text="Prijava"
+                        TextColor="Black">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding LoginCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Image
+                        Aspect="AspectFit"
+                        Source="login.svg"
+                        WidthRequest="24">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding LoginCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <FlexLayout.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding LoginCommand}" />
-                    </Label.GestureRecognizers>
-                </Label>
-                <Label
+                    </FlexLayout.GestureRecognizers>
+                </FlexLayout>
+
+                <FlexLayout
                     Margin="0,8,0,0"
-                    FontAttributes="Bold"
-                    FontSize="17"
+                    AlignItems="Center"
+                    Direction="Row"
+                    HeightRequest="20"
                     IsVisible="{Binding IsUserLoggedIn}"
-                    Text="Odjava"
-                    TextColor="Black">
-                    <Label.GestureRecognizers>
+                    JustifyContent="SpaceBetween">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="17"
+                        Text="Odjava"
+                        TextColor="Black">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding LogoutCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Image
+                        Aspect="AspectFit"
+                        Source="logout.svg"
+                        WidthRequest="24">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding LogoutCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <FlexLayout.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding LogoutCommand}" />
-                    </Label.GestureRecognizers>
-                </Label>
-                <Label
+                    </FlexLayout.GestureRecognizers>
+                </FlexLayout>
+
+                <FlexLayout
                     Margin="0,15,0,0"
-                    FontAttributes="Bold"
-                    FontSize="17"
+                    AlignItems="Center"
+                    Direction="Row"
+                    HeightRequest="20"
                     IsVisible="{Binding IsUserLoggedIn}"
-                    Text="Izbriši račun"
-                    TextColor="Red" />
+                    JustifyContent="SpaceBetween">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="17"
+                        Text="Izbriši račun"
+                        TextColor="Red" />
+
+                    <Image
+                        Aspect="AspectFit"
+                        Source="delete_red.svg"
+                        WidthRequest="24" />
+                </FlexLayout>
             </StackLayout>
 
             <!--  About Section  -->
@@ -182,22 +241,52 @@
                     FontSize="Small"
                     Text="O aplikaciji"
                     TextColor="DimGray" />
-                <Label
+
+                <FlexLayout
                     Margin="0,8,0,0"
-                    FontAttributes="Bold"
-                    FontSize="17"
-                    Text="Korišteni API"
-                    TextColor="Black">
-                    <Label.GestureRecognizers>
+                    AlignItems="Center"
+                    Direction="Row"
+                    HeightRequest="20"
+                    JustifyContent="SpaceBetween">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="17"
+                        Text="Korišteni API"
+                        TextColor="Black">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenFakeStoreApiCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Image
+                        Aspect="AspectFit"
+                        Source="arrow_next_small.svg"
+                        WidthRequest="24">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenFakeStoreApiCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <FlexLayout.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding OpenFakeStoreApiCommand}" />
-                    </Label.GestureRecognizers>
-                </Label>
-                <Label
+                    </FlexLayout.GestureRecognizers>
+                </FlexLayout>
+
+                <FlexLayout
                     Margin="0,15,0,0"
-                    FontAttributes="Bold"
-                    FontSize="17"
-                    Text="Tekst diplomskog rada"
-                    TextColor="Black" />
+                    AlignItems="Center"
+                    Direction="Row"
+                    HeightRequest="20"
+                    JustifyContent="SpaceBetween">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="17"
+                        Text="Tekst diplomskog rada"
+                        TextColor="Black" />
+                    <Image
+                        Aspect="AspectFit"
+                        Source="arrow_next_small.svg"
+                        WidthRequest="24" />
+                </FlexLayout>
             </StackLayout>
         </StackLayout>
     </Grid>
