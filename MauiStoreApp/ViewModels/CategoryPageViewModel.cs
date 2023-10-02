@@ -26,6 +26,9 @@ namespace MauiStoreApp.ViewModels
         [ObservableProperty]
         string sortOrder = "asc";
 
+        [ObservableProperty]
+        bool isBusyWithSorting = false;
+
         public ObservableCollection<Product> Products { get; private set; } = new ObservableCollection<Product>();
 
         [RelayCommand]
@@ -41,7 +44,8 @@ namespace MauiStoreApp.ViewModels
 
             try
             {
-                IsBusy = true;
+                IsBusy = !IsBusyWithSorting;
+
                 var products = await _productService.GetProductsByCategoryAsync(Category.Name, sortOrder);
                 Products.Clear();
                 foreach (var product in products)
@@ -82,8 +86,15 @@ namespace MauiStoreApp.ViewModels
         [RelayCommand]
         private async Task SortProducts()
         {
+            if (IsBusyWithSorting)
+                return;
+
+            IsBusyWithSorting = true;
+
             SortOrder = SortOrder == "asc" ? "desc" : "asc";
             await GetProductsByCategoryAsync(SortOrder);
+
+            IsBusyWithSorting = false;
         }
     }
 }

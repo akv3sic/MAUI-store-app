@@ -8,8 +8,37 @@
     xmlns:local="clr-namespace:MauiStoreApp.ViewModels"
     xmlns:model="clr-namespace:MauiStoreApp.Models"
     xmlns:modelroot="clr-namespace:MauiStoreApp.Models"
+    xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:DataType="local:CategoryPageViewModel"
     BackgroundColor="#F4F3F4">
+
+
+    <Shell.TitleView>
+        <Grid HorizontalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!--  title in the middle  -->
+            <Label
+                Grid.Column="0"
+                FontAttributes="Bold"
+                FontFamily="AstoreEczarSemiBold"
+                FontSize="20"
+                HorizontalOptions="CenterAndExpand"
+                Text="{Binding Category.Name, Converter={StaticResource FirstLetterUppercaseConverter}}"
+                TextColor="White"
+                VerticalOptions="CenterAndExpand" />
+
+            <!--  right button placeholder  -->
+            <Button
+                Grid.Column="1"
+                HorizontalOptions="End"
+                Text="" />
+        </Grid>
+    </Shell.TitleView>
+
 
     <ContentPage.Behaviors>
         <behaviors:EventToCommandBehavior Command="{Binding InitCommand}" EventName="Appearing" />
@@ -18,156 +47,178 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:FirstLetterUppercaseConverter x:Key="FirstLetterUppercaseConverter" />
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-        <!--  Category Name  -->
-        <Label
-            Grid.Row="0"
-            Margin="30,17,20,5"
-            FontAttributes="Bold"
-            FontSize="20"
-            HorizontalOptions="Start"
-            Text="{Binding Category.Name, Converter={StaticResource FirstLetterUppercaseConverter}}" />
+                <!--  Count of products  -->
+                <Label
+                    Grid.Row="0"
+                    Margin="30,20,20,5"
+                    FontAttributes="Bold"
+                    FontSize="20"
+                    HorizontalOptions="Start"
+                    IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
+                    Text="{Binding Products.Count, Converter={StaticResource FirstLetterUppercaseConverter}, StringFormat='{0} proizvoda'}"
+                    TextColor="Black" />
 
-        <!--  Sort Button  -->
-        <Frame
-            Grid.Row="0"
-            Margin="0,17,25,5"
-            Padding="5"
-            BackgroundColor="Black"
-            BorderColor="Transparent"
-            CornerRadius="20"
-            HasShadow="False"
-            HeightRequest="39"
-            HorizontalOptions="End"
-            WidthRequest="39">
-            <Image HeightRequest="25" WidthRequest="25">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding SortProductsCommand}" />
-                </Image.GestureRecognizers>
-                <Image.Triggers>
-                    <DataTrigger
-                        Binding="{Binding SortOrder}"
-                        TargetType="Image"
-                        Value="asc">
-                        <Setter Property="Source" Value="sort_from_top_to_bottom_white.svg" />
-                    </DataTrigger>
-                    <DataTrigger
-                        Binding="{Binding SortOrder}"
-                        TargetType="Image"
-                        Value="desc">
-                        <Setter Property="Source" Value="sort_from_bottom_to_top_white.svg" />
-                    </DataTrigger>
-                </Image.Triggers>
-            </Image>
-        </Frame>
+                <!--  Sort Button  -->
+                <FlexLayout
+                    Grid.Row="0"
+                    Margin="0,17,25,5"
+                    Padding="5"
+                    AlignItems="Center"
+                    Direction="Row"
+                    HorizontalOptions="End"
+                    IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
+                    JustifyContent="Start">
 
-        <!--  Products List  -->
-        <CollectionView
-            Grid.Row="1"
-            Margin="20"
-            ItemsSource="{Binding Products}">
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical" Span="2" />
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:Product">
-                    <StackLayout Margin="10" WidthRequest="160">
-                        <!--  Image Frame  -->
-                        <Frame
-                            Padding="1"
-                            BorderColor="Transparent"
-                            CornerRadius="8"
-                            HasShadow="False">
-                            <Grid>
-                                <!--  product image  -->
-                                <Image
-                                    Margin="20"
-                                    Aspect="AspectFit"
-                                    HeightRequest="130"
-                                    Source="{Binding Image}">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:HomePageViewModel}}, Path=ProductTappedCommand}" CommandParameter="{Binding .}" />
-                                    </Image.GestureRecognizers>
-                                </Image>
-                            </Grid>
-                        </Frame>
+                    <Label
+                        FontSize="Small"
+                        Text="Sortiraj po: "
+                        TextColor="DimGray" />
 
-                        <!--  rating, title, price  -->
-                        <FlexLayout
-                            Margin="5,0"
-                            AlignItems="Start"
-                            Direction="Column"
-                            JustifyContent="Start">
+                    <Label FontAttributes="Bold" TextColor="Black">
+                        <Label.Triggers>
+                            <DataTrigger
+                                Binding="{Binding SortOrder}"
+                                TargetType="Label"
+                                Value="asc">
+                                <Setter Property="Text" Value="Cijeni silazno" />
+                            </DataTrigger>
+                            <DataTrigger
+                                Binding="{Binding SortOrder}"
+                                TargetType="Label"
+                                Value="desc">
+                                <Setter Property="Text" Value="Cijeni uzlazno" />
+                            </DataTrigger>
+                        </Label.Triggers>
 
-                            <!--  rating  -->
-                            <FlexLayout
-                                AlignItems="Start"
-                                AlignSelf="Center"
-                                Direction="Row"
-                                HeightRequest="30"
-                                JustifyContent="Start"
-                                Wrap="NoWrap">
-                                <Image
-                                    Aspect="AspectFit"
-                                    HeightRequest="16"
-                                    HorizontalOptions="StartAndExpand"
-                                    Source="star_filled_yellow.svg"
-                                    VerticalOptions="Center"
-                                    WidthRequest="16" />
-                                <Label
-                                    FontAttributes="Bold"
-                                    FontFamily="AstoreEczarSemiBold"
-                                    FontSize="Small"
-                                    HorizontalOptions="StartAndExpand"
-                                    Text="{Binding Rating.Rate}"
-                                    TextColor="Black"
-                                    VerticalTextAlignment="Center" />
-                            </FlexLayout>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SortProductsCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
 
-                            <!--  title  -->
-                            <Label
-                                Margin="0,3"
-                                FontFamily="AstoreEczarSemiBold"
-                                FontSize="Small"
-                                HeightRequest="35"
-                                LineBreakMode="WordWrap"
-                                MaxLines="2"
-                                Text="{Binding Title}"
-                                TextColor="#000" />
+                </FlexLayout>
 
-                            <!--  price  -->
-                            <Label
-                                FontAttributes="Bold"
-                                FontFamily="AstoreEczarSemiBold"
-                                FontSize="Medium"
-                                HeightRequest="30"
-                                HorizontalOptions="StartAndExpand"
-                                LineBreakMode="NoWrap"
-                                Text="{Binding Price, StringFormat='€{0:F2}'}"
-                                TextColor="Black" />
-                            <FlexLayout.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:CategoryPageViewModel}}, Path=ProductTappedCommand}" CommandParameter="{Binding .}" />
-                            </FlexLayout.GestureRecognizers>
-                        </FlexLayout>
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
 
-        <!--  Loading Indicator  -->
-        <ActivityIndicator
-            Grid.RowSpan="2"
-            HorizontalOptions="CenterAndExpand"
-            IsRunning="{Binding IsBusy}"
-            IsVisible="{Binding IsBusy}"
-            VerticalOptions="CenterAndExpand" />
-    </Grid>
+                <!--  Products List  -->
+                <CollectionView
+                    Grid.Row="1"
+                    Margin="20"
+                    ItemsSource="{Binding Products}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="2" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Product">
+                            <StackLayout Margin="10" WidthRequest="160">
+                                <!--  Image Frame  -->
+                                <Frame
+                                    Padding="1"
+                                    BorderColor="Transparent"
+                                    CornerRadius="8"
+                                    HasShadow="False">
+                                    <Grid>
+                                        <!--  product image  -->
+                                        <Image
+                                            Margin="20"
+                                            Aspect="AspectFit"
+                                            HeightRequest="130"
+                                            Source="{Binding Image}">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:HomePageViewModel}}, Path=ProductTappedCommand}" CommandParameter="{Binding .}" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </Grid>
+                                </Frame>
+
+                                <!--  rating, title, price  -->
+                                <FlexLayout
+                                    Margin="5,0"
+                                    AlignItems="Start"
+                                    Direction="Column"
+                                    JustifyContent="Start">
+
+                                    <!--  rating  -->
+                                    <FlexLayout
+                                        AlignItems="Start"
+                                        AlignSelf="Center"
+                                        Direction="Row"
+                                        HeightRequest="30"
+                                        JustifyContent="Start"
+                                        Wrap="NoWrap">
+                                        <Image
+                                            Aspect="AspectFit"
+                                            HeightRequest="16"
+                                            HorizontalOptions="StartAndExpand"
+                                            Source="star_filled_yellow.svg"
+                                            VerticalOptions="Center"
+                                            WidthRequest="16" />
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontFamily="AstoreEczarSemiBold"
+                                            FontSize="Small"
+                                            HorizontalOptions="StartAndExpand"
+                                            Text="{Binding Rating.Rate}"
+                                            TextColor="Black"
+                                            VerticalTextAlignment="Center" />
+                                    </FlexLayout>
+
+                                    <!--  title  -->
+                                    <Label
+                                        Margin="0,3"
+                                        FontFamily="AstoreEczarSemiBold"
+                                        FontSize="Small"
+                                        HeightRequest="35"
+                                        LineBreakMode="WordWrap"
+                                        MaxLines="2"
+                                        Text="{Binding Title}"
+                                        TextColor="#000" />
+
+                                    <!--  price  -->
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontFamily="AstoreEczarSemiBold"
+                                        FontSize="Medium"
+                                        HeightRequest="30"
+                                        HorizontalOptions="StartAndExpand"
+                                        LineBreakMode="NoWrap"
+                                        Text="{Binding Price, StringFormat='€{0:F2}'}"
+                                        TextColor="Black" />
+                                    <FlexLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:CategoryPageViewModel}}, Path=ProductTappedCommand}" CommandParameter="{Binding .}" />
+                                    </FlexLayout.GestureRecognizers>
+                                </FlexLayout>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!--  Loading Indicator  -->
+                <ActivityIndicator
+                    Grid.RowSpan="2"
+                    HorizontalOptions="CenterAndExpand"
+                    IsRunning="{Binding IsBusy}"
+                    IsVisible="{Binding IsBusy}"
+                    VerticalOptions="CenterAndExpand" />
+
+                <!--  Loading Indicator  -->
+                <ActivityIndicator
+                    Grid.RowSpan="2"
+                    HorizontalOptions="CenterAndExpand"
+                    IsRunning="{Binding IsBusyWithSorting}"
+                    IsVisible="{Binding IsBusyWithSorting}"
+                    VerticalOptions="CenterAndExpand" />
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
 </ContentPage>
