@@ -29,212 +29,221 @@
         <behaviors:EventToCommandBehavior Command="{Binding InitCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
 
-    <!--  if user is logged in  -->
+    <!--  page wrapper  -->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <StackLayout
-            Grid.Row="0"
-            Padding="10"
-            IsVisible="{Binding IsUserLoggedIn}">
-            <CollectionView ItemsSource="{Binding CartItems}" VerticalOptions="FillAndExpand">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:CartItemDetail">
-                        <Frame
-                            Margin="0,5"
-                            Padding="5"
-                            BackgroundColor="#F5F6F4"
-                            BorderColor="Transparent"
-                            CornerRadius="20">
-                            <Grid Padding="5">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="3*" />
-                                    <ColumnDefinition Width="auto" />
-                                </Grid.ColumnDefinitions>
-                                <Frame
-                                    Grid.Column="0"
-                                    Margin="10,10,0,0"
-                                    Padding="9,8"
-                                    BackgroundColor="White"
-                                    BorderColor="Transparent"
-                                    CornerRadius="15"
-                                    HorizontalOptions="StartAndExpand"
-                                    VerticalOptions="StartAndExpand">
-                                    <Grid>
+
+
+        <!--  if user is logged in  -->
+        <Grid IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout
+                Grid.Row="0"
+                Padding="10"
+                IsVisible="{Binding IsUserLoggedIn}">
+                <CollectionView ItemsSource="{Binding CartItems}" VerticalOptions="FillAndExpand">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:CartItemDetail">
+                            <Frame
+                                Margin="0,5"
+                                Padding="5"
+                                BackgroundColor="#F5F6F4"
+                                BorderColor="Transparent"
+                                CornerRadius="20">
+                                <Grid Padding="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*" />
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Frame
+                                        Grid.Column="0"
+                                        Margin="10,10,0,0"
+                                        Padding="9,8"
+                                        BackgroundColor="White"
+                                        BorderColor="Transparent"
+                                        CornerRadius="15"
+                                        HorizontalOptions="StartAndExpand"
+                                        VerticalOptions="StartAndExpand">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label
+                                                Grid.Column="0"
+                                                Padding="0"
+                                                FontFamily="AstoreEczarSemiBold"
+                                                FontSize="14"
+                                                LineBreakMode="WordWrap"
+                                                Text="{Binding Product.Category, Converter={StaticResource FirstLetterUppercaseConverter}}"
+                                                ZIndex="10" />
+                                            <Image
+                                                Grid.Column="1"
+                                                HeightRequest="22"
+                                                HorizontalOptions="End"
+                                                Source="arrow_next_small.svg"
+                                                VerticalOptions="Center"
+                                                WidthRequest="22" />
+                                        </Grid>
+                                    </Frame>
+
+                                    <Label
+                                        Grid.Column="0"
+                                        Margin="10,45,0,0"
+                                        Padding="2,10,0,0"
+                                        FontAttributes="Bold"
+                                        FontFamily="AstoreEczarSemiBold"
+                                        FontSize="14"
+                                        LineBreakMode="WordWrap"
+                                        MaxLines="2"
+                                        Text="{Binding Product.Title}" />
+
+                                    <Grid Margin="15,100,0,0" HorizontalOptions="Start">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="38" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
 
-                                        <Label
-                                            Grid.Column="0"
-                                            Padding="0"
-                                            FontFamily="AstoreEczarSemiBold"
-                                            FontSize="14"
-                                            LineBreakMode="WordWrap"
-                                            Text="{Binding Product.Category, Converter={StaticResource FirstLetterUppercaseConverter}}"
-                                            ZIndex="10" />
+                                        <!--  Minus Icon  -->
                                         <Image
-                                            Grid.Column="1"
-                                            HeightRequest="22"
-                                            HorizontalOptions="End"
-                                            Source="arrow_next_small.svg"
+                                            Grid.Column="0"
+                                            HeightRequest="20"
+                                            Source="minus.svg"
                                             VerticalOptions="Center"
-                                            WidthRequest="22" />
+                                            WidthRequest="20" />
+
+                                        <!--  Quantity  -->
+                                        <Frame
+                                            Grid.Column="1"
+                                            Margin="8,0"
+                                            Padding="7"
+                                            BackgroundColor="White"
+                                            BorderColor="Transparent"
+                                            CornerRadius="6"
+                                            HorizontalOptions="Fill"
+                                            VerticalOptions="Center">
+                                            <Label
+                                                Padding="0"
+                                                FontFamily="AstoreEczarSemiBold"
+                                                FontSize="14"
+                                                HorizontalTextAlignment="Center"
+                                                LineBreakMode="WordWrap"
+                                                Text="{Binding Quantity, StringFormat='{0}'}"
+                                                VerticalTextAlignment="Center" />
+                                        </Frame>
+
+                                        <!--  Plus Icon  -->
+                                        <Image
+                                            Grid.Column="2"
+                                            HeightRequest="20"
+                                            Source="plus.svg"
+                                            VerticalOptions="Center"
+                                            WidthRequest="20" />
                                     </Grid>
-                                </Frame>
 
-                                <Label
-                                    Grid.Column="0"
-                                    Margin="10,45,0,0"
-                                    Padding="2,10,0,0"
-                                    FontAttributes="Bold"
-                                    FontFamily="AstoreEczarSemiBold"
-                                    FontSize="14"
-                                    LineBreakMode="WordWrap"
-                                    MaxLines="2"
-                                    Text="{Binding Product.Title}" />
 
-                                <Grid Margin="15,100,0,0" HorizontalOptions="Start">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="38" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
 
-                                    <!--  Minus Icon  -->
-                                    <Image
-                                        Grid.Column="0"
-                                        HeightRequest="20"
-                                        Source="minus.svg"
-                                        VerticalOptions="Center"
-                                        WidthRequest="20" />
 
-                                    <!--  Quantity  -->
+                                    <!--  Product Image  -->
                                     <Frame
                                         Grid.Column="1"
-                                        Margin="8,0"
-                                        Padding="7"
+                                        Margin="5,0,0,0"
+                                        Padding="5"
                                         BackgroundColor="White"
-                                        BorderColor="Transparent"
-                                        CornerRadius="6"
-                                        HorizontalOptions="Fill"
-                                        VerticalOptions="Center">
-                                        <Label
-                                            Padding="0"
-                                            FontFamily="AstoreEczarSemiBold"
-                                            FontSize="14"
-                                            HorizontalTextAlignment="Center"
-                                            LineBreakMode="WordWrap"
-                                            Text="{Binding Quantity, StringFormat='{0}'}"
-                                            VerticalTextAlignment="Center" />
+                                        BorderColor="White"
+                                        CornerRadius="20">
+                                        <Grid>
+                                            <Image
+                                                Margin="15"
+                                                Aspect="AspectFit"
+                                                HeightRequest="90"
+                                                Source="{Binding Product.Image}"
+                                                WidthRequest="90" />
+
+                                            <!--  Product Price Label  -->
+                                            <Frame
+                                                Grid.Row="0"
+                                                Grid.Column="0"
+                                                Margin="0,4,4,0"
+                                                Padding="5"
+                                                BackgroundColor="#FA2C2D"
+                                                BorderColor="Transparent"
+                                                CornerRadius="10"
+                                                HorizontalOptions="End"
+                                                IsClippedToBounds="True"
+                                                VerticalOptions="Start">
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="12"
+                                                    HorizontalOptions="Center"
+                                                    Text="{Binding Product.Price, StringFormat='€{0:F2}'}"
+                                                    TextColor="White"
+                                                    VerticalOptions="Center" />
+                                            </Frame>
+                                        </Grid>
                                     </Frame>
 
-                                    <!--  Plus Icon  -->
-                                    <Image
-                                        Grid.Column="2"
-                                        HeightRequest="20"
-                                        Source="plus.svg"
-                                        VerticalOptions="Center"
-                                        WidthRequest="20" />
                                 </Grid>
+                            </Frame>
+                        </DataTemplate>
+
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
 
 
 
 
-                                <!--  Product Image  -->
-                                <Frame
-                                    Grid.Column="1"
-                                    Margin="5,0,0,0"
-                                    Padding="5"
-                                    BackgroundColor="White"
-                                    BorderColor="White"
-                                    CornerRadius="20">
-                                    <Grid>
-                                        <Image
-                                            Margin="15"
-                                            Aspect="AspectFit"
-                                            HeightRequest="90"
-                                            Source="{Binding Product.Image}"
-                                            WidthRequest="90" />
+            <!--  if user is not logged in  -->
+            <StackLayout
+                Grid.Row="0"
+                Padding="10"
+                IsVisible="{Binding IsUserLoggedIn, Converter={StaticResource InvertedBoolConverter}}"
+                VerticalOptions="CenterAndExpand">
+                <Image
+                    Margin="0,0,0,45"
+                    HorizontalOptions="Center"
+                    Source="not_logged_in.svg"
+                    VerticalOptions="Center" />
 
-                                        <!--  Product Price Label  -->
-                                        <Frame
-                                            Grid.Row="0"
-                                            Grid.Column="0"
-                                            Margin="0,4,4,0"
-                                            Padding="5"
-                                            BackgroundColor="#FA2C2D"
-                                            BorderColor="Transparent"
-                                            CornerRadius="10"
-                                            HorizontalOptions="End"
-                                            IsClippedToBounds="True"
-                                            VerticalOptions="Start">
-                                            <Label
-                                                FontAttributes="Bold"
-                                                FontSize="12"
-                                                HorizontalOptions="Center"
-                                                Text="{Binding Product.Price, StringFormat='€{0:F2}'}"
-                                                TextColor="White"
-                                                VerticalOptions="Center" />
-                                        </Frame>
-                                    </Grid>
-                                </Frame>
+                <Label
+                    Margin="0,5"
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    HorizontalOptions="Center"
+                    Text="Niste prijavljeni"
+                    VerticalOptions="Center" />
 
-                            </Grid>
-                        </Frame>
-                    </DataTemplate>
+                <Label
+                    Margin="0,5"
+                    HorizontalOptions="Center"
+                    Text="Molimo prijavite se ako želite vidjeti košaricu."
+                    TextColor="Gray"
+                    VerticalOptions="Center" />
 
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </StackLayout>
+                <Button
+                    Margin="0,45"
+                    Command="{Binding GoToLoginPageCommand}"
+                    CornerRadius="20"
+                    HorizontalOptions="Center"
+                    Text="Prijava"
+                    VerticalOptions="Center"
+                    WidthRequest="150" />
+
+            </StackLayout>
+        </Grid>
 
         <!--  Activity Indicator for loading status  -->
         <ActivityIndicator
-            Grid.Row="0"
             HorizontalOptions="CenterAndExpand"
             IsRunning="{Binding IsBusy}"
             IsVisible="{Binding IsBusy}"
             VerticalOptions="CenterAndExpand" />
-
-
-        <!--  if user is not logged in  -->
-        <StackLayout
-            Grid.Row="0"
-            Padding="10"
-            IsVisible="{Binding IsUserLoggedIn, Converter={StaticResource InvertedBoolConverter}}"
-            VerticalOptions="CenterAndExpand">
-            <Image
-                Margin="0,0,0,45"
-                HorizontalOptions="Center"
-                Source="not_logged_in.svg"
-                VerticalOptions="Center" />
-
-            <Label
-                Margin="0,5"
-                FontAttributes="Bold"
-                FontSize="Large"
-                HorizontalOptions="Center"
-                Text="Niste prijavljeni"
-                VerticalOptions="Center" />
-
-            <Label
-                Margin="0,5"
-                HorizontalOptions="Center"
-                Text="Molimo prijavite se ako želite vidjeti košaricu."
-                TextColor="Gray"
-                VerticalOptions="Center" />
-
-            <Button
-                Margin="0,45"
-                Command="{Binding GoToLoginPageCommand}"
-                CornerRadius="20"
-                HorizontalOptions="Center"
-                Text="Prijava"
-                VerticalOptions="Center"
-                WidthRequest="150" />
-
-        </StackLayout>
     </Grid>
 </ContentPage>

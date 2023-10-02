@@ -5,12 +5,14 @@
     xmlns:behaviors="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
     xmlns:converters="clr-namespace:MauiStoreApp.Converters"
     xmlns:local="clr-namespace:MauiStoreApp.ViewModels"
+    xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     BackgroundColor="#F4F3F4">
 
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:CategoryToColorConverter x:Key="CategoryToColorConverter" />
             <converters:FirstLetterUppercaseConverter x:Key="FirstLetterUppercaseConverter" />
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -81,7 +83,10 @@
         </StackLayout>
 
         <!--  ScrollView  -->
-        <ScrollView Grid.Row="1" Scrolled="OnScrolled">
+        <ScrollView
+            Grid.Row="1"
+            IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
+            Scrolled="OnScrolled">
             <StackLayout Padding="12,10">
                 <Label
                     Margin="0,15,0,10"

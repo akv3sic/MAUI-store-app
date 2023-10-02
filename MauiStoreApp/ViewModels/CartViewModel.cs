@@ -42,14 +42,14 @@ namespace MauiStoreApp.ViewModels
 
         private async Task GetCartByUserIdAsync()
         {
-            if (IsBusy)
-                return;
-
-            int userId;
-
-            try
+            if (AuthService.IsUserLoggedIn)
             {
-                // Try to fetch the userId from SecureStorage
+
+                if (IsBusy)
+                    return;
+
+                int userId;
+
                 var userIdStr = await SecureStorage.GetAsync("userId");
                 if (!int.TryParse(userIdStr, out userId))
                 {
@@ -57,52 +57,46 @@ namespace MauiStoreApp.ViewModels
                     await Shell.Current.DisplayAlert("Greška", "Greška prilikom dohvata korisničkih podataka.", "U redu");
                     return;
                 }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Error fetching userId from SecureStorage: {ex.Message}");
-                await Shell.Current.DisplayAlert("Greška", "Greška prilikom dohvata korisničkih podataka.", "U redu");
-                return; // exit if we can't get the userId
-            }
 
-            try
-            {
-                IsBusy = true;
-
-                // Get a list of Cart objects
-                var carts = await _cartService.GetCartByUserIdAsync(userId);
-        
-                // Get the first cart from the list (if any)
-                var cart = carts?.FirstOrDefault();
-
-                if (cart != null)
+                try
                 {
-                    CartItems.Clear();
-                    foreach (var cartProduct in cart.Products)
+                    IsBusy = true;
+
+                    // Get a list of Cart objects
+                    var carts = await _cartService.GetCartByUserIdAsync(userId);
+
+                    // Get the first cart from the list (if any)
+                    var cart = carts?.FirstOrDefault();
+
+                    if (cart != null)
                     {
-                        // fetch product details by id
-                        var productDetails = await _productService.GetProductByIdAsync(cartProduct.ProductId);
-                        CartItems.Add(new CartItemDetail
+                        CartItems.Clear();
+                        foreach (var cartProduct in cart.Products)
                         {
-                            Product = productDetails,
-                            Quantity = cartProduct.Quantity
-                        });
+                            // fetch product details by id
+                            var productDetails = await _productService.GetProductByIdAsync(cartProduct.ProductId);
+                            CartItems.Add(new CartItemDetail
+                            {
+                                Product = productDetails,
+                                Quantity = cartProduct.Quantity
+                            });
+                        }
+                    }
+                    else
+                    {
+                        Debug.WriteLine("No cart found for user.");
+                        await Shell.Current.DisplayAlert("Obavijest", "Nema košarice za ovog korisnika.", "U redu");
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    Debug.WriteLine("No cart found for user.");
-                    await Shell.Current.DisplayAlert("Obavijest", "Nema košarice za ovog korisnika.", "U redu");
+                    Debug.WriteLine($"Unable to get cart: {ex.Message}");
+                    await Shell.Current.DisplayAlert("Greška", "Greška prilikom dohvata košarice.", "U redu");
                 }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Unable to get cart: {ex.Message}");
-                await Shell.Current.DisplayAlert("Greška", "Greška prilikom dohvata košarice.", "U redu");
-            }
-            finally
-            {
-                IsBusy = false;
+                finally
+                {
+                    IsBusy = false;
+                }
             }
         }
 

@@ -82,8 +82,6 @@ namespace MauiStoreApp.ViewModels
         [RelayCommand]
         private async Task ProductTapped(Product product)
         {
-            IsBusy = true;
-
             if (product == null)
                 return;
 
@@ -95,15 +93,11 @@ namespace MauiStoreApp.ViewModels
             AddToRecentlyViewedProducts(product);
 
             await Shell.Current.GoToAsync($"{nameof(ProductDetailsPage)}", true, navigationParameter);
-
-            IsBusy = false;
         }
 
         [RelayCommand]
         private async Task CategoryTapped(Category category)
         {
-            IsBusy = true;
-
             if (category == null)
                 return;
 
@@ -113,8 +107,6 @@ namespace MauiStoreApp.ViewModels
             };
 
             await Shell.Current.GoToAsync($"{nameof(CategoryPage)}", true, navigationParameter);
-
-            IsBusy = false;
         }
 
         private void AddToRecentlyViewedProducts(Product product)
