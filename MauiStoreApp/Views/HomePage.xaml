@@ -24,6 +24,21 @@
         <behaviors:EventToCommandBehavior Command="{Binding InitCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>
 
+    <Shell.TitleView>
+        <Label
+            FontAttributes="Bold"
+            FontSize="Large"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="A" TextColor="#E6A958" />
+                    <Span Text="Store" TextColor="White" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+    </Shell.TitleView>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -31,55 +46,39 @@
         </Grid.RowDefinitions>
 
         <!--  Fixed  -->
-        <StackLayout
-            x:Name="SearchBarLayout"
-            Grid.Row="0"
-            Padding="12,5">
-            <!--
-                Logo + Search bar
-            -->
-            <Grid Padding="20,3">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+        <StackLayout x:Name="searchBar" Grid.Row="0">
+            <!--  Search Bar Background  -->
+            <Frame
+                Margin="0"
+                Padding="0,0,0,30"
+                BackgroundColor="{StaticResource Primary}"
+                BorderColor="{StaticResource Primary}"
+                CornerRadius="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Center" />
 
-                <Image
-                    x:Name="Logo"
-                    Grid.Column="0"
-                    Margin="-31,0,0,0"
-                    HeightRequest="40"
-                    HorizontalOptions="Start"
-                    Source="Resources/Images/logo_single_letter_black.svg"
-                    VerticalOptions="Center" />
-
-                <StackLayout
-                    Grid.Column="1"
-                    Margin="-30,12,0,0"
-                    HorizontalOptions="EndAndExpand"
-                    Orientation="Horizontal"
-                    Spacing="0"
-                    VerticalOptions="Center">
-
-                    <Entry
-                        x:Name="SearchEntry"
-                        BackgroundColor="Transparent"
-                        HeightRequest="45"
-                        HorizontalOptions="FillAndExpand"
+            <!--  Search Bar Frame  -->
+            <Frame
+                Margin="30,-20,30,0"
+                Padding="10"
+                BackgroundColor="White"
+                BorderColor="Transparent"
+                CornerRadius="20">
+                <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                    <Image
+                        Aspect="AspectFit"
+                        HeightRequest="20"
+                        Source="search.svg"
                         VerticalOptions="Center"
-                        WidthRequest="270" />
-
-                    <ImageButton
-                        x:Name="SearchButton"
-                        Margin="-35,0,0,10"
-                        BackgroundColor="Transparent"
-                        HeightRequest="22"
-                        HorizontalOptions="End"
-                        Source="Resources/Images/search.svg"
-                        VerticalOptions="Center"
-                        WidthRequest="22" />
+                        WidthRequest="20" />
+                    <Label
+                        Padding="20,0"
+                        HorizontalOptions="StartAndExpand"
+                        Text="Traži proizvode"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
                 </StackLayout>
-            </Grid>
+            </Frame>
         </StackLayout>
 
         <!--  ScrollView  -->
