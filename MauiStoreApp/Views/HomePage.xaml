@@ -94,7 +94,7 @@
                     FontFamily="AstoreEczarSemiBold"
                     FontSize="20"
                     HorizontalOptions="Start"
-                    Text="Istraži po kategorijama"
+                    Text="Kategorije"
                     VerticalOptions="Start" />
 
                 <!--  Horizontal ScrollView for categories  -->
@@ -111,33 +111,39 @@
                                         CornerRadius="8"
                                         HasShadow="False">
                                         <StackLayout>
+                                            <!--  Image  -->
                                             <Image
                                                 Aspect="AspectFill"
-                                                HeightRequest="110"
+                                                HeightRequest="120"
                                                 HorizontalOptions="FillAndExpand"
                                                 Source="{Binding ImageName}"
                                                 VerticalOptions="FillAndExpand"
-                                                ZIndex="2" />
-                                            <Frame
-                                                Margin="0,-20,0,0"
-                                                Padding="3,26,3,6"
-                                                BackgroundColor="{Binding Name, Converter={StaticResource CategoryToColorConverter}}"
-                                                BorderColor="Transparent"
-                                                CornerRadius="8"
-                                                HasShadow="False"
+                                                ZIndex="1" />
+
+                                            <!--  Desaturation Overlay  -->
+                                            <BoxView
+                                                Margin="0,-120,0,0"
+                                                HeightRequest="120"
                                                 HorizontalOptions="FillAndExpand"
-                                                VerticalOptions="End"
-                                                ZIndex="1">
-                                                <Label
-                                                    FontAttributes="Bold"
-                                                    FontFamily="AstoreEczarSemiBold"
-                                                    FontSize="Small"
-                                                    HorizontalTextAlignment="Center"
-                                                    Text="{Binding Name, Converter={StaticResource FirstLetterUppercaseConverter}}"
-                                                    TextColor="White"
-                                                    VerticalTextAlignment="Center" />
-                                            </Frame>
+                                                VerticalOptions="FillAndExpand"
+                                                ZIndex="2"
+                                                Color="#339e9e9e" />
+
+                                            <!--  Label  -->
+                                            <Label
+                                                Margin="0,-120,0,0"
+                                                FontAttributes="Bold"
+                                                FontFamily="AstoreEczarSemiBold"
+                                                FontSize="15"
+                                                HeightRequest="20"
+                                                HorizontalTextAlignment="Center"
+                                                LineBreakMode="CharacterWrap"
+                                                Text="{Binding Name, Converter={StaticResource FirstLetterUppercaseConverter}}"
+                                                TextColor="White"
+                                                VerticalTextAlignment="Center"
+                                                ZIndex="4" />
                                         </StackLayout>
+
                                         <Frame.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:HomePageViewModel}}, Path=CategoryTappedCommand}" CommandParameter="{Binding .}" />
                                         </Frame.GestureRecognizers>
