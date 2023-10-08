@@ -80,33 +80,50 @@
                     HorizontalOptions="End"
                     IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
                     JustifyContent="Start">
+                    <StackLayout Orientation="Horizontal" Spacing="5">
+                        <!--  text  -->
+                        <Label FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}">
+                            <Label.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding SortOrder}"
+                                    TargetType="Label"
+                                    Value="asc">
+                                    <Setter Property="Text" Value="Cijeni uzlazno" />
+                                </DataTrigger>
+                                <DataTrigger
+                                    Binding="{Binding SortOrder}"
+                                    TargetType="Label"
+                                    Value="desc">
+                                    <Setter Property="Text" Value="Cijeni silazno" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
 
-                    <Label
-                        FontSize="Small"
-                        Text="Sortiraj po: "
-                        TextColor="DimGray" />
+                        <!--  arrow  -->
+                        <Image
+                            Margin="0,-4,0,0"
+                            HeightRequest="25"
+                            WidthRequest="25">
+                            <Image.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding SortOrder}"
+                                    TargetType="Image"
+                                    Value="asc">
+                                    <Setter Property="Source" Value="arrow_up_primary.svg" />
+                                </DataTrigger>
+                                <DataTrigger
+                                    Binding="{Binding SortOrder}"
+                                    TargetType="Image"
+                                    Value="desc">
+                                    <Setter Property="Source" Value="arrow_down_primary.svg" />
+                                </DataTrigger>
+                            </Image.Triggers>
+                        </Image>
 
-                    <Label FontAttributes="Bold" TextColor="Black">
-                        <Label.Triggers>
-                            <DataTrigger
-                                Binding="{Binding SortOrder}"
-                                TargetType="Label"
-                                Value="asc">
-                                <Setter Property="Text" Value="Cijeni silazno" />
-                            </DataTrigger>
-                            <DataTrigger
-                                Binding="{Binding SortOrder}"
-                                TargetType="Label"
-                                Value="desc">
-                                <Setter Property="Text" Value="Cijeni uzlazno" />
-                            </DataTrigger>
-                        </Label.Triggers>
-
-                        <Label.GestureRecognizers>
+                        <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding SortProductsCommand}" />
-                        </Label.GestureRecognizers>
-                    </Label>
-
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
                 </FlexLayout>
 
 
