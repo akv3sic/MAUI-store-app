@@ -8,8 +8,33 @@
     xmlns:model="clr-namespace:MauiStoreApp.Models"
     xmlns:modelroot="clr-namespace:MauiStoreApp.Models"
     xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
-    x:DataType="local:ProfilePageViewModel"
-    Shell.NavBarIsVisible="False">
+    x:DataType="local:ProfilePageViewModel">
+
+    <Shell.TitleView>
+        <Grid HorizontalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!--  title in the middle  -->
+            <Label
+                Grid.Column="0"
+                FontAttributes="Bold"
+                FontFamily="AstoreEczarSemiBold"
+                FontSize="20"
+                HorizontalOptions="CenterAndExpand"
+                Text="Moj račun"
+                TextColor="White"
+                VerticalOptions="CenterAndExpand" />
+
+            <!--  right button placeholder  -->
+            <Button
+                Grid.Column="1"
+                HorizontalOptions="End"
+                Text="" />
+        </Grid>
+    </Shell.TitleView>
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -29,102 +54,90 @@
 
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!--  appbar  -->
-            <Grid Grid.Row="0" Padding="5,15">
-                <Label
-                    FontAttributes="Bold"
-                    FontSize="18"
-                    HorizontalOptions="Center"
-                    Text="Moj račun"
-                    TextColor="Black"
-                    VerticalOptions="Center" />
-            </Grid>
-
             <StackLayout
-                Grid.Row="1"
+                Grid.Row="0"
                 Padding="0"
                 IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}">
-                <!--  gradient frame behind avatar  -->
                 <Frame
+                    Margin="-90,-75,-5,0"
                     BackgroundColor="Transparent"
                     BorderColor="Transparent"
-                    HeightRequest="60"
-                    HorizontalOptions="Start"
+                    CornerRadius="120"
+                    HeightRequest="180"
+                    HorizontalOptions="FillAndExpand"
                     IsVisible="{Binding IsUserLoggedIn}"
-                    WidthRequest="1000"
                     ZIndex="0">
+
+                    <FlexLayout
+                        Margin="80,55,0,0"
+                        AlignItems="Center"
+                        Direction="Row">
+
+                        <!--  Avatar with Initials  -->
+                        <Frame
+                            Margin="8"
+                            Padding="0"
+                            BackgroundColor="#689F38"
+                            BorderColor="White"
+                            CornerRadius="30"
+                            HasShadow="True"
+                            HeightRequest="55"
+                            WidthRequest="55"
+                            ZIndex="2">
+                            <Label
+                                FontSize="20"
+                                HorizontalOptions="Center"
+                                Text="{Binding User.AvatarInitials}"
+                                TextColor="White"
+                                VerticalOptions="Center" />
+                        </Frame>
+
+                        <StackLayout
+                            HorizontalOptions="Center"
+                            Spacing="5"
+                            VerticalOptions="Center">
+
+                            <!--  Name  -->
+                            <Label
+                                Margin="0,0,0,3"
+                                FontAttributes="Bold"
+                                FontSize="20"
+                                HorizontalOptions="Center"
+                                Text="{Binding User.FullName}"
+                                TextColor="#FFF" />
+
+                            <FlexLayout AlignItems="Center" Direction="Row">
+
+                                <!--  Location marker icon  -->
+                                <Image
+                                    Margin="1,0,0,0"
+                                    Aspect="AspectFit"
+                                    HeightRequest="18"
+                                    Source="location_yellow.svg"
+                                    WidthRequest="18" />
+
+                                <!--  City label  -->
+                                <Label
+                                    Margin="3,0,0,0"
+                                    FontAttributes="Bold"
+                                    HeightRequest="20"
+                                    HorizontalOptions="StartAndExpand"
+                                    Text="{Binding User.Address.CityCapitalized}"
+                                    TextColor="#FFF" />
+                            </FlexLayout>
+                        </StackLayout>
+                    </FlexLayout>
+
                     <Frame.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                            <GradientStop Offset="0.0" Color="#F2FAE2" />
-                            <GradientStop Offset="1.0" Color="#EADDF9" />
+                            <GradientStop Offset="0.0" Color="{StaticResource Primary}" />
+                            <GradientStop Offset="1.0" Color="{StaticResource Primary}" />
                         </LinearGradientBrush>
                     </Frame.Background>
                 </Frame>
-
-                <StackLayout
-                    Margin="0,-40,0,0"
-                    HorizontalOptions="Center"
-                    IsVisible="{Binding IsUserLoggedIn}"
-                    Spacing="8">
-
-                    <!--  Avatar with Initials  -->
-                    <Frame
-                        Padding="0"
-                        BackgroundColor="#689F38"
-                        BorderColor="White"
-                        CornerRadius="30"
-                        HasShadow="True"
-                        HeightRequest="60"
-                        WidthRequest="60"
-                        ZIndex="2">
-                        <Label
-                            FontSize="20"
-                            HorizontalOptions="Center"
-                            Text="{Binding User.AvatarInitials}"
-                            TextColor="White"
-                            VerticalOptions="Center" />
-                    </Frame>
-
-                    <!--  Name  -->
-                    <Label
-                        FontAttributes="Bold"
-                        FontSize="20"
-                        HorizontalOptions="Center"
-                        Text="{Binding User.FullName}" />
-
-                    <!--  Location (City)  -->
-                    <Frame
-                        Margin="0,3,0,0"
-                        Padding="5,4"
-                        BackgroundColor="#EDF4FA"
-                        BorderColor="Transparent"
-                        CornerRadius="17"
-                        HeightRequest="25"
-                        HorizontalOptions="CenterAndExpand">
-
-                        <FlexLayout AlignItems="Center" Direction="Row">
-
-                            <!--  Location marker icon  -->
-                            <Image
-                                Aspect="AspectFit"
-                                HeightRequest="18"
-                                Source="location_marker_blue.svg"
-                                WidthRequest="18" />
-
-                            <!--  City label  -->
-                            <Label
-                                Margin="5,0,0,0"
-                                FontAttributes="Bold"
-                                HorizontalOptions="StartAndExpand"
-                                Text="{Binding User.Address.CityCapitalized}"
-                                TextColor="#4C89E4" />
-                        </FlexLayout>
-                    </Frame>
-                </StackLayout>
 
                 <!--  Addresses Section  -->
                 <StackLayout

@@ -9,10 +9,37 @@
     xmlns:model="clr-namespace:MauiStoreApp.Models"
     xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     xmlns:vm="clr-namespace:MauiStoreApp.ViewModels"
-    Title="Košarica"
-    BackgroundColor="White"
-    Shell.BackgroundColor="Transparent"
-    Shell.TitleColor="Black">
+    BackgroundColor="White">
+
+    <Shell.TitleView>
+        <Grid HorizontalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!--  title in the middle  -->
+            <Label
+                Grid.Column="0"
+                FontAttributes="Bold"
+                FontFamily="AstoreEczarSemiBold"
+                FontSize="20"
+                HorizontalOptions="CenterAndExpand"
+                Text="Košarica"
+                TextColor="White"
+                VerticalOptions="CenterAndExpand" />
+
+            <!--  delete button  -->
+            <ImageButton
+                Grid.Column="1"
+                Padding="5"
+                HeightRequest="46"
+                HorizontalOptions="End"
+                IsVisible="{Binding IsDeleteButtonVisible}"
+                Source="delete_white.svg"
+                WidthRequest="46" />
+        </Grid>
+    </Shell.TitleView>
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -172,7 +199,7 @@
                                                 Grid.Column="0"
                                                 Margin="0,4,4,0"
                                                 Padding="5"
-                                                BackgroundColor="#FA2C2D"
+                                                BackgroundColor="#E7B944"
                                                 BorderColor="Transparent"
                                                 CornerRadius="10"
                                                 HorizontalOptions="End"

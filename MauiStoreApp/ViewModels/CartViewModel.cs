@@ -29,6 +29,9 @@ namespace MauiStoreApp.ViewModels
         public bool isUserLoggedIn;
 
         [ObservableProperty]
+        private bool isDeleteButtonVisible;
+
+        [ObservableProperty]
         Cart cart;
 
         public ObservableCollection<CartItemDetail> CartItems { get; private set; } = new ObservableCollection<CartItemDetail>();
@@ -38,6 +41,7 @@ namespace MauiStoreApp.ViewModels
         {
             await GetCartByUserIdAsync();
             IsUserLoggedIn = AuthService.IsUserLoggedIn;
+            IsDeleteButtonVisible = AuthService.IsUserLoggedIn && CartItems.Count > 0;
         }
 
         private async Task GetCartByUserIdAsync()

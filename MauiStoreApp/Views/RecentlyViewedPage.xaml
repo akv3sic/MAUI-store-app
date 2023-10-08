@@ -8,8 +8,38 @@
     xmlns:model="clr-namespace:MauiStoreApp.Models"
     xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     xmlns:vm="clr-namespace:MauiStoreApp.ViewModels"
-    BackgroundColor="White"
-    Shell.NavBarIsVisible="False">
+    BackgroundColor="White">
+
+    <Shell.TitleView>
+        <Grid HorizontalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!--  title in the middle  -->
+            <Label
+                Grid.Column="0"
+                FontAttributes="Bold"
+                FontFamily="AstoreEczarSemiBold"
+                FontSize="20"
+                HorizontalOptions="CenterAndExpand"
+                Text="Nedavno gledano"
+                TextColor="White"
+                VerticalOptions="CenterAndExpand" />
+
+            <!--  delete button  -->
+            <ImageButton
+                Grid.Column="1"
+                Padding="5"
+                Command="{Binding DeleteAllCommand}"
+                HeightRequest="46"
+                HorizontalOptions="End"
+                IsVisible="{Binding IsPageEmpty, Converter={StaticResource InvertedBoolConverter}}"
+                Source="delete_white.svg"
+                WidthRequest="46" />
+        </Grid>
+    </Shell.TitleView>
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -30,35 +60,10 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!--  appbar  -->
-        <Grid Grid.Row="0" Padding="5,15">
-            <Label
-                FontAttributes="Bold"
-                FontSize="18"
-                HorizontalOptions="Center"
-                Text="Nedavno gledano"
-                TextColor="Black"
-                VerticalOptions="Center" />
-
-            <!--  delete button  -->
-            <ImageButton
-                Grid.Column="2"
-                Padding="6"
-                BackgroundColor="#000000"
-                Command="{Binding DeleteAllCommand}"
-                CornerRadius="17"
-                HeightRequest="46"
-                HorizontalOptions="End"
-                IsVisible="{Binding IsPageEmpty, Converter={StaticResource InvertedBoolConverter}}"
-                Source="delete_white.svg"
-                WidthRequest="46" />
-        </Grid>
-
-        <StackLayout Grid.Row="1" Padding="10,0,10,10">
+        <StackLayout Grid.Row="0" Padding="10,0,10,10">
             <CollectionView ItemsSource="{Binding RecentlyViewedProducts}" VerticalOptions="FillAndExpand">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Product">
@@ -153,7 +158,7 @@
 
         <!--  if page is empty  -->
         <StackLayout
-            Grid.Row="1"
+            Grid.Row="0"
             Padding="10"
             IsVisible="{Binding IsPageEmpty}"
             VerticalOptions="CenterAndExpand">
