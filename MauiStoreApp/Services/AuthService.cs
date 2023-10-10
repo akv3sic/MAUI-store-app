@@ -10,7 +10,7 @@ namespace MauiStoreApp.Services
         {
         }
 
-        public static bool IsUserLoggedIn
+        public bool IsUserLoggedIn
         {
             get
             {

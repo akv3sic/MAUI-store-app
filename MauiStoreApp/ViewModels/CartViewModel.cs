@@ -40,13 +40,13 @@ namespace MauiStoreApp.ViewModels
         public async Task Init()
         {
             await GetCartByUserIdAsync();
-            IsUserLoggedIn = AuthService.IsUserLoggedIn;
-            IsDeleteButtonVisible = AuthService.IsUserLoggedIn && CartItems.Count > 0;
+            IsUserLoggedIn = _authService.IsUserLoggedIn;
+            IsDeleteButtonVisible = _authService.IsUserLoggedIn && CartItems.Count > 0;
         }
 
         private async Task GetCartByUserIdAsync()
         {
-            if (AuthService.IsUserLoggedIn)
+            if (_authService.IsUserLoggedIn)
             {
 
                 if (IsBusy)

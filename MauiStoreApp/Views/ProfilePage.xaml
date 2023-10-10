@@ -251,6 +251,9 @@
                             Aspect="AspectFit"
                             Source="delete_red.svg"
                             WidthRequest="24" />
+                        <FlexLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding DeleteAccountCommand}" />
+                        </FlexLayout.GestureRecognizers>
                     </FlexLayout>
                 </StackLayout>
 
