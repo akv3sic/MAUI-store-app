@@ -24,5 +24,16 @@ namespace MauiStoreApp.ViewModels
         {
             await Shell.Current.GoToAsync("..", true);
         }
+
+        /// <summary>
+        /// Navigates to the specified page using shell navigation.
+        /// </summary>
+        /// <param name="pageName">The name of the page to navigate to.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
+        [RelayCommand]
+        private async Task GoToRoute(string pageName)
+        {
+            await Shell.Current.GoToAsync($"//{pageName}");
+        }
     }
 }

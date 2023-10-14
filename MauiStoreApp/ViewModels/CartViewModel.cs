@@ -14,11 +14,14 @@ namespace MauiStoreApp.ViewModels
         private readonly ProductService _productService;
         private readonly AuthService _authService;
 
+        bool isFirstRun;
+
         public CartViewModel(CartService cartService, ProductService productService, AuthService authService)
         {
             _cartService = cartService;
             _productService = productService;
             _authService = authService;
+            isFirstRun = true;
         }
 
         public CartViewModel()
@@ -28,20 +31,23 @@ namespace MauiStoreApp.ViewModels
         [ObservableProperty]
         public bool isUserLoggedIn;
 
-        [ObservableProperty]
-        private bool isDeleteButtonVisible;
+
+        private int cartId;
 
         [ObservableProperty]
-        Cart cart;
+        private bool isBusyWithCartModification;
 
         public ObservableCollection<CartItemDetail> CartItems { get; private set; } = new ObservableCollection<CartItemDetail>();
 
         [RelayCommand]
         public async Task Init()
         {
-            await GetCartByUserIdAsync();
+            if (isFirstRun)
+            {
+                await GetCartByUserIdAsync();
+                isFirstRun = false;
+            }
             IsUserLoggedIn = _authService.IsUserLoggedIn;
-            IsDeleteButtonVisible = _authService.IsUserLoggedIn && CartItems.Count > 0;
         }
 
         private async Task GetCartByUserIdAsync()
@@ -85,6 +91,8 @@ namespace MauiStoreApp.ViewModels
                                 Quantity = cartProduct.Quantity
                             });
                         }
+                        // set cartId
+                        cartId = cart.Id;
                     }
                     else
                     {
@@ -108,6 +116,58 @@ namespace MauiStoreApp.ViewModels
         public async Task GoToLoginPage()
         {
             await Shell.Current.GoToAsync("LoginPage");
+        }
+
+        [RelayCommand]
+        public async Task DeleteCart()
+        {
+            if (IsBusy || IsBusyWithCartModification)
+                return;
+
+            try
+            {
+                // Ask the user for confirmation
+                var userResponse = await Shell.Current.DisplayAlert("Potvrda", "Jeste li sigurni da želite obrisati košaricu?", "Da", "Ne");
+                if (!userResponse)
+                {
+                    Debug.WriteLine("Cart deletion cancelled by the user.");
+                    return; // exit if the user cancels the deletion
+                }
+
+                if (CartItems.Count > 0)
+                {
+                    IsBusyWithCartModification = true;
+
+                    // Delete the cart
+                    var response = await _cartService.DeleteCartAsync(cartId);
+
+                    if (response != null && response.IsSuccessStatusCode)
+                    {
+                        Debug.WriteLine("Cart deleted.");
+                        CartItems.Clear();
+                        await Shell.Current.DisplayAlert("Obavijest", "Košarica je uspješno obrisana.", "U redu");
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Failed to delete cart.");
+                        await Shell.Current.DisplayAlert("Greška", "Greška prilikom brisanja košarice.", "U redu");
+                    }
+                }
+                else
+                {
+                    Debug.WriteLine("No cart found.");
+                    await Shell.Current.DisplayAlert("Obavijest", "Košarica nije pronađena.", "U redu");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Unable to delete cart: {ex.Message}");
+                await Shell.Current.DisplayAlert("Greška", "Greška prilikom brisanja košarice.", "U redu");
+            }
+            finally
+            {
+                IsBusyWithCartModification = false;
+            }
         }
     }
 }

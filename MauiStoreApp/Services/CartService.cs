@@ -13,5 +13,10 @@ namespace MauiStoreApp.Services
         {
             return await GetAsync<List<Cart>>($"carts/user/{userId}");
         }
+
+        public async Task<HttpResponseMessage> DeleteCartAsync(int cartId)
+        {
+            return await DeleteAsync($"carts/{cartId}");
+        }
     }
 }

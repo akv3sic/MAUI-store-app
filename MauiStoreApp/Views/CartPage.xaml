@@ -14,13 +14,24 @@
     <Shell.TitleView>
         <Grid HorizontalOptions="FillAndExpand">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="46" />
             </Grid.ColumnDefinitions>
+
+            <!--  activity indicator  -->
+            <ActivityIndicator
+                Grid.Column="0"
+                HeightRequest="18"
+                HorizontalOptions="Center"
+                IsRunning="{Binding IsBusyWithCartModification}"
+                VerticalOptions="Center"
+                WidthRequest="25"
+                Color="White" />
 
             <!--  title in the middle  -->
             <Label
-                Grid.Column="0"
+                Grid.Column="1"
                 FontAttributes="Bold"
                 FontFamily="AstoreEczarSemiBold"
                 FontSize="20"
@@ -31,11 +42,12 @@
 
             <!--  delete button  -->
             <ImageButton
-                Grid.Column="1"
+                Grid.Column="2"
                 Padding="5"
+                Command="{Binding DeleteCartCommand}"
                 HeightRequest="46"
-                HorizontalOptions="End"
-                IsVisible="{Binding IsDeleteButtonVisible}"
+                HorizontalOptions="Center"
+                IsVisible="{Binding CartItems.Count, Converter={StaticResource IntToBoolConverter}}"
                 Source="delete_white.svg"
                 WidthRequest="46" />
         </Grid>
@@ -45,6 +57,8 @@
         <ResourceDictionary>
             <converters:FirstLetterUppercaseConverter x:Key="FirstLetterUppercaseConverter" />
             <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <converters:IntToBoolInvertedConverter x:Key="IntToBoolInvertedConverter" />
+            <toolkit:IntToBoolConverter x:Key="IntToBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -72,7 +86,12 @@
                 Grid.Row="0"
                 Padding="10"
                 IsVisible="{Binding IsUserLoggedIn}">
-                <CollectionView ItemsSource="{Binding CartItems}" VerticalOptions="FillAndExpand">
+
+                <!--  CART ITEMS  -->
+                <CollectionView
+                    IsVisible="{Binding CartItems.Count, Converter={StaticResource IntToBoolConverter}}"
+                    ItemsSource="{Binding CartItems}"
+                    VerticalOptions="FillAndExpand">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:CartItemDetail">
                             <Frame
@@ -222,10 +241,45 @@
 
                     </CollectionView.ItemTemplate>
                 </CollectionView>
+
+                <!--  if cart is empty  -->
+                <StackLayout
+                    Grid.Row="0"
+                    Padding="10"
+                    IsVisible="{Binding CartItems.Count, Converter={StaticResource IntToBoolInvertedConverter}}"
+                    VerticalOptions="CenterAndExpand">
+                    <Image
+                        Margin="0,0,0,45"
+                        HorizontalOptions="Center"
+                        Source="empty_ghost.svg"
+                        VerticalOptions="Center" />
+
+                    <Label
+                        Margin="0,5"
+                        FontAttributes="Bold"
+                        FontSize="Large"
+                        HorizontalOptions="Center"
+                        Text="Buuh!"
+                        VerticalOptions="Center" />
+
+                    <Label
+                        Margin="0,5"
+                        HorizontalOptions="Center"
+                        Text="Košarica je prazna."
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+
+                    <Button
+                        Margin="0,45"
+                        Command="{Binding GoToRouteCommand}"
+                        CommandParameter="HomePage"
+                        CornerRadius="20"
+                        HorizontalOptions="Center"
+                        Text="Pogledajte ponudu"
+                        VerticalOptions="Center"
+                        WidthRequest="155" />
+                </StackLayout>
             </StackLayout>
-
-
-
 
             <!--  if user is not logged in  -->
             <StackLayout
