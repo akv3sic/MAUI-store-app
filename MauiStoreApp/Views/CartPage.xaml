@@ -8,7 +8,7 @@
     xmlns:local="clr-namespace:MauiStoreApp.ViewModels"
     xmlns:model="clr-namespace:MauiStoreApp.Models"
     xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
-    xmlns:vm="clr-namespace:MauiStoreApp.ViewModels"
+    xmlns:viewmodel="clr-namespace:MauiStoreApp.ViewModels"
     BackgroundColor="White">
 
     <Shell.TitleView>
@@ -63,7 +63,7 @@
     </ContentPage.Resources>
 
     <ContentPage.BindingContext>
-        <vm:CartViewModel />
+        <viewmodel:CartViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.Behaviors>
@@ -157,8 +157,11 @@
                                         </Grid.ColumnDefinitions>
 
                                         <!--  Minus Icon  -->
-                                        <Image
+                                        <ImageButton
                                             Grid.Column="0"
+                                            BackgroundColor="Transparent"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CartViewModel}}, Path=DecreaseProductQuantityCommand}"
+                                            CommandParameter="{Binding Product}"
                                             HeightRequest="20"
                                             Source="minus.svg"
                                             VerticalOptions="Center"
@@ -185,8 +188,11 @@
                                         </Frame>
 
                                         <!--  Plus Icon  -->
-                                        <Image
+                                        <ImageButton
                                             Grid.Column="2"
+                                            BackgroundColor="Transparent"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CartViewModel}}, Path=IncreaseProductQuantityCommand}"
+                                            CommandParameter="{Binding Product}"
                                             HeightRequest="20"
                                             Source="plus.svg"
                                             VerticalOptions="Center"

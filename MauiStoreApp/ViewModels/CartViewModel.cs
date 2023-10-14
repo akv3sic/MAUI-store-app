@@ -45,15 +45,7 @@ namespace MauiStoreApp.ViewModels
             }
             else
             {
-                // sync the cart items
-                if(CartItems.Count != _cartService.GetCartItems().Count)
-                {
-                    CartItems.Clear();
-                    foreach (var cartItem in _cartService.GetCartItems())
-                    {
-                        CartItems.Add(cartItem);
-                    }
-                }   
+                this.SyncCartItems(); 
             }
             IsUserLoggedIn = _authService.IsUserLoggedIn;
         }
@@ -152,6 +144,68 @@ namespace MauiStoreApp.ViewModels
             finally
             {
                 IsBusyWithCartModification = false;
+            }
+        }
+
+        [RelayCommand]
+        public void IncreaseProductQuantity(Product product)
+        {
+            try
+            {
+                _cartService.IncreaseProductQuantity(product.Id);
+
+                // Refresh the cart item in the ViewModel
+                SyncCartItems();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Unable to increase product quantity: {ex.Message}");
+                Shell.Current.DisplayAlert("Greška", "Greška prilikom povećavanja količine proizvoda.", "U redu");
+            }
+        }
+
+        [RelayCommand]
+        public void DecreaseProductQuantity(Product product)
+        {
+            try
+            {
+                _cartService.DecreaseProductQuantity(product.Id);
+
+                // Refresh the cart items in the ViewModel
+                SyncCartItems();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Unable to decrease product quantity: {ex.Message}");
+                Shell.Current.DisplayAlert("Greška", "Greška prilikom smanjivanja količine proizvoda.", "U redu");
+            }
+        }
+
+        private void SyncCartItems()
+        {
+            var updatedCartItems = _cartService.GetCartItems();
+
+            // Remove items not in the updated list
+            foreach (var item in CartItems.ToList())
+            {
+                if (!updatedCartItems.Any(ci => ci.Product.Id == item.Product.Id))
+                {
+                    CartItems.Remove(item);
+                }
+            }
+
+            // Add or update items
+            foreach (var updatedItem in updatedCartItems)
+            {
+                var existingItem = CartItems.FirstOrDefault(ci => ci.Product.Id == updatedItem.Product.Id);
+                if (existingItem == null)
+                {
+                    CartItems.Add(updatedItem);
+                }
+                else
+                {
+                    existingItem.Quantity = updatedItem.Quantity;  // Assuming Quantity property notifies changes
+                }
             }
         }
     }
