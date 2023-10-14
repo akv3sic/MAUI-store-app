@@ -115,17 +115,15 @@
                             BackgroundColor="#E7B844"
                             BorderColor="Transparent"
                             BorderWidth="0"
+                            Command="{Binding AddToCartCommand}"
+                            CommandParameter="{Binding Product}"
                             CornerRadius="10"
                             FontAttributes="Bold"
                             FontFamily="AstoreEczarSemiBold"
                             FontSize="Medium"
                             Text="Dodaj u košaricu"
                             TextColor="White"
-                            VerticalOptions="Center">
-                            <Button.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProductDetailsViewModel}}, Path=AddToCartCommand}" CommandParameter="{Binding Product}" />
-                            </Button.GestureRecognizers>
-                        </Button>
+                            VerticalOptions="Center" />
                     </FlexLayout>
 
                     <!--  description  -->

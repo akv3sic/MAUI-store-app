@@ -14,10 +14,12 @@ namespace MauiStoreApp.ViewModels
     {
 
         private readonly ProductService _productService;
+        private readonly CartService _cartService;
 
-        public ProductDetailsViewModel(ProductService productService)
+        public ProductDetailsViewModel(ProductService productService, CartService cartService)
         {
             _productService = productService;
+            _cartService = cartService;
         }
 
         public ProductDetailsViewModel()
@@ -119,6 +121,28 @@ namespace MauiStoreApp.ViewModels
                 Title = product.Title,
                 Text = "Pogledaj ovaj proizod na AStore!"
             });
+        }
+
+        [RelayCommand]
+        private async Task AddToCart(Product product)
+        {
+            if (IsBusy)
+                return;
+
+            try
+            {
+                if (product == null)
+                    return;
+
+                _cartService.AddProductToCart(product);
+
+                await Shell.Current.DisplayAlert("Obavijest", "Proizvod je dodan u košaricu.", "U redu");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Unable to add product to cart: {ex.Message}");
+                await Shell.Current.DisplayAlert("Greška", "Greška prilikom dodavanja proizvoda u košaricu.", "U redu");
+            }
         }
     }
 }

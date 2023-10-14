@@ -11,7 +11,6 @@ namespace MauiStoreApp.ViewModels
     public partial class CartViewModel : BaseViewModel
     {
         private readonly CartService _cartService;
-        private readonly ProductService _productService;
         private readonly AuthService _authService;
 
         bool isFirstRun;
@@ -19,7 +18,6 @@ namespace MauiStoreApp.ViewModels
         public CartViewModel(CartService cartService, ProductService productService, AuthService authService)
         {
             _cartService = cartService;
-            _productService = productService;
             _authService = authService;
             isFirstRun = true;
         }
@@ -31,8 +29,6 @@ namespace MauiStoreApp.ViewModels
         [ObservableProperty]
         public bool isUserLoggedIn;
 
-
-        private int cartId;
 
         [ObservableProperty]
         private bool isBusyWithCartModification;
@@ -47,6 +43,18 @@ namespace MauiStoreApp.ViewModels
                 await GetCartByUserIdAsync();
                 isFirstRun = false;
             }
+            else
+            {
+                // sync the cart items
+                if(CartItems.Count != _cartService.GetCartItems().Count)
+                {
+                    CartItems.Clear();
+                    foreach (var cartItem in _cartService.GetCartItems())
+                    {
+                        CartItems.Add(cartItem);
+                    }
+                }   
+            }
             IsUserLoggedIn = _authService.IsUserLoggedIn;
         }
 
@@ -54,12 +62,10 @@ namespace MauiStoreApp.ViewModels
         {
             if (_authService.IsUserLoggedIn)
             {
-
                 if (IsBusy)
                     return;
 
                 int userId;
-
                 var userIdStr = await SecureStorage.GetAsync("userId");
                 if (!int.TryParse(userIdStr, out userId))
                 {
@@ -72,32 +78,11 @@ namespace MauiStoreApp.ViewModels
                 {
                     IsBusy = true;
 
-                    // Get a list of Cart objects
-                    var carts = await _cartService.GetCartByUserIdAsync(userId);
-
-                    // Get the first cart from the list (if any)
-                    var cart = carts?.FirstOrDefault();
-
-                    if (cart != null)
+                    await _cartService.RefreshCartItemsByUserIdAsync(userId);
+                    CartItems.Clear();
+                    foreach (var cartItem in _cartService.GetCartItems())
                     {
-                        CartItems.Clear();
-                        foreach (var cartProduct in cart.Products)
-                        {
-                            // fetch product details by id
-                            var productDetails = await _productService.GetProductByIdAsync(cartProduct.ProductId);
-                            CartItems.Add(new CartItemDetail
-                            {
-                                Product = productDetails,
-                                Quantity = cartProduct.Quantity
-                            });
-                        }
-                        // set cartId
-                        cartId = cart.Id;
-                    }
-                    else
-                    {
-                        Debug.WriteLine("No cart found for user.");
-                        await Shell.Current.DisplayAlert("Obavijest", "Nema košarice za ovog korisnika.", "U redu");
+                        CartItems.Add(cartItem);
                     }
                 }
                 catch (Exception ex)
@@ -139,7 +124,7 @@ namespace MauiStoreApp.ViewModels
                     IsBusyWithCartModification = true;
 
                     // Delete the cart
-                    var response = await _cartService.DeleteCartAsync(cartId);
+                    var response = await _cartService.DeleteCartAsync();
 
                     if (response != null && response.IsSuccessStatusCode)
                     {
