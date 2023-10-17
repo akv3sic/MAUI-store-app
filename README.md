@@ -14,7 +14,7 @@ the functionality and features of a real-world store application.
 - [x] Product listing
 - [x] Categories
 - [x] Product details
-- [ ] Cart - some features are not implemented yet
+- [x] Cart
 - [x] User profile
 - [x] Authentication
 - [x] Sorting
