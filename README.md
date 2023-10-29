@@ -50,7 +50,3 @@ Thanks to all the contributors!
 Copyright © 2023 A. Kvesić, J. Matković, and [Faculty of Mechanical Engineering, Computing and Electrical Engineering, University of Mostar](https://fsre.sum.ba). All rights reserved.
 
 Licensed under the [MIT License](https://opensource.org/licenses/MIT).
-
-## Contact
-
-For any questions or suggestions, feel free to contact me at [ante.kvesic@fsre.sum.ba](mailto:ante.kvesic@fsre.sum.ba).
