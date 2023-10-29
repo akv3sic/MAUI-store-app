@@ -2,45 +2,31 @@
 using CommunityToolkit.Mvvm.Input;
 using MauiStoreApp.Models;
 using MauiStoreApp.Views;
-using Newtonsoft.Json;
-using System.Collections.ObjectModel;
+using MauiStoreApp.Services;
 
 namespace MauiStoreApp.ViewModels
 {
     public partial class RecentlyViewedPageViewModel : BaseViewModel
     {
-        public ObservableCollection<Product> RecentlyViewedProducts { get; private set; } = new ObservableCollection<Product>();
+        [ObservableProperty]
+        public RecentlyViewedProductsService recentlyViewedProductsService;
+
+        public RecentlyViewedPageViewModel(RecentlyViewedProductsService recentlyViewedProductsService)
+        {
+            RecentlyViewedProductsService = recentlyViewedProductsService;
+        }
 
         public RecentlyViewedPageViewModel()
         {
         }
 
-        [ObservableProperty]
-        public bool isPageEmpty;
-
         [RelayCommand]
         public async Task Init()
         {
-            LoadRecentlyViewedProducts();
-            IsPageEmpty = RecentlyViewedProducts.Count == 0;
+            RecentlyViewedProductsService.LoadProducts();
 
             await Task.CompletedTask;
         }
-
-        private void LoadRecentlyViewedProducts()
-        {
-            var productsJson = Preferences.Get("recently_viewed", string.Empty);
-            if (!string.IsNullOrEmpty(productsJson))
-            {
-                var products = JsonConvert.DeserializeObject<ObservableCollection<Product>>(productsJson);
-                RecentlyViewedProducts.Clear();
-                foreach (var product in products)
-                {
-                    RecentlyViewedProducts.Add(product);
-                }
-            }
-        }
-
 
         [RelayCommand]
         private async Task ProductTapped(Product product)
@@ -54,7 +40,6 @@ namespace MauiStoreApp.ViewModels
             {
                 { "Product", product }
             };
-
 
             await Shell.Current.GoToAsync($"{nameof(ProductDetailsPage)}", true, navigationParameter);
 
@@ -71,14 +56,13 @@ namespace MauiStoreApp.ViewModels
         private async Task DeleteAll()
         {
             // fire alert to confirm
-            var result = await Shell.Current.DisplayAlert("Brisanje", "Sigurno želite izbrisati sve nedano gledane proizvode?", "Da", "Ne");
+            var result = await Shell.Current.DisplayAlert("Brisanje", "Sigurno želite izbrisati sve nedavno gledane proizvode?", "Da", "Ne");
 
             if (!result)
                 return; // exit if user cancels
 
-            Preferences.Remove("recently_viewed");
-            RecentlyViewedProducts.Clear();
-            IsPageEmpty = true;
+            RecentlyViewedProductsService.RecentlyViewedProducts.Clear();
+            RecentlyViewedProductsService.SaveProducts();
 
             await Task.CompletedTask;
         }

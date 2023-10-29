@@ -15,11 +15,13 @@ namespace MauiStoreApp.ViewModels
 
         private readonly ProductService _productService;
         private readonly CartService _cartService;
+        private readonly RecentlyViewedProductsService _recentlyViewedProductsService;
 
-        public ProductDetailsViewModel(ProductService productService, CartService cartService)
+        public ProductDetailsViewModel(ProductService productService, CartService cartService, RecentlyViewedProductsService recentlyViewedProductsService)
         {
             _productService = productService;
             _cartService = cartService;
+            _recentlyViewedProductsService = recentlyViewedProductsService;
         }
 
         public ProductDetailsViewModel()
@@ -103,6 +105,7 @@ namespace MauiStoreApp.ViewModels
                 { "Product", product }
             };
 
+            _recentlyViewedProductsService.AddProduct(product);
 
             await Shell.Current.GoToAsync($"{nameof(ProductDetailsPage)}", true, navigationParameter);
 

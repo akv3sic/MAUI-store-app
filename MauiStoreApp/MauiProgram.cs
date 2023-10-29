@@ -26,6 +26,7 @@ namespace MauiStoreApp
             builder.Services.AddSingleton<CartService>();
             builder.Services.AddSingleton<UserService>();
             builder.Services.AddSingleton<AuthService>();
+            builder.Services.AddSingleton<RecentlyViewedProductsService>();
             builder.Services.AddTransient<HomePageViewModel>();
             builder.Services.AddTransient<HomePage>();
             builder.Services.AddTransient<ProductDetailsViewModel>();
