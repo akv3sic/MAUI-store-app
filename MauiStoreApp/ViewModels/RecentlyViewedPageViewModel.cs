@@ -61,7 +61,9 @@ namespace MauiStoreApp.ViewModels
             IsBusy = true;
 
             if (product == null)
+            {
                 return;
+            }
 
             var navigationParameter = new Dictionary<string, object>
             {
@@ -92,7 +94,9 @@ namespace MauiStoreApp.ViewModels
             var result = await Shell.Current.DisplayAlert("Brisanje", "Sigurno želite izbrisati sve nedavno gledane proizvode?", "Da", "Ne");
 
             if (!result)
+            {
                 return; // Exit if user cancels
+            }
 
             RecentlyViewedProductsService.RecentlyViewedProducts.Clear();
             RecentlyViewedProductsService.SaveProducts();

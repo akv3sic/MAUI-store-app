@@ -62,6 +62,7 @@ namespace MauiStoreApp.ViewModels
         /// <summary>
         /// Initializes the cart view model.
         /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         [RelayCommand]
         public async Task Init()
         {

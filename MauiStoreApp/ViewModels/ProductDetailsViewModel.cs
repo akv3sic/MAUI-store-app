@@ -81,7 +81,7 @@ namespace MauiStoreApp.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine($"Unable to get product: {ex.Message}");
-                await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
+                await Shell.Current.DisplayAlert("Došlo je do pogreške!", ex.Message, "U redu");
             }
             finally
             {
@@ -92,7 +92,9 @@ namespace MauiStoreApp.ViewModels
         private async Task GetCrossSellProductsAsync()
         {
             if (IsBusy || Product == null)
+            {
                 return;
+            }
 
             try
             {
@@ -110,7 +112,7 @@ namespace MauiStoreApp.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine($"Unable to get cross-sell products: {ex.Message}");
-                await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
+                await Shell.Current.DisplayAlert("Došlo je do pogreške!", ex.Message, "U redu");
             }
             finally
             {
@@ -128,11 +130,13 @@ namespace MauiStoreApp.ViewModels
             IsBusy = true;
 
             if (product == null)
+            {
                 return;
+            }
 
             var navigationParameter = new Dictionary<string, object>
             {
-                { "Product", product }
+                { "Product", product },
             };
 
             _recentlyViewedProductsService.AddProduct(product);
@@ -156,7 +160,7 @@ namespace MauiStoreApp.ViewModels
             {
                 Uri = product.Image,
                 Title = product.Title,
-                Text = "Check out this product on AStore!"
+                Text = "Pogledaj ovaj proizvod na AStore!",
             });
         }
 
@@ -168,12 +172,16 @@ namespace MauiStoreApp.ViewModels
         private async Task AddToCart(Product product)
         {
             if (IsBusy)
+            {
                 return;
+            }
 
             try
             {
                 if (product == null)
+                {
                     return;
+                }
 
                 _cartService.AddProductToCart(product);
 

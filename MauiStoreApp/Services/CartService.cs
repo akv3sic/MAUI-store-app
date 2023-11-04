@@ -67,7 +67,7 @@ namespace MauiStoreApp.Services
                     _cartItems.Add(new CartItemDetail
                     {
                         Product = productDetails,
-                        Quantity = cartProduct.Quantity
+                        Quantity = cartProduct.Quantity,
                     });
                 }
             }

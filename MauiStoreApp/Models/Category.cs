@@ -28,7 +28,7 @@ namespace MauiStoreApp.Models
                     return null;
                 }
 
-                string formattedName = Name.Replace(" ", "_").Replace("'", "").ToLower();
+                string formattedName = Name.Replace(" ", "_").Replace("'", string.Empty).ToLower();
                 return formattedName + ".jpg";
             }
         }

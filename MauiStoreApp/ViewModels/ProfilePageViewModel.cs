@@ -54,6 +54,7 @@ namespace MauiStoreApp.ViewModels
         /// <summary>
         /// Initializes the view model.
         /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         [RelayCommand]
         public async Task Init()
         {
@@ -64,7 +65,9 @@ namespace MauiStoreApp.ViewModels
         private async Task GetUserByIdAsync()
         {
             if (IsBusy)
+            {
                 return;
+            }
 
             try
             {
@@ -105,8 +108,8 @@ namespace MauiStoreApp.ViewModels
         [RelayCommand]
         private async Task Logout()
         {
-           // fire alert
-           var result = await Shell.Current.DisplayAlert("Odjava", "Jeste li sigurni da se želite odjaviti?", "Da", "Ne");
+            // fire alert
+            var result = await Shell.Current.DisplayAlert("Odjava", "Jeste li sigurni da se želite odjaviti?", "Da", "Ne");
 
             if (result)
             {
