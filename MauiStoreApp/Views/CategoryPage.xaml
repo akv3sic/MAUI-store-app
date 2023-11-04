@@ -82,7 +82,7 @@
                     JustifyContent="Start">
                     <StackLayout Orientation="Horizontal" Spacing="5">
                         <!--  text  -->
-                        <Label FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}">
+                        <Label FontAttributes="Bold" TextColor="{StaticResource Primary}">
                             <Label.Triggers>
                                 <DataTrigger
                                     Binding="{Binding SortOrder}"

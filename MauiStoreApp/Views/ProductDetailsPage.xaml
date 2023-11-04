@@ -142,7 +142,7 @@
                                 Text="Detalji proizvoda" />
 
                             <Label
-                                FontFamily="AstoreEczarRegular"
+                                FontFamily="AstoreEczarSemiBold"
                                 FontSize="16"
                                 Text="{Binding Product.Description}"
                                 TextColor="DimGray" />
@@ -164,7 +164,7 @@
                                 FontSize="17"
                                 Text="Kategorija" />
                             <Label
-                                FontFamily="AstoreEczarRegular"
+                                FontFamily="AstoreEczarSemiBold"
                                 FontSize="16"
                                 Text="{Binding Product.Category}"
                                 VerticalOptions="Center" />
@@ -205,7 +205,7 @@
                                     <Label
                                         Margin="1,0"
                                         FontAttributes="Bold"
-                                        FontFamily="AstoreEczarRegular"
+                                        FontFamily="AstoreEczarSemiBold"
                                         FontSize="18"
                                         Text="{Binding Product.Rating.Rate}"
                                         VerticalOptions="Center" />
