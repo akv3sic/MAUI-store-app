@@ -1,11 +1,26 @@
-﻿using System.Diagnostics;
+﻿// -----------------------------------------------------------------------
+// <copyright file="BaseService.cs" company="Kvesic, Matkovic, FSRE">
+// Copyright (c) Kvesic, Matkovic, FSRE. All rights reserved.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System.Diagnostics;
 
 namespace MauiStoreApp.Services
 {
+    /// <summary>
+    /// This class provides base functionality for other service classes.
+    /// </summary>
     public class BaseService
     {
+        /// <summary>
+        /// An instance of <see cref="HttpClient"/>.
+        /// </summary>
         protected readonly HttpClient _httpClient;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BaseService"/> class.
+        /// </summary>
         public BaseService()
         {
             _httpClient = new HttpClient
@@ -14,6 +29,12 @@ namespace MauiStoreApp.Services
             };
         }
 
+        /// <summary>
+        /// Sends a GET request to the specified endpoint and returns the response as an instance of type <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the response object.</typeparam>
+        /// <param name="endpoint">The endpoint to send the GET request to.</param>
+        /// <returns>A task of type <typeparamref name="T"/>.</returns>
         protected async Task<T> GetAsync<T>(string endpoint)
         {
             if (!IsInternetAvailable())
@@ -38,6 +59,11 @@ namespace MauiStoreApp.Services
             }
         }
 
+        /// <summary>
+        /// Sends a DELETE request to the specified endpoint and returns the response.
+        /// </summary>
+        /// <param name="endpoint">The endpoint to send the DELETE request to.</param>
+        /// <returns>A task of type <see cref="HttpResponseMessage"/>.</returns>
         protected async Task<HttpResponseMessage> DeleteAsync(string endpoint)
         {
             if (!IsInternetAvailable())
@@ -57,6 +83,10 @@ namespace MauiStoreApp.Services
             }
         }
 
+        /// <summary>
+        /// Checks if an internet connection is available.
+        /// </summary>
+        /// <returns><c>true</c> if an internet connection is available; otherwise, <c>false</c>.</returns>
         private bool IsInternetAvailable()
         {
             NetworkAccess accessType = Connectivity.NetworkAccess;
@@ -66,10 +96,15 @@ namespace MauiStoreApp.Services
                 if (Shell.Current != null)
                 {
                     if (accessType == NetworkAccess.ConstrainedInternet)
+                    {
                         Shell.Current.DisplayAlert("Greška!", "Internet veza je ograničena.", "U redu");
+                    }
                     else
+                    {
                         Shell.Current.DisplayAlert("Greška!", "Internet veza nije dostupna.", "U redu");
+                    }
                 }
+
                 return false;
             }
 

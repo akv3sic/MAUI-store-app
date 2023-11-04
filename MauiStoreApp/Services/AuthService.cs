@@ -1,15 +1,33 @@
-﻿using MauiStoreApp.Models;
+﻿// -----------------------------------------------------------------------
+// <copyright file="AuthService.cs" company="Kvesic, Matkovic, FSRE">
+// Copyright (c) Kvesic, Matkovic, FSRE. All rights reserved.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Text;
 using System.Text.Json;
+using MauiStoreApp.Models;
 
 namespace MauiStoreApp.Services
 {
+    /// <summary>
+    /// This class is responsible for authenticating the user and storing the token and userId in secure storage.
+    /// </summary>
     public class AuthService : BaseService
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AuthService"/> class.
+        /// </summary>
         public AuthService()
         {
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the user is logged in.
+        /// </summary>
+        /// <remarks>
+        /// Checks if the token is stored in secure storage. If set to false, removes the token and userId from secure storage.
+        /// </remarks>
         public bool IsUserLoggedIn
         {
             get
@@ -29,12 +47,18 @@ namespace MauiStoreApp.Services
             }
         }
 
+        /// <summary>
+        /// Logs the user in.
+        /// </summary>
+        /// <param name="username">The username of the user.</param>
+        /// <param name="password">The password of the user.</param>
+        /// <returns>A task of type <see cref="LoginResponse"/>.</returns>
         public async Task<LoginResponse> LoginAsync(string username, string password)
         {
             var request = new LoginRequest
             {
                 Username = username,
-                Password = password
+                Password = password,
             };
 
             var content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");

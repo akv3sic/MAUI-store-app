@@ -1,16 +1,29 @@
-﻿using MauiStoreApp.Models;
+﻿// -----------------------------------------------------------------------
+// <copyright file="CartService.cs" company="Kvesic, Matkovic, FSRE">
+// Copyright (c) Kvesic, Matkovic, FSRE. All rights reserved.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using MauiStoreApp.Models;
 
 namespace MauiStoreApp.Services
 {
+    /// <summary>
+    /// Provides services for managing the shopping cart.
+    /// </summary>
     public class CartService : BaseService
     {
         private readonly ProductService _productService;
         private List<CartItemDetail> _cartItems = new List<CartItemDetail>(); // Internal cart items collection
         private int? cartId = null;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CartService"/> class.
+        /// </summary>
+        /// <param name="productService">The product service to use for retrieving product details.</param>
         public CartService(ProductService productService)
         {
-            _productService = productService;
+            _productService = productService ?? throw new ArgumentNullException(nameof(productService));
         }
 
         /// <summary>

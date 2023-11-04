@@ -1,33 +1,51 @@
-﻿
+﻿using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MauiStoreApp.Models;
 using MauiStoreApp.Services;
-using System.Diagnostics;
 
 namespace MauiStoreApp.ViewModels
 {
+    /// <summary>
+    /// The view model for the login page.
+    /// </summary>
     public partial class LoginViewModel : BaseViewModel
     {
         private readonly AuthService _authService;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoginViewModel"/> class.
+        /// </summary>
+        /// <param name="authService">The authentication service.</param>
         public LoginViewModel(AuthService authService)
         {
             _authService = authService;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoginViewModel"/> class. This empty constructor is used for design-time data.
+        /// </summary>
         public LoginViewModel()
         {
         }
 
+        /// <summary>
+        /// Gets or sets the username.
+        /// </summary>
         [ObservableProperty]
         string username;
 
+        /// <summary>
+        /// Gets or sets the password.
+        /// </summary>
         [ObservableProperty]
         string password;
 
-        LoginResponse loginResponse = new LoginResponse();
+        private LoginResponse loginResponse = new LoginResponse();
 
+        /// <summary>
+        /// Attempts to log in the user.
+        /// </summary>
         [RelayCommand]
         public async Task Login()
         {
@@ -45,6 +63,7 @@ namespace MauiStoreApp.ViewModels
 
                     // save token to secure storage
                     await SecureStorage.Default.SetAsync("token", loginResponse.Token);
+
                     // save user id to secure storage
                     await SecureStorage.Default.SetAsync("userId", loginResponse.UserId.ToString());
 

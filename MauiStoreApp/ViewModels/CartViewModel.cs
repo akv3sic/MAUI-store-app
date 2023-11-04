@@ -1,13 +1,21 @@
-﻿
+﻿// -----------------------------------------------------------------------
+// <copyright file="CartViewModel.cs" company="Kvesic, Matkovic, FSRE">
+// Copyright (c) Kvesic, Matkovic, FSRE. All rights reserved.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MauiStoreApp.Models;
 using MauiStoreApp.Services;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 
 namespace MauiStoreApp.ViewModels
 {
+    /// <summary>
+    /// Represents the view model for the cart page.
+    /// </summary>
     public partial class CartViewModel : BaseViewModel
     {
         private readonly CartService _cartService;
@@ -15,26 +23,45 @@ namespace MauiStoreApp.ViewModels
 
         bool isFirstRun;
 
-        public CartViewModel(CartService cartService, ProductService productService, AuthService authService)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CartViewModel"/> class.
+        /// </summary>
+        /// <param name="cartService">An instance of the <see cref="CartService"/> class used for cart operations.</param>
+        /// <param name="authService">An instance of the <see cref="AuthService"/> class used for authentication operations.</param>
+        public CartViewModel(CartService cartService, AuthService authService)
         {
             _cartService = cartService;
             _authService = authService;
             isFirstRun = true;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CartViewModel"/> class.
+        /// </summary>
         public CartViewModel()
         {
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the user is logged in.
+        /// </summary>
         [ObservableProperty]
         public bool isUserLoggedIn;
 
-
+        /// <summary>
+        /// Gets or sets a value indicating whether the view model is busy with cart modification.
+        /// </summary>
         [ObservableProperty]
         private bool isBusyWithCartModification;
 
+        /// <summary>
+        /// Gets the cart items.
+        /// </summary>
         public ObservableCollection<CartItemDetail> CartItems { get; private set; } = new ObservableCollection<CartItemDetail>();
 
+        /// <summary>
+        /// Initializes the cart view model.
+        /// </summary>
         [RelayCommand]
         public async Task Init()
         {
@@ -45,7 +72,7 @@ namespace MauiStoreApp.ViewModels
             }
             else
             {
-                this.SyncCartItems(); 
+                this.SyncCartItems();
             }
             IsUserLoggedIn = _authService.IsUserLoggedIn;
         }
@@ -55,7 +82,9 @@ namespace MauiStoreApp.ViewModels
             if (_authService.IsUserLoggedIn)
             {
                 if (IsBusy)
+                {
                     return;
+                }
 
                 int userId;
                 var userIdStr = await SecureStorage.GetAsync("userId");
@@ -89,33 +118,41 @@ namespace MauiStoreApp.ViewModels
             }
         }
 
+        /// <summary>
+        /// Navigates to the login page.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         [RelayCommand]
         public async Task GoToLoginPage()
         {
             await Shell.Current.GoToAsync("LoginPage");
         }
 
+        /// <summary>
+        /// Deletes the cart.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         [RelayCommand]
         public async Task DeleteCart()
         {
             if (IsBusy || IsBusyWithCartModification)
+            {
                 return;
+            }
 
             try
             {
-                // Ask the user for confirmation
                 var userResponse = await Shell.Current.DisplayAlert("Potvrda", "Jeste li sigurni da želite obrisati košaricu?", "Da", "Ne");
                 if (!userResponse)
                 {
                     Debug.WriteLine("Cart deletion cancelled by the user.");
-                    return; // exit if the user cancels the deletion
+                    return;
                 }
 
                 if (CartItems.Count > 0)
                 {
                     IsBusyWithCartModification = true;
 
-                    // Delete the cart
                     var response = await _cartService.DeleteCartAsync();
 
                     if (response != null && response.IsSuccessStatusCode)
@@ -147,14 +184,16 @@ namespace MauiStoreApp.ViewModels
             }
         }
 
+        /// <summary>
+        /// Increases the quantity of the specified product in the cart.
+        /// </summary>
+        /// <param name="product">The product whose quantity to increase.</param>
         [RelayCommand]
         public void IncreaseProductQuantity(Product product)
         {
             try
             {
                 _cartService.IncreaseProductQuantity(product.Id);
-
-                // Refresh the cart item in the ViewModel
                 SyncCartItems();
             }
             catch (Exception ex)
@@ -164,14 +203,16 @@ namespace MauiStoreApp.ViewModels
             }
         }
 
+        /// <summary>
+        /// Decreases the quantity of the specified product in the cart.
+        /// </summary>
+        /// <param name="product">The product whose quantity to decrease.</param>
         [RelayCommand]
         public void DecreaseProductQuantity(Product product)
         {
             try
             {
                 _cartService.DecreaseProductQuantity(product.Id);
-
-                // Refresh the cart items in the ViewModel
                 SyncCartItems();
             }
             catch (Exception ex)
@@ -184,8 +225,6 @@ namespace MauiStoreApp.ViewModels
         private void SyncCartItems()
         {
             var updatedCartItems = _cartService.GetCartItems();
-
-            // Remove items not in the updated list
             foreach (var item in CartItems.ToList())
             {
                 if (!updatedCartItems.Any(ci => ci.Product.Id == item.Product.Id))
@@ -194,7 +233,6 @@ namespace MauiStoreApp.ViewModels
                 }
             }
 
-            // Add or update items
             foreach (var updatedItem in updatedCartItems)
             {
                 var existingItem = CartItems.FirstOrDefault(ci => ci.Product.Id == updatedItem.Product.Id);
@@ -204,7 +242,7 @@ namespace MauiStoreApp.ViewModels
                 }
                 else
                 {
-                    existingItem.Quantity = updatedItem.Quantity;  // Assuming Quantity property notifies changes
+                    existingItem.Quantity = updatedItem.Quantity;
                 }
             }
         }
