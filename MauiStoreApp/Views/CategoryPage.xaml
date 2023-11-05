@@ -84,7 +84,6 @@
                         Margin="0,2,0,0"
                         Orientation="Horizontal"
                         Spacing="5">
-                        <!--  sortiraj po label  -->
                         <Label
                             FontAttributes="Bold"
                             Text="Sortiraj po:"
