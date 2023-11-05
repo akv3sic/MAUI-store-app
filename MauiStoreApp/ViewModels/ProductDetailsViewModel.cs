@@ -6,6 +6,8 @@
 
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MauiStoreApp.Models;
@@ -185,7 +187,13 @@ namespace MauiStoreApp.ViewModels
 
                 _cartService.AddProductToCart(product);
 
-                await Shell.Current.DisplayAlert("Obavijest", "Proizvod je dodan u košaricu.", "U redu");
+                CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
+                string infoText = "Proizvod dodan u košaricu.";
+                ToastDuration duration = ToastDuration.Short;
+                var toast = Toast.Make(infoText, duration);
+
+                await toast.Show(cancellationTokenSource.Token);
             }
             catch (Exception ex)
             {

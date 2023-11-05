@@ -6,6 +6,8 @@
 
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MauiStoreApp.Models;
@@ -160,7 +162,14 @@ namespace MauiStoreApp.ViewModels
                     {
                         Debug.WriteLine("Cart deleted.");
                         CartItems.Clear();
-                        await Shell.Current.DisplayAlert("Obavijest", "Košarica je uspješno obrisana.", "U redu");
+
+                        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
+                        string infoText = "Košarica uspješno izbrisana.";
+                        ToastDuration duration = ToastDuration.Short;
+                        var toast = Toast.Make(infoText, duration);
+
+                        await toast.Show(cancellationTokenSource.Token);
                     }
                     else
                     {
