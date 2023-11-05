@@ -46,7 +46,7 @@
         </Grid.RowDefinitions>
 
         <!--  Fixed  -->
-        <StackLayout x:Name="searchBar" Grid.Row="0">
+        <StackLayout Grid.Row="0">
             <!--  Search Bar Background  -->
             <Frame
                 Margin="0"
@@ -82,10 +82,7 @@
         </StackLayout>
 
         <!--  ScrollView  -->
-        <ScrollView
-            Grid.Row="1"
-            IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
-            Scrolled="OnScrolled">
+        <ScrollView Grid.Row="1" IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}">
             <StackLayout Padding="12,10">
                 <Label
                     Margin="0,15,0,10"

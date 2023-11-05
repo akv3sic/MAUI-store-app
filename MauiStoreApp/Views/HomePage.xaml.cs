@@ -9,9 +9,4 @@ public partial class HomePage : ContentPage
 		InitializeComponent();
 		BindingContext = viewModel;
 	}
-
-    private void OnScrolled(object sender, ScrolledEventArgs e)
-    {
-		searchBar.IsVisible = e.ScrollY < 90;
-    }
 }
