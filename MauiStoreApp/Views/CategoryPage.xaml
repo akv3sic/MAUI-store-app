@@ -64,7 +64,7 @@
                     Grid.Row="0"
                     Margin="30,20,20,5"
                     FontAttributes="Bold"
-                    FontSize="20"
+                    FontSize="18"
                     HorizontalOptions="Start"
                     IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
                     Text="{Binding Products.Count, Converter={StaticResource FirstLetterUppercaseConverter}, StringFormat='{0} proizvoda'}"
@@ -80,7 +80,16 @@
                     HorizontalOptions="End"
                     IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
                     JustifyContent="Start">
-                    <StackLayout Orientation="Horizontal" Spacing="5">
+                    <StackLayout
+                        Margin="0,2,0,0"
+                        Orientation="Horizontal"
+                        Spacing="5">
+                        <!--  sortiraj po label  -->
+                        <Label
+                            FontAttributes="Bold"
+                            Text="Sortiraj po:"
+                            TextColor="DimGray" />
+
                         <!--  text  -->
                         <Label FontAttributes="Bold" TextColor="{StaticResource Primary}">
                             <Label.Triggers>
