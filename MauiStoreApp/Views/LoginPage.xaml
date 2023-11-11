@@ -3,9 +3,11 @@
     x:Class="MauiStoreApp.Views.LoginPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:MauiStoreApp.Converters"
     xmlns:local="clr-namespace:MauiStoreApp.ViewModels"
     xmlns:model="clr-namespace:MauiStoreApp.Models"
     xmlns:modelroot="clr-namespace:MauiStoreApp.Models"
+    xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:DataType="local:LoginViewModel"
     BackgroundColor="#FFF"
     Shell.NavBarIsVisible="True">
@@ -29,6 +31,8 @@
                 <Setter Property="CornerRadius" Value="20" />
                 <Setter Property="Margin" Value="20" />
             </Style>
+            <converters:BoolToPasswordIconConverter x:Key="BoolToPasswordIconConverter" />
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -60,11 +64,25 @@
                 Style="{StaticResource EntryStyle}"
                 Text="{Binding Username}" />
 
-            <Entry
-                IsPassword="True"
-                Placeholder="Zaporka"
-                Style="{StaticResource EntryStyle}"
-                Text="{Binding Password}" />
+            <AbsoluteLayout HeightRequest="50">
+                <Entry
+                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    IsPassword="{Binding IsPasswordVisible, Converter={StaticResource InvertedBoolConverter}}"
+                    Placeholder="Zaporka"
+                    Style="{StaticResource EntryStyle}"
+                    Text="{Binding Password}" />
+
+                <Image
+                    AbsoluteLayout.LayoutBounds="0.98,0.5,21,21"
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    BackgroundColor="Transparent"
+                    Source="{Binding IsPasswordVisible, Converter={StaticResource BoolToPasswordIconConverter}}">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding TogglePasswordVisibilityCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </AbsoluteLayout>
 
             <Label
                 FontAttributes="Bold"

@@ -41,6 +41,12 @@ namespace MauiStoreApp.ViewModels
         [ObservableProperty]
         string password;
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the password is visible.
+        /// </summary>
+        [ObservableProperty]
+        bool isPasswordVisible;
+
         private LoginResponse loginResponse = new LoginResponse();
 
         /// <summary>
@@ -91,6 +97,15 @@ namespace MauiStoreApp.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        /// <summary>
+        /// Toggles the password visibility.
+        /// </summary>
+        [RelayCommand]
+        public void TogglePasswordVisibility()
+        {
+            this.IsPasswordVisible = !this.IsPasswordVisible;
         }
     }
 }
