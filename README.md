@@ -8,6 +8,7 @@ This project is developed as a part of a Master's Thesis at [FSRE](https://fsre.
 It is a store application built with .NET MAUI leveraging the [Fake Store API](https://fakestoreapi.com/) to simulate
 the functionality and features of a real-world store application.
 
+You can access the full text of the thesis [here](https://drive.google.com/file/d/19TEatq-Dr9WGvYuaFw2ARENorvGu_oyr/view?usp=sharing) (Note: The document is in Croatian).
 
 ### Features
 
