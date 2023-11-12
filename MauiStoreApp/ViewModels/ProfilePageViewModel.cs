@@ -139,6 +139,15 @@ namespace MauiStoreApp.ViewModels
         }
 
         /// <summary>
+        /// Opens the master thesis (full text in Croatian) in a browser.
+        /// </summary>
+        [RelayCommand]
+        private static async Task OpenMasterThesis()
+        {
+            await Browser.OpenAsync("https://drive.google.com/file/d/19TEatq-Dr9WGvYuaFw2ARENorvGu_oyr/view?usp=sharing");
+        }
+
+        /// <summary>
         /// Deletes the user account.
         /// </summary>
         [RelayCommand]

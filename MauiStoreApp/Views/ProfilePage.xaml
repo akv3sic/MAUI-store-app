@@ -305,11 +305,23 @@
                             FontAttributes="Bold"
                             FontSize="17"
                             Text="Tekst diplomskog rada"
-                            TextColor="Black" />
+                            TextColor="Black">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenMasterThesisCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
                         <Image
                             Aspect="AspectFit"
                             Source="arrow_next_small.svg"
-                            WidthRequest="24" />
+                            WidthRequest="24">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenMasterThesisCommand}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <FlexLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenMasterThesisCommand}" />
+                        </FlexLayout.GestureRecognizers>
                     </FlexLayout>
                 </StackLayout>
             </StackLayout>
