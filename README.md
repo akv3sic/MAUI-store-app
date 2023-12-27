@@ -1,6 +1,9 @@
 # FSRE Master Thesis - MAUI Store App
 
 ![Build Android](https://github.com/akv3sic/MAUI-store-app/actions/workflows/dotnet.yml/badge.svg?event=push&branch=master)
+![Last Commit](https://img.shields.io/github/last-commit/akv3sic/MAUI-store-app)
+![License](https://img.shields.io/github/license/akv3sic/MAUI-store-app)
+![GitHub Repo stars](https://img.shields.io/github/stars/akv3sic/MAUI-store-app?style=social)
 
 <img src="https://github.com/akv3sic/MAUI-store-app/assets/57301167/3a1a9e16-a615-49a0-8160-5d2c83345546" height="300" />
 <img src="https://github.com/akv3sic/MAUI-store-app/assets/57301167/31b98a85-8b7b-4468-8706-319896e36712" height="300" />
