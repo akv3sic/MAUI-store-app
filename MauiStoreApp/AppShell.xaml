@@ -8,22 +8,22 @@
 
     <TabBar>
         <!--  Home Page  -->
-        <Tab Title="Početna" Icon="home.svg">
+        <Tab Title="Home" Icon="home.svg">
             <ShellContent ContentTemplate="{DataTemplate views:HomePage}" Route="HomePage" />
         </Tab>
 
         <!--  Recently Watched Page  -->
-        <Tab Title="Nedavno gledano" Icon="recently_viewed.svg">
+        <Tab Title="Recently Viewed" Icon="recently_viewed.svg">
             <ShellContent ContentTemplate="{DataTemplate views:RecentlyViewedPage}" Route="RecentlyViewedPage" />
         </Tab>
 
         <!--  Cart Page  -->
-        <Tab Title="Košarica" Icon="cart.svg">
+        <Tab Title="Cart" Icon="cart.svg">
             <ShellContent ContentTemplate="{DataTemplate views:CartPage}" Route="CartPage" />
         </Tab>
 
         <!--  Profile Page  -->
-        <Tab Title="Račun" Icon="profile.svg">
+        <Tab Title="Account" Icon="profile.svg">
             <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}" Route="ProfilePage" />
         </Tab>
     </TabBar>

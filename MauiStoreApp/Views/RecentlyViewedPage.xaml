@@ -24,7 +24,7 @@
                 FontFamily="AstoreEczarSemiBold"
                 FontSize="20"
                 HorizontalOptions="CenterAndExpand"
-                Text="Nedavno gledano"
+                Text="Recently viewed"
                 TextColor="White"
                 VerticalOptions="CenterAndExpand" />
 
@@ -175,13 +175,13 @@
                 FontAttributes="Bold"
                 FontSize="Large"
                 HorizontalOptions="Center"
-                Text="Buuh!"
+                Text="Boo!"
                 VerticalOptions="Center" />
 
             <Label
                 Margin="0,5"
                 HorizontalOptions="Center"
-                Text="Nemate nedavno pregledanih proizvoda."
+                Text="There are no recently viewed products."
                 TextColor="Gray"
                 VerticalOptions="Center" />
 
@@ -190,7 +190,7 @@
                 Command="{Binding GoToHomeCommand}"
                 CornerRadius="20"
                 HorizontalOptions="Center"
-                Text="Pogledajte ponudu"
+                Text="Start shopping"
                 VerticalOptions="Center"
                 WidthRequest="155" />
         </StackLayout>

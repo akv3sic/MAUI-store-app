@@ -94,7 +94,7 @@ namespace MauiStoreApp.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine($"Unable to get user: {ex.Message}");
-                await Shell.Current.DisplayAlert("Greška pri dohvaćanu podataka sa servera!", ex.Message, "U redu");
+                await Shell.Current.DisplayAlert("Error", "Failed to retrieve user.", "OK");
             }
             finally
             {
@@ -109,7 +109,7 @@ namespace MauiStoreApp.ViewModels
         private async Task Logout()
         {
             // fire alert
-            var result = await Shell.Current.DisplayAlert("Odjava", "Jeste li sigurni da se želite odjaviti?", "Da", "Ne");
+            var result = await Shell.Current.DisplayAlert("Logout", "Are you sure you want to log out?", "Yes", "No");
 
             if (result)
             {
@@ -154,7 +154,7 @@ namespace MauiStoreApp.ViewModels
         private async Task DeleteAccount()
         {
             // fire alert
-            var result = await Shell.Current.DisplayAlert("Brisanje računa", "Jeste li sigurni da želite izbrisati račun?", "Da", "Ne");
+            var result = await Shell.Current.DisplayAlert("Account Deletion", "Are you sure you want to delete your account?", "Yes", "No");
 
             if (result)
             {
@@ -172,14 +172,14 @@ namespace MauiStoreApp.ViewModels
 
                     if (isDeleted)
                     {
-                        await Shell.Current.DisplayAlert("Obavijest", "Račun je uspješno izbrisan.", "U redu");
+                        await Shell.Current.DisplayAlert("Info", "Account deleted successfully.", "OK");
 
                         // Navigate to home page
                         await Shell.Current.GoToAsync("//HomePage");
                     }
                     else
                     {
-                        await Shell.Current.DisplayAlert("Greška", "Greška prilikom brisanja računa.", "U redu");
+                        await Shell.Current.DisplayAlert("Error", "Failed to delete account.", "OK");
                     }
                 }
             }

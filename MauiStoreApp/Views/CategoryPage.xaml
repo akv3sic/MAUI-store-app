@@ -67,7 +67,7 @@
                     FontSize="18"
                     HorizontalOptions="Start"
                     IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
-                    Text="{Binding Products.Count, Converter={StaticResource FirstLetterUppercaseConverter}, StringFormat='{0} proizvoda'}"
+                    Text="{Binding Products.Count, Converter={StaticResource FirstLetterUppercaseConverter}, StringFormat='{0} products'}"
                     TextColor="Black" />
 
                 <!--  Sort Button  -->
@@ -86,7 +86,7 @@
                         Spacing="5">
                         <Label
                             FontAttributes="Bold"
-                            Text="Sortiraj po:"
+                            Text="Sort by:"
                             TextColor="DimGray" />
 
                         <!--  text  -->
@@ -96,13 +96,13 @@
                                     Binding="{Binding SortOrder}"
                                     TargetType="Label"
                                     Value="asc">
-                                    <Setter Property="Text" Value="Cijeni uzlazno" />
+                                    <Setter Property="Text" Value="Price ascending" />
                                 </DataTrigger>
                                 <DataTrigger
                                     Binding="{Binding SortOrder}"
                                     TargetType="Label"
                                     Value="desc">
-                                    <Setter Property="Text" Value="Cijeni silazno" />
+                                    <Setter Property="Text" Value="Price descending" />
                                 </DataTrigger>
                             </Label.Triggers>
                         </Label>

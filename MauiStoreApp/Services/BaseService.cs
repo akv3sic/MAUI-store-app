@@ -54,7 +54,7 @@ namespace MauiStoreApp.Services
             catch (Exception ex)
             {
                 Debug.WriteLine($"Unable to get data: {ex.Message}");
-                await Shell.Current.DisplayAlert("Greška!", ex.Message, "U redu");
+                await Shell.Current.DisplayAlert("Error!", "Unable to get data.", "OK");
                 return default;
             }
         }
@@ -78,7 +78,7 @@ namespace MauiStoreApp.Services
             catch (Exception ex)
             {
                 Debug.WriteLine($"Unable to delete data: {ex.Message}");
-                await Shell.Current.DisplayAlert("Greška!", ex.Message, "U redu");
+                await Shell.Current.DisplayAlert("Error!", "Unable to delete data.", "OK");
                 return null;
             }
         }
@@ -97,11 +97,11 @@ namespace MauiStoreApp.Services
                 {
                     if (accessType == NetworkAccess.ConstrainedInternet)
                     {
-                        Shell.Current.DisplayAlert("Greška!", "Internet veza je ograničena.", "U redu");
+                        Shell.Current.DisplayAlert("Error!", "Internet access is limited.", "OK");
                     }
                     else
                     {
-                        Shell.Current.DisplayAlert("Greška!", "Internet veza nije dostupna.", "U redu");
+                        Shell.Current.DisplayAlert("Error!", "No internet access.", "OK");
                     }
                 }
 

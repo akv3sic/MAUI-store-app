@@ -83,7 +83,7 @@ namespace MauiStoreApp.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine($"Unable to get product: {ex.Message}");
-                await Shell.Current.DisplayAlert("Došlo je do pogreške!", ex.Message, "U redu");
+                await Shell.Current.DisplayAlert("Error", "Unable to get products.", "OK");
             }
             finally
             {
@@ -114,7 +114,7 @@ namespace MauiStoreApp.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine($"Unable to get cross-sell products: {ex.Message}");
-                await Shell.Current.DisplayAlert("Došlo je do pogreške!", ex.Message, "U redu");
+                await Shell.Current.DisplayAlert("Error", "Unable to get cross-sell products.", "OK");
             }
             finally
             {
@@ -162,7 +162,7 @@ namespace MauiStoreApp.ViewModels
             {
                 Uri = product.Image,
                 Title = product.Title,
-                Text = "Pogledaj ovaj proizvod na AStore!",
+                Text = "Hey, check out this product I found on AStore!",
             });
         }
 
@@ -189,7 +189,7 @@ namespace MauiStoreApp.ViewModels
 
                 CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
-                string infoText = "Proizvod dodan u košaricu.";
+                string infoText = "Product successfully added to cart.";
                 ToastDuration duration = ToastDuration.Short;
                 var toast = Toast.Make(infoText, duration);
 
@@ -198,7 +198,7 @@ namespace MauiStoreApp.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine($"Unable to add product to cart: {ex.Message}");
-                await Shell.Current.DisplayAlert("Greška", "Greška prilikom dodavanja proizvoda u košaricu.", "U redu");
+                await Shell.Current.DisplayAlert("Error", "Failed to add product to cart.", "OK");
             }
         }
     }

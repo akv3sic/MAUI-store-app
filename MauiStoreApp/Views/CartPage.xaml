@@ -36,7 +36,7 @@
                 FontFamily="AstoreEczarSemiBold"
                 FontSize="20"
                 HorizontalOptions="CenterAndExpand"
-                Text="Košarica"
+                Text="Cart"
                 TextColor="White"
                 VerticalOptions="CenterAndExpand" />
 
@@ -271,7 +271,7 @@
                     <Label
                         Margin="0,5"
                         HorizontalOptions="Center"
-                        Text="Košarica je prazna."
+                        Text="Your cart is empty."
                         TextColor="Gray"
                         VerticalOptions="Center" />
 
@@ -304,13 +304,13 @@
                     FontAttributes="Bold"
                     FontSize="Large"
                     HorizontalOptions="Center"
-                    Text="Niste prijavljeni"
+                    Text="You are not logged in"
                     VerticalOptions="Center" />
 
                 <Label
                     Margin="0,5"
                     HorizontalOptions="Center"
-                    Text="Molimo prijavite se ako želite vidjeti košaricu."
+                    Text="Please log in order to see your cart."
                     TextColor="Gray"
                     VerticalOptions="Center" />
 
@@ -319,7 +319,7 @@
                     Command="{Binding GoToLoginPageCommand}"
                     CornerRadius="20"
                     HorizontalOptions="Center"
-                    Text="Prijava"
+                    Text="Sign in"
                     VerticalOptions="Center"
                     WidthRequest="150" />
 

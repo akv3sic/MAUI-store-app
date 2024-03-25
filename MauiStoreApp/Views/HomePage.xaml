@@ -74,7 +74,7 @@
                     <Label
                         Padding="20,0"
                         HorizontalOptions="StartAndExpand"
-                        Text="Traži proizvode"
+                        Text="Search products"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                 </StackLayout>
@@ -90,7 +90,7 @@
                     FontFamily="AstoreEczarSemiBold"
                     FontSize="20"
                     HorizontalOptions="Start"
-                    Text="Kategorije"
+                    Text="Categories"
                     VerticalOptions="Start" />
 
                 <!--  Horizontal ScrollView for categories  -->
@@ -156,7 +156,7 @@
                     FontFamily="AstoreEczarSemiBold"
                     FontSize="20"
                     HorizontalOptions="Start"
-                    Text="Istaknute ponude"
+                    Text="Featured products"
                     VerticalOptions="Start" />
 
                 <!--  Vertical ScrollView for products  -->

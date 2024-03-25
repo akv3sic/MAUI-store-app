@@ -85,7 +85,7 @@
                         FontAttributes="Bold"
                         FontFamily="AstoreEczarSemiBold"
                         FontSize="Small"
-                        Text="Dostupno"
+                        Text="Available"
                         TextColor="Green"
                         VerticalTextAlignment="Center" />
 
@@ -121,7 +121,7 @@
                             FontAttributes="Bold"
                             FontFamily="AstoreEczarSemiBold"
                             FontSize="Medium"
-                            Text="Dodaj u košaricu"
+                            Text="Add to cart"
                             TextColor="White"
                             VerticalOptions="Center" />
                     </FlexLayout>
@@ -139,7 +139,7 @@
                                 FontAttributes="Bold"
                                 FontFamily="AstoreEczarSemiBold"
                                 FontSize="17"
-                                Text="Detalji proizvoda" />
+                                Text="Product description" />
 
                             <Label
                                 FontFamily="AstoreEczarSemiBold"
@@ -162,7 +162,7 @@
                                 FontAttributes="Bold"
                                 FontFamily="AstoreEczarSemiBold"
                                 FontSize="17"
-                                Text="Kategorija" />
+                                Text="Category" />
                             <Label
                                 FontFamily="AstoreEczarSemiBold"
                                 FontSize="16"
@@ -177,7 +177,7 @@
                             FontAttributes="Bold"
                             FontFamily="AstoreEczarSemiBold"
                             FontSize="17"
-                            Text="Ocjene" />
+                            Text="Reviews" />
 
                         <!--  rating  -->
                         <Frame
@@ -213,7 +213,7 @@
                                     <Label
                                         Margin="1,1,0,1"
                                         FontSize="16"
-                                        Text="{Binding Product.Rating.Count, StringFormat='({0} mišljenja)'}"
+                                        Text="{Binding Product.Rating.Count, StringFormat='({0} reviews)'}"
                                         VerticalOptions="Center" />
                                 </FlexLayout>
 
@@ -232,7 +232,7 @@
                             FontAttributes="Bold"
                             FontFamily="AstoreEczarSemiBold"
                             FontSize="17"
-                            Text="Povezani proizvodi" />
+                            Text="You may also like" />
 
                         <CollectionView ItemsLayout="HorizontalList" ItemsSource="{Binding CrossSellProducts}">
                             <CollectionView.ItemTemplate>

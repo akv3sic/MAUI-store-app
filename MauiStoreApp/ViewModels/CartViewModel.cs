@@ -94,7 +94,7 @@ namespace MauiStoreApp.ViewModels
                 if (!int.TryParse(userIdStr, out userId))
                 {
                     Debug.WriteLine("Failed to get or parse userId from SecureStorage.");
-                    await Shell.Current.DisplayAlert("Greška", "Greška prilikom dohvata korisničkih podataka.", "U redu");
+                    await Shell.Current.DisplayAlert("Error", "Failed to retrieve user.", "OK");
                     return;
                 }
 
@@ -112,7 +112,7 @@ namespace MauiStoreApp.ViewModels
                 catch (Exception ex)
                 {
                     Debug.WriteLine($"Unable to get cart: {ex.Message}");
-                    await Shell.Current.DisplayAlert("Greška", "Greška prilikom dohvata košarice.", "U redu");
+                    await Shell.Current.DisplayAlert("Error", "Failed to retrieve cart.", "OK");
                 }
                 finally
                 {
@@ -145,7 +145,7 @@ namespace MauiStoreApp.ViewModels
 
             try
             {
-                var userResponse = await Shell.Current.DisplayAlert("Potvrda", "Jeste li sigurni da želite obrisati košaricu?", "Da", "Ne");
+                var userResponse = await Shell.Current.DisplayAlert("Confirm", "Are you sure you want to delete the cart?", "Yes", "No");
                 if (!userResponse)
                 {
                     Debug.WriteLine("Cart deletion cancelled by the user.");
@@ -165,7 +165,7 @@ namespace MauiStoreApp.ViewModels
 
                         CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
-                        string infoText = "Košarica uspješno izbrisana.";
+                        string infoText = "Cart deleted successfully.";
                         ToastDuration duration = ToastDuration.Short;
                         var toast = Toast.Make(infoText, duration);
 
@@ -174,19 +174,19 @@ namespace MauiStoreApp.ViewModels
                     else
                     {
                         Debug.WriteLine("Failed to delete cart.");
-                        await Shell.Current.DisplayAlert("Greška", "Greška prilikom brisanja košarice.", "U redu");
+                        await Shell.Current.DisplayAlert("Error", "Failed to delete cart.", "OK");
                     }
                 }
                 else
                 {
                     Debug.WriteLine("No cart found.");
-                    await Shell.Current.DisplayAlert("Obavijest", "Košarica nije pronađena.", "U redu");
+                    await Shell.Current.DisplayAlert("Error", "No cart found.", "OK");
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Unable to delete cart: {ex.Message}");
-                await Shell.Current.DisplayAlert("Greška", "Greška prilikom brisanja košarice.", "U redu");
+                await Shell.Current.DisplayAlert("Error", "Failed to delete cart.", "OK");
             }
             finally
             {
@@ -209,7 +209,7 @@ namespace MauiStoreApp.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine($"Unable to increase product quantity: {ex.Message}");
-                Shell.Current.DisplayAlert("Greška", "Greška prilikom povećavanja količine proizvoda.", "U redu");
+                Shell.Current.DisplayAlert("Error", "Failed to increase product quantity.", "OK");
             }
         }
 
@@ -228,7 +228,7 @@ namespace MauiStoreApp.ViewModels
             catch (Exception ex)
             {
                 Debug.WriteLine($"Unable to decrease product quantity: {ex.Message}");
-                Shell.Current.DisplayAlert("Greška", "Greška prilikom smanjivanja količine proizvoda.", "U redu");
+                Shell.Current.DisplayAlert("Error", "Failed to decrease product quantity.", "OK");
             }
         }
 

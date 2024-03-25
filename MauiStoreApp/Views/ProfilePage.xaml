@@ -24,7 +24,7 @@
                 FontFamily="AstoreEczarSemiBold"
                 FontSize="20"
                 HorizontalOptions="CenterAndExpand"
-                Text="Moj račun"
+                Text="My account"
                 TextColor="White"
                 VerticalOptions="CenterAndExpand" />
 
@@ -169,7 +169,7 @@
                         Margin="0,0,0,3"
                         FontAttributes="Bold"
                         FontSize="Small"
-                        Text="Račun"
+                        Text="Account"
                         TextColor="DimGray" />
 
                     <FlexLayout
@@ -182,7 +182,7 @@
                         <Label
                             FontAttributes="Bold"
                             FontSize="17"
-                            Text="Prijava"
+                            Text="Sign in"
                             TextColor="Black">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding LoginCommand}" />
@@ -263,7 +263,7 @@
                         Margin="0,0,0,3"
                         FontAttributes="Bold"
                         FontSize="Small"
-                        Text="O aplikaciji"
+                        Text="About the app"
                         TextColor="DimGray" />
 
                     <FlexLayout
@@ -275,7 +275,7 @@
                         <Label
                             FontAttributes="Bold"
                             FontSize="17"
-                            Text="Korišteni API"
+                            Text="Fake Store API"
                             TextColor="Black">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding OpenFakeStoreApiCommand}" />
@@ -304,7 +304,7 @@
                         <Label
                             FontAttributes="Bold"
                             FontSize="17"
-                            Text="Tekst diplomskog rada"
+                            Text="Master Thesis (Croatian)"
                             TextColor="Black">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding OpenMasterThesisCommand}" />
