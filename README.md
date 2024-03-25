@@ -31,6 +31,12 @@ You can access the full text of the thesis [here](https://drive.google.com/file/
 - [x] Product sharing
 - [x] Recently viewed products
 
+### Demo Credentials
+- Username: `johnd`
+- Password: `m38rmF$`
+
+More at [Fake Store API - Users](https://fakestoreapi.com/users).
+
 ## Setup Instructions
 
 ### Prerequisites
