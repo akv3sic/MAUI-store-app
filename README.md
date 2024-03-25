@@ -60,8 +60,19 @@ The following libraries are used in this project and require attribution:
 
 Thanks to all the contributors!
 
+## Other Resources Used
+- Empty State Illustrations by TanahAir Studio - [Figma](https://www.figma.com/community/file/931094174831888421)
+- Icons by [SVG Repo](https://www.svgrepo.com/)
+- App UI/UX Design inspired by E-commerce template made by Oleh Chabanov - [Behance](https://www.behance.net/gallery/107120839/Free-Mobile-AppE-commerce-templateFigmaUIStoreShop)
+- This software is greatly influenced by content published by [James Montemagno](https://github.com/jamesmontemagno) and [Gerard Versluis](https://github.com/jfversluis) at their YouTube channels.
+
+Thanks you for all the great resources!
+
 ## Copyright and License
 
 Copyright © 2023 A. Kvesić, J. Matković, and [Faculty of Mechanical Engineering, Computing and Electrical Engineering, University of Mostar](https://fsre.sum.ba). All rights reserved.
 
 Licensed under the [MIT License](https://opensource.org/licenses/MIT).
+
+## Thank You
+A special thank you goes to my mentor and my fellow work colleagues who suggested me choosing this topic for my Master's Thesis, provided me resources and valuable feedback. I am not going to mention them by name, but they know who they are. Thank you!
