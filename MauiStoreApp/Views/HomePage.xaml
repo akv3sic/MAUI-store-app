@@ -224,7 +224,7 @@
                                         Margin="0,3"
                                         FontFamily="AstoreEczarSemiBold"
                                         FontSize="Small"
-                                        HeightRequest="35"
+                                        HeightRequest="38"
                                         LineBreakMode="WordWrap"
                                         MaxLines="2"
                                         Text="{Binding Title}"
