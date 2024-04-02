@@ -105,7 +105,8 @@
                                         BackgroundColor="White"
                                         BorderColor="Transparent"
                                         CornerRadius="8"
-                                        HasShadow="False">
+                                        HasShadow="False"
+                                        HeightRequest="80">
                                         <StackLayout>
                                             <!--  Image  -->
                                             <Image
@@ -127,7 +128,7 @@
 
                                             <!--  Label  -->
                                             <Label
-                                                Margin="0,-120,0,0"
+                                                Margin="0,-80,0,0"
                                                 FontAttributes="Bold"
                                                 FontFamily="AstoreEczarSemiBold"
                                                 FontSize="15"
