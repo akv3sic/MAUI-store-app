@@ -106,13 +106,13 @@
                                         BorderColor="Transparent"
                                         CornerRadius="8"
                                         HasShadow="False"
-                                        HeightRequest="80"
-                                        WidthRequest="140">
+                                        HeightRequest="90"
+                                        WidthRequest="160">
                                         <StackLayout>
                                             <!--  Image  -->
                                             <Image
                                                 Aspect="AspectFill"
-                                                HeightRequest="120"
+                                                HeightRequest="140"
                                                 HorizontalOptions="FillAndExpand"
                                                 Source="{Binding ImageName}"
                                                 VerticalOptions="FillAndExpand"
@@ -120,8 +120,8 @@
 
                                             <!--  Desaturation Overlay  -->
                                             <BoxView
-                                                Margin="0,-120,0,0"
-                                                HeightRequest="120"
+                                                Margin="0,-140,0,0"
+                                                HeightRequest="140"
                                                 HorizontalOptions="FillAndExpand"
                                                 VerticalOptions="FillAndExpand"
                                                 ZIndex="2"
