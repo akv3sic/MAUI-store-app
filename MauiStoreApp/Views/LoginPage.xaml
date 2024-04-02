@@ -50,17 +50,18 @@
             <HorizontalStackLayout Margin="0,0,0,20">
                 <Label
                     Style="{StaticResource LabelStyle}"
-                    Text="Dobrodošli"
+                    Text="Welcome"
                     TextColor="{StaticResource Primary}"
                     VerticalOptions="Center" />
                 <Label
                     Style="{StaticResource LabelStyle}"
-                    Text=" natrag!"
+                    Text=" back!"
                     VerticalOptions="Center" />
             </HorizontalStackLayout>
 
             <Entry
-                Placeholder="Korisničko ime"
+                FontSize="Small"
+                Placeholder="Username"
                 Style="{StaticResource EntryStyle}"
                 Text="{Binding Username}" />
 
@@ -68,8 +69,9 @@
                 <Entry
                     AbsoluteLayout.LayoutBounds="0,0,1,1"
                     AbsoluteLayout.LayoutFlags="All"
+                    FontSize="Small"
                     IsPassword="{Binding IsPasswordVisible, Converter={StaticResource InvertedBoolConverter}}"
-                    Placeholder="Zaporka"
+                    Placeholder="Password"
                     Style="{StaticResource EntryStyle}"
                     Text="{Binding Password}" />
 
@@ -88,7 +90,7 @@
                 FontAttributes="Bold"
                 FontSize="15"
                 HorizontalOptions="Center"
-                Text="Zaboravili ste zaporku?"
+                Text="Forgot password?"
                 TextColor="#7F7F7F" />
 
             <Button
@@ -98,17 +100,17 @@
                 HeightRequest="50"
                 HorizontalOptions="FillAndExpand"
                 Style="{StaticResource ButtonStyle}"
-                Text="Prijava" />
+                Text="Login" />
 
             <!--  no account  -->
             <HorizontalStackLayout Margin="0,0,0,20" HorizontalOptions="Center">
                 <Label
                     Style="{StaticResource LabelStyle}"
-                    Text="Nemate račun?"
+                    Text="No account?"
                     VerticalOptions="Center" />
                 <Label
                     Style="{StaticResource LabelStyle}"
-                    Text=" Registrirajte se!"
+                    Text=" Register!"
                     TextColor="{StaticResource Primary}"
                     VerticalOptions="Center" />
             </HorizontalStackLayout>

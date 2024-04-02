@@ -106,7 +106,8 @@
                                         BorderColor="Transparent"
                                         CornerRadius="8"
                                         HasShadow="False"
-                                        HeightRequest="80">
+                                        HeightRequest="80"
+                                        WidthRequest="140">
                                         <StackLayout>
                                             <!--  Image  -->
                                             <Image
