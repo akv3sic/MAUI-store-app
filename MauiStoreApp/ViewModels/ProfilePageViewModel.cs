@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ProfilePageViewModel.cs" company="Kvesic, Matkovic, FSRE">
-// Copyright (c) Kvesic, Matkovic, FSRE. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MauiStoreApp.Models;

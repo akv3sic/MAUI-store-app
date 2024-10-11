@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="BoolToPasswordIconConverter.cs" company="Kvesic, Matkovic, FSRE">
-// Copyright (c) Kvesic, Matkovic, FSRE. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-
-using System.Globalization;
+﻿using System.Globalization;
 
 namespace MauiStoreApp.Converters
 {

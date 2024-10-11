@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="CartItemDetail.cs" company="Kvesic, Matkovic, FSRE">
-// Copyright (c) Kvesic, Matkovic, FSRE. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace MauiStoreApp.Models
 {

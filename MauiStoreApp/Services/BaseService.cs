@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="BaseService.cs" company="Kvesic, Matkovic, FSRE">
-// Copyright (c) Kvesic, Matkovic, FSRE. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace MauiStoreApp.Services
 {

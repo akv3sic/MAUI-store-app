@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="CartService.cs" company="Kvesic, Matkovic, FSRE">
-// Copyright (c) Kvesic, Matkovic, FSRE. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-
-using MauiStoreApp.Models;
+﻿using MauiStoreApp.Models;
 
 namespace MauiStoreApp.Services
 {

@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="Category.cs" company="Kvesic, Matkovic, FSRE">
-// Copyright (c) Kvesic, Matkovic, FSRE. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace MauiStoreApp.Models
+﻿namespace MauiStoreApp.Models
 {
     /// <summary>
     /// Represents a product category with a name and associated image.
