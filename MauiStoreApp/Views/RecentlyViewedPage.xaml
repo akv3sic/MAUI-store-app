@@ -57,7 +57,7 @@
 
 
     <ContentPage.Behaviors>
-        <behaviors:EventToCommandBehavior Command="{Binding InitCommand}" EventName="Appearing" />
+        <behaviors:EventToCommandBehavior Command="{Binding InitCommand}" EventName="NavigatedTo" />
     </ContentPage.Behaviors>
 
     <Grid>

@@ -43,7 +43,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Behaviors>
-        <behaviors:EventToCommandBehavior Command="{Binding InitCommand}" EventName="Appearing" />
+        <behaviors:EventToCommandBehavior Command="{Binding InitCommand}" EventName="NavigatedTo" />
     </ContentPage.Behaviors>
 
     <!--  page wrapper  -->
