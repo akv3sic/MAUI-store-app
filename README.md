@@ -4,6 +4,7 @@
 ![Last Commit](https://img.shields.io/github/last-commit/akv3sic/MAUI-store-app)
 ![License](https://img.shields.io/github/license/akv3sic/MAUI-store-app)
 ![GitHub Repo stars](https://img.shields.io/github/stars/akv3sic/MAUI-store-app?style=social)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
 
 <img src="https://github.com/akv3sic/MAUI-store-app/assets/57301167/3a1a9e16-a615-49a0-8160-5d2c83345546" height="300" />
 <img src="https://github.com/akv3sic/MAUI-store-app/assets/57301167/31b98a85-8b7b-4468-8706-319896e36712" height="300" />
@@ -71,7 +72,7 @@ Thanks you for all the great resources!
 
 ## Copyright and License
 
-Copyright © 2023 A. Kvesić, J. Matković, and [Faculty of Mechanical Engineering, Computing and Electrical Engineering, University of Mostar](https://fsre.sum.ba). All rights reserved.
+Copyright © 2023 A. Kvesić, J. Matković, [Faculty of Mechanical Engineering, Computing and Electrical Engineering, University of Mostar](https://fsre.sum.ba) and contributors. All rights reserved.
 
 Licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
