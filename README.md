@@ -42,15 +42,18 @@ More at [Fake Store API - Users](https://fakestoreapi.com/users).
 
 ### Prerequisites
 
-- [Visual Studio 2022](https://visualstudio.microsoft.com/vs/) 17.3 or greater with .NET MAUI installed.
-
-More at [Microsoft Docs](https://docs.microsoft.com/en-us/dotnet/maui/get-started/installation).
+- Visual Studio 2022 17.8 or later
+- .NET 9 SDK with MAUI workload installed
+- Android emulator or real device with ADB enabled
 
 ### Running the app
 
-1. Clone the repository.
-2. Open the solution in Visual Studio 2022.
-3. Build and run the app.
+```bash
+git clone https://github.com/akv3sic/MAUI-store-app.git
+cd MAUI-store-app\src
+dotnet restore
+dotnet build -f net9.0-android
+```
 
 ## Libraries Used
 
