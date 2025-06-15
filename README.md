@@ -1,6 +1,5 @@
 # AStore - .NET MAUI Store App
 
-![Build Android](https://github.com/akv3sic/MAUI-store-app/actions/workflows/dotnet.yml/badge.svg?event=push&branch=master)
 ![Last Commit](https://img.shields.io/github/last-commit/akv3sic/MAUI-store-app)
 ![License](https://img.shields.io/github/license/akv3sic/MAUI-store-app)
 ![GitHub Repo stars](https://img.shields.io/github/stars/akv3sic/MAUI-store-app?style=social)
