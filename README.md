@@ -1,5 +1,8 @@
 # AStore - .NET MAUI Store App
 
+![.NET](https://img.shields.io/badge/.NET-9.0-blue)
+![Platforms](https://img.shields.io/badge/platforms-Android%20%7C%20iOS%20%7C%20Windows-blueviolet)
+![Thesis Project](https://img.shields.io/badge/Based_on-Master's_Thesis-informational)
 ![Last Commit](https://img.shields.io/github/last-commit/akv3sic/MAUI-store-app)
 ![License](https://img.shields.io/github/license/akv3sic/MAUI-store-app)
 ![GitHub Repo stars](https://img.shields.io/github/stars/akv3sic/MAUI-store-app?style=social)
