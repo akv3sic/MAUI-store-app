@@ -75,10 +75,12 @@ Thanks you for all the great resources!
 
 ## Copyright and License
 
-Copyright © 2023 A. Kvesić, J. Matković, [Faculty of Mechanical Engineering, Computing and Electrical Engineering, University of Mostar](https://fsre.sum.ba) and contributors. All rights reserved.
+© 2023–2025 A. Kvesić, mentored by Prof. J. Matković, [Faculty of Mechanical Engineering, Computing and Electrical Engineering, University of Mostar](https://fsre.sum.ba) and contributors.
 
-Licensed under the [MIT License](https://opensource.org/licenses/MIT).
-Feel free to use, modify and distribute this code as per the terms of the license.
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).  
+Feel free to use, modify and distribute this code in accordance with the terms of the license.
+
+Contributions are welcome and will be acknowledged under the same license.
 
 ## Thank You
 A special thank you goes to my mentor and my fellow work colleagues who suggested me choosing this topic for my Master's Thesis, provided me resources and valuable feedback. I am not going to mention them by name, but they know who they are. Thank you!
