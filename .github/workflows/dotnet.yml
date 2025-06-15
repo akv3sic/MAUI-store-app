@@ -12,15 +12,16 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout source
+      uses: actions/checkout@v3
 
-    - name: Setup .NET
+    - name: Setup .NET 9 SDK
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 7.0.x
+        dotnet-version: 9.0.x
 
-    - name: Install .NET MAUI
-      run: dotnet workload install maui
+    - name: Install .NET MAUI workloads
+      run: dotnet workload install maui --skip-sign-check
 
     - name: Setup Java JDK
       uses: actions/setup-java@v3.13.0
@@ -31,10 +32,10 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
 
-    - name: Build
-      run: dotnet build src/MauiStoreApp.csproj -c Release -f net7.0-android --no-restore
+    - name: Build MAUI Android app
+      run: dotnet build src/MauiStoreApp.csproj -c Release -f net9.0-android --no-restore
 
-    - name: Upload a Build Artifact
+    - name: Upload Android artifacts (.aab & .apk)
       uses: actions/upload-artifact@v3.1.3
       with:
         path: |
