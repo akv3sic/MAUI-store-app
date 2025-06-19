@@ -70,7 +70,7 @@ Thanks to all the contributors!
 - Empty State Illustrations by TanahAir Studio - [Figma](https://www.figma.com/community/file/931094174831888421)
 - Icons by [SVG Repo](https://www.svgrepo.com/)
 - App UI/UX Design inspired by E-commerce template made by Oleh Chabanov - [Behance](https://www.behance.net/gallery/107120839/Free-Mobile-AppE-commerce-templateFigmaUIStoreShop)
-- This software is greatly influenced by content published by [James Montemagno](https://github.com/jamesmontemagno) and [Gerard Versluis](https://github.com/jfversluis) at their YouTube channels.
+- This software is greatly influenced by content published by [James Montemagno](https://github.com/jamesmontemagno) and [Gerald Versluis](https://github.com/jfversluis) at their YouTube channels.
 - Videos by [Javier Suárez](https://github.com/jsuarezruiz) helped me to understand how to build UI using XAML.
 
 Thanks you for all the great resources!
