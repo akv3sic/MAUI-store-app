@@ -147,7 +147,7 @@
                     <Label
                         FontAttributes="Bold"
                         FontSize="Small"
-                        Text="Adrese"
+                        Text="Addresses"
                         TextColor="DimGray" />
                     <Frame
                         Margin="0,5"

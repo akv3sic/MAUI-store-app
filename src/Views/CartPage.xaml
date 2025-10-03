@@ -265,7 +265,7 @@
                         FontAttributes="Bold"
                         FontSize="Large"
                         HorizontalOptions="Center"
-                        Text="Buuh!"
+                        Text="Boo!"
                         VerticalOptions="Center" />
 
                     <Label
@@ -281,7 +281,7 @@
                         CommandParameter="HomePage"
                         CornerRadius="20"
                         HorizontalOptions="Center"
-                        Text="Pogledajte ponudu"
+                        Text="Browse products"
                         VerticalOptions="Center"
                         WidthRequest="155" />
                 </StackLayout>
