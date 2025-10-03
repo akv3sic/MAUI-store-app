@@ -30,7 +30,7 @@ jobs:
         java-version: '17'
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore src/MauiStoreApp.csproj
 
     - name: Build MAUI Android app
       run: dotnet build src/MauiStoreApp.csproj -c Release -f net9.0-android --no-restore
