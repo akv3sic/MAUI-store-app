@@ -1,5 +1,6 @@
 # AStore - .NET MAUI Store App
 
+![Build Status](https://github.com/akv3sic/MAUI-store-app/workflows/Build%20.NET%20MAUI%20App%20(Android)/badge.svg)
 ![.NET](https://img.shields.io/badge/.NET-9.0-blue)
 ![Platforms](https://img.shields.io/badge/platforms-Android%20%7C%20iOS%20%7C%20Windows-blueviolet)
 ![Thesis Project](https://img.shields.io/badge/Based_on-Master's_Thesis-informational)

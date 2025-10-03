@@ -3,8 +3,14 @@ name: Build .NET MAUI App (Android)
 on:
   push:
     branches: [ "master" ]
+    paths:
+      - 'src/**'
+      - '.github/workflows/**'
   pull_request:
     branches: [ "master" ]
+    paths:
+      - 'src/**'
+      - '.github/workflows/**'
 
 jobs:
   build:
