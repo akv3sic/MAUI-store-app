@@ -36,7 +36,7 @@ jobs:
       run: dotnet build src/MauiStoreApp.csproj -c Release -f net9.0-android --no-restore
 
     - name: Upload Android artifacts (.aab & .apk)
-      uses: actions/upload-artifact@v3.1.3
+      uses: actions/upload-artifact@v4
       with:
         path: |
           ./**/*.aab
