@@ -78,7 +78,7 @@ Thanks you for all the great resources!
 
 ## Copyright and License
 
-© 2023–2025 A. Kvesić, mentored by Prof. J. Matković, [Faculty of Mechanical Engineering, Computing and Electrical Engineering, University of Mostar](https://fsre.sum.ba) and contributors.
+© 2023–2026 A. Kvesić, mentored by Prof. J. Matković, [Faculty of Mechanical Engineering, Computing and Electrical Engineering, University of Mostar](https://fsre.sum.ba) and contributors.
 
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).  
 Feel free to use, modify and distribute this code in accordance with the terms of the license.
